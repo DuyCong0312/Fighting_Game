@@ -1,0 +1,194 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    private enum State { Idle, Running, Jumping, Falling }
+    private State currentState;
+
+    private Rigidbody2D rb;
+    private Collider2D coll;
+    private Animator anim;
+    [SerializeField] private AudioManager audioManager;
+
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private float jumpForce = 6f;
+    [SerializeField] private bool isGround = true;
+    [SerializeField] private bool isDoubleJump;
+    public bool isFacingRight = true;
+
+    [Header("Effect")]
+    [SerializeField] private EffectManager effectManager;
+    [SerializeField] private Transform jumpPos;
+    [SerializeField] private Transform dashPos;
+
+    [Header("Dash Setting")]
+    [SerializeField] private float dashPower = 10f;
+    [SerializeField] private float dashTime = 0.1f;
+    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private bool isDashing;
+    [SerializeField] private bool canDash = true;
+
+
+    public bool IsGrounded => isGround;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        Movement();
+        HandleJump();
+        HandleDash();
+        UpdateState();
+        UpdateAnimation();
+    }
+
+    private void Movement()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+
+        float movement = 0f;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (isFacingRight) 
+            {
+                this.transform.eulerAngles = new Vector3(0, 180, 0);
+                isFacingRight = false;
+            }
+            movement = -1f; 
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            if (!isFacingRight)
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 0);
+                isFacingRight = true;
+            }
+            movement = 1f;
+        }
+        rb.velocity = new Vector2(speed * movement, rb.velocity.y);
+    }
+
+    private void HandleJump()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.K) && isGround == true)
+        {
+            Jump();
+            isGround = false;
+            isDoubleJump = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.K) && isDoubleJump && currentState == State.Falling)
+        {
+            Jump();
+            isDoubleJump = false;
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        currentState = State.Jumping;
+        effectManager.SpawnEffect(effectManager.jump, jumpPos, transform.rotation);
+        audioManager.PlaySFX(audioManager.jump);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
+    }
+
+    private void HandleDash()
+    {
+        if(Input.GetKeyDown(KeyCode.N) && canDash)
+        {
+            StartCoroutine(Dash());
+            anim.SetBool("isDashing", true);
+            audioManager.PlaySFX(audioManager.dash);
+
+            if (isGround)
+            {
+
+                effectManager.SpawnEffect(effectManager.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+            }
+            else
+            {
+                effectManager.SpawnEffect(effectManager.airDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+            }
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        float direction = isFacingRight ? 1 : -1;
+        rb.velocity = new Vector2(direction * dashPower, 0f);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        anim.SetBool("isDashing", false);
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
+    private void UpdateAnimation()
+    {
+        anim.SetInteger("CurrentState", (int)currentState);
+    }
+
+    private void UpdateState()
+    {
+        if (currentState == State.Jumping)
+        {
+            if (rb.velocity.y < 0.1f)
+            {
+                currentState = State.Falling;
+            }
+        }
+        else if (currentState == State.Falling)
+        {
+            if (isGround)
+            {
+                currentState = State.Idle; 
+                effectManager.SpawnEffect(effectManager.touchGround, jumpPos, transform.rotation);
+                audioManager.PlaySFX(audioManager.touchGround);
+            }
+        }
+        else if (Mathf.Abs(rb.velocity.x) > 1f)
+        {
+            currentState = State.Running;
+        }
+        else
+        {
+            currentState = State.Idle;
+        }
+    }
+
+    private void Footstep()
+    {
+        audioManager.PlaySFX(audioManager.step1);
+    }
+    private void Footstep3()
+    {
+        audioManager.PlaySFX(audioManager.step3);
+    }
+}
