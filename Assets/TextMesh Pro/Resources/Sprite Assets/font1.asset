@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-8040578796546036419
+--- !u!21 &-1149916876476286312
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: font1
   m_EditorClassIdentifier: 
   hashCode: 122112194
-  material: {fileID: -8040578796546036419}
+  material: {fileID: -1149916876476286312}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -457,6 +457,12 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 62
     m_Scale: 1
+    m_Name: ^
+    m_HashCode: 94
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 63
+    m_Scale: 1
     m_Name: BACK
     m_HashCode: 2444587
   m_SpriteGlyphTable:
@@ -544,8 +550,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 25
       m_Height: 38
-      m_HorizontalBearingX: 3.77
-      m_HorizontalBearingY: 28
+      m_HorizontalBearingX: 7
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 25
     m_GlyphRect:
       m_X: 230
@@ -560,8 +566,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 16
       m_Height: 38
-      m_HorizontalBearingX: -0.61
-      m_HorizontalBearingY: 28
+      m_HorizontalBearingX: 2.4
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 16
     m_GlyphRect:
       m_X: 299
@@ -816,8 +822,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 25
       m_Height: 38
-      m_HorizontalBearingX: -5.3
-      m_HorizontalBearingY: 27.8
+      m_HorizontalBearingX: -1.7
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 25
     m_GlyphRect:
       m_X: 231
@@ -848,8 +854,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 28
       m_Height: 38
-      m_HorizontalBearingX: 4.1
-      m_HorizontalBearingY: 28
+      m_HorizontalBearingX: 7
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 28
     m_GlyphRect:
       m_X: 173
@@ -896,8 +902,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 35
       m_Height: 38
-      m_HorizontalBearingX: 3.44
-      m_HorizontalBearingY: 28
+      m_HorizontalBearingX: 4
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 35
     m_GlyphRect:
       m_X: 41
@@ -944,8 +950,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 32
       m_Height: 38
-      m_HorizontalBearingX: -0.9
-      m_HorizontalBearingY: 28
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 77
@@ -1312,8 +1318,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 29
       m_Height: 38
-      m_HorizontalBearingX: 4.15
-      m_HorizontalBearingY: 27.2
+      m_HorizontalBearingX: 7
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 29
     m_GlyphRect:
       m_X: 142
@@ -1376,8 +1382,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 34
       m_Height: 38
-      m_HorizontalBearingX: -3.98
-      m_HorizontalBearingY: 27.6
+      m_HorizontalBearingX: -0.93
+      m_HorizontalBearingY: 30
       m_HorizontalAdvance: 34
     m_GlyphRect:
       m_X: 75
@@ -1454,10 +1460,26 @@ MonoBehaviour:
     sprite: {fileID: -1955840055, guid: baced796ea9287c4cac413b2cfd9a74e, type: 3}
   - m_Index: 62
     m_Metrics:
+      m_Width: 28
+      m_Height: 29
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 23
+      m_HorizontalAdvance: 28
+    m_GlyphRect:
+      m_X: 117
+      m_Y: 12
+      m_Width: 28
+      m_Height: 29
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 380585220, guid: baced796ea9287c4cac413b2cfd9a74e, type: 3}
+  - m_Index: 63
+    m_Metrics:
       m_Width: 113
       m_Height: 37
-      m_HorizontalBearingX: 2.7
-      m_HorizontalBearingY: 29
+      m_HorizontalBearingX: 1
+      m_HorizontalBearingY: 29.9
       m_HorizontalAdvance: 113
     m_GlyphRect:
       m_X: 2

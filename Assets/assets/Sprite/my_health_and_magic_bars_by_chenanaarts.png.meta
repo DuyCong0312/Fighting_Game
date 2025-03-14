@@ -260,18 +260,18 @@ TextureImporter:
       name: Player_look
       rect:
         serializedVersion: 2
-        x: 6
-        y: 68
-        width: 64
-        height: 100
+        x: 109
+        y: 65
+        width: 70
+        height: 104
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 908d98c5d4498e14aa1e073ec5ab33fe
+      spriteID: 071c83926f8d4864f83e12cca599e35d
       internalID: -1207440362
       vertices: []
       indices: 
