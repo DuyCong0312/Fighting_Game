@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Not Yet Completed
 public class CameraManager : MonoBehaviour
 {
     private Transform[] playerTransforms;
