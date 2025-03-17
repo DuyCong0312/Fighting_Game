@@ -37,8 +37,15 @@ public class PlayerHealth : MonoBehaviour
         Instantiate(hit, hitPos.position, transform.rotation);
         if (currentHealth <= 0)
         {
-            Die();
+            Debug.Log("0 health");
+            //Die();
         }
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     private void Die()

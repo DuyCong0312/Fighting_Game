@@ -22,6 +22,6 @@ public class BGManager : MonoBehaviour
 
         float yFinal = (yMiddle > maxY) ? maxY : yMiddle;
 
-        this.transform.position = Vector2.Lerp(transform.position, new Vector3(xMiddle, yFinal, transform.position.z), Time.deltaTime);
+        this.transform.localPosition = new Vector3(xMiddle, yFinal, transform.position.z);
     }
 }
