@@ -17,8 +17,7 @@ public class FighterSelection : MonoBehaviour
     {
         if (fighterList.Count > 0)
         {
-            selectedFighterIndex = fighterList.Count - 1;
-            ChooseFighter(selectedFighterIndex);
+            RandomFighter();
         }
         else
         {
@@ -27,12 +26,20 @@ public class FighterSelection : MonoBehaviour
     }
     public void ChooseFighter(int fighterIndex)
     {
-        fighterImage.sprite = fighterList[fighterIndex].FighterSpite;
+        fighterImage.sprite = fighterList[fighterIndex].FighterSprite;
         fighterName.text = fighterList[fighterIndex].FighterName;
         selectedFighterIndex = fighterIndex;
         SaveFighter();
     }
 
+    public void RandomFighter()
+    {
+        int randomFighter = Random.Range(0, fighterList.Count -1);
+        fighterImage.sprite = fighterList[fighterList.Count - 1].FighterSprite;
+        fighterName.text = fighterList[fighterList.Count - 1].FighterName;
+        selectedFighterIndex = randomFighter;
+        SaveFighter();
+    }
     private void SaveFighter()
     {
         PlayerPrefs.SetInt("SelectedFighterIndex",selectedFighterIndex);

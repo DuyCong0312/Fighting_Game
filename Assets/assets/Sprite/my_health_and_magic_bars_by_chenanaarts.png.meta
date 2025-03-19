@@ -156,9 +156,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 196
-        width: 64
-        height: 51
+        y: 11
+        width: 57
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,32 +173,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: time
-      rect:
-        serializedVersion: 2
-        x: 90
-        y: 205
-        width: 49
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5cee07fd01876ed4195799b71106a26e
-      internalID: 205669325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: time_2
       rect:
         serializedVersion: 2
-        x: 10
-        y: 253
+        x: 18
+        y: 264
         width: 45
         height: 30
       alignment: 0
@@ -218,8 +197,8 @@ TextureImporter:
       name: round
       rect:
         serializedVersion: 2
-        x: 156
-        y: 249
+        x: 164
+        y: 298
         width: 22
         height: 22
       alignment: 0
@@ -239,8 +218,8 @@ TextureImporter:
       name: win_round
       rect:
         serializedVersion: 2
-        x: 190
-        y: 249
+        x: 198
+        y: 298
         width: 22
         height: 22
       alignment: 0
@@ -260,12 +239,12 @@ TextureImporter:
       name: Player_look
       rect:
         serializedVersion: 2
-        x: 109
-        y: 65
+        x: 7
+        y: 79
         width: 70
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,6 +252,90 @@ TextureImporter:
       bones: []
       spriteID: 071c83926f8d4864f83e12cca599e35d
       internalID: -1207440362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: manaBar
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 204
+        width: 144
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbfa92386ec2c264e8023cad4e699f83
+      internalID: 666635544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mana
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 187
+        width: 128
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cd96f38097edfb4da6e6af52ddf3804
+      internalID: 1405735400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aaaa
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 100
+        width: 337
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98f58ec818068db4784c17c0b9ca8208
+      internalID: 729829788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 192
+        width: 70
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e39b3661348ae44b809a76bc2232ce8
+      internalID: 688944089
       vertices: []
       indices: 
       edges: []
@@ -289,9 +352,13 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Player_look: -1207440362
+      aaaa: 729829788
       character: -994451653
+      face: 688944089
       health_bar: 364791609
       hp: -1799059754
+      mana: 1405735400
+      manaBar: 666635544
       my_health_and_magic_bars_by_chenanaarts_11: -1855345624
       my_health_and_magic_bars_by_chenanaarts_13: -680701033
       my_health_and_magic_bars_by_chenanaarts_14: -1792382170

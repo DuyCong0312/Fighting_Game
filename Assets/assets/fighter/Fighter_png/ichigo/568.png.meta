@@ -130,6 +130,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: avatar
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 24
+        width: 53
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48d66fd6b5a37c047ae0ba19a06d6c47
+      internalID: -2015743170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -142,6 +163,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       568_0: 188447996
+      avatar: -2015743170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

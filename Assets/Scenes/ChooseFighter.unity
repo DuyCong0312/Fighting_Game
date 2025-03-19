@@ -1772,12 +1772,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2103384141}
         m_TargetAssemblyTypeName: FighterSelection, Assembly-CSharp
-        m_MethodName: ChooseFighter
-        m_Mode: 3
+        m_MethodName: RandomFighter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2128,12 +2128,18 @@ MonoBehaviour:
   fighterList:
   - fighterSprite: {fileID: 188447996, guid: 1f2cec70939656b4682998d6e4f7a4fb, type: 3}
     fighterName: Ichigo
+    fighterAvatar: {fileID: -2015743170, guid: 1f2cec70939656b4682998d6e4f7a4fb, type: 3}
+    fighterFace: {fileID: 426325187, guid: bfa4034dbb7e4834b99261adcafec918, type: 3}
     fighterAnimator: {fileID: 9100000, guid: 3fcfc843934db2045b9479a9f8eb8a1b, type: 2}
   - fighterSprite: {fileID: 1715832091, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
     fighterName: Sakura
+    fighterAvatar: {fileID: -242849844, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
+    fighterFace: {fileID: 1753230391, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
     fighterAnimator: {fileID: 9100000, guid: 3ca5bb98b0075a84298abfbe1036ee76, type: 2}
   - fighterSprite: {fileID: 21300000, guid: 10c9f7e770e318c4a87f00c67c01e6a6, type: 3}
     fighterName: Random
+    fighterAvatar: {fileID: 0}
+    fighterFace: {fileID: 0}
     fighterAnimator: {fileID: 0}
   fighterName: {fileID: 1000579484}
   fighterImage: {fileID: 1457544814}
