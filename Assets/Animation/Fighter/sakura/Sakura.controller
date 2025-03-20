@@ -74,19 +74,19 @@ AnimatorStateMachine:
     m_Position: {x: 460, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5693086245093197104}
-    m_Position: {x: 640, y: 630, z: 0}
+    m_Position: {x: 180, y: 680, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4043549639525381090}
-    m_Position: {x: 640, y: 560, z: 0}
+    m_Position: {x: 180, y: 610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2407816200598930892}
     m_Position: {x: 0, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 896571960198868047}
-    m_Position: {x: 880, y: 510, z: 0}
+    m_Position: {x: 420, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8562367391779015136}
-    m_Position: {x: 880, y: 450, z: 0}
+    m_Position: {x: 420, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2448739201611991728}
     m_Position: {x: 0, y: 80, z: 0}
@@ -101,22 +101,22 @@ AnimatorStateMachine:
     m_Position: {x: -400, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2945516610921048902}
-    m_Position: {x: 640, y: 700, z: 0}
+    m_Position: {x: 180, y: 750, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8908755177350728685}
-    m_Position: {x: 880, y: 390, z: 0}
+    m_Position: {x: 420, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5533125243766353281}
-    m_Position: {x: 1120, y: 390, z: 0}
+    m_Position: {x: 660, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -481347323825091456}
-    m_Position: {x: 1120, y: 450, z: 0}
+    m_Position: {x: 660, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3649012747543933388}
-    m_Position: {x: 1120, y: 510, z: 0}
+    m_Position: {x: 660, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8998501731236184047}
-    m_Position: {x: 1120, y: 570, z: 0}
+    m_Position: {x: 660, y: 620, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -545789545641144133}
@@ -126,9 +126,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -220, y: 110, z: 0}
+  m_AnyStatePosition: {x: -310, y: 80, z: 0}
   m_EntryPosition: {x: 600, y: 250, z: 0}
-  m_ExitPosition: {x: 400, y: 540, z: 0}
+  m_ExitPosition: {x: -100, y: 490, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 8296171026698482795}
 --- !u!1101 &-7812075129269130971

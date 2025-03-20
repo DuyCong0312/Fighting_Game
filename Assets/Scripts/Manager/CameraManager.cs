@@ -7,30 +7,31 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform player1;
     [SerializeField] private Transform player2;
-    [SerializeField] private float yOffset = 4.0f;
-    [SerializeField] private float maxY = 4.5f;
-    [SerializeField] private float minDistance = 5.0f;
-    [SerializeField] private float maxDistance = 10.0f;
 
-    private void LateUpdate()
+    public float minZoom = 5f;
+    public float maxZoom = 15f;
+    public float zoomLimiter = 2f;
+    public float smoothSpeed = 0.125f;
+
+    void LateUpdate()
     {
-        if (player1 == null || player2 == null)
-        {
-            Debug.Log("No found the player");
-            return;
-        }
+        if (player1 == null || player2 == null) return;
 
-        float xMiddle = (player1.transform.position.x + player2.transform.position.x) / 2;
-        float yMiddle = ((player1.transform.position.y + player2.transform.position.y) / 2) + yOffset;
+        MoveCamera();
+        ZoomCamera();
+    }
 
-        float yFinal = (yMiddle > maxY) ? maxY : yMiddle;
-        float distance = Mathf.Abs((player1.transform.position.x - player2.transform.position.x));
+    void MoveCamera()
+    {
+        Vector3 midpoint = (player1.position + player2.position) / 2f;
+        Vector3 smoothPosition = Vector3.Lerp(transform.position, new Vector3(midpoint.x, midpoint.y, transform.position.z), smoothSpeed);
+        transform.position = smoothPosition;
+    }
 
-        if (distance < minDistance)
-            distance = minDistance;
-        if (distance > maxDistance)
-            distance = maxDistance;
-
-        transform.position = new Vector3(xMiddle,yFinal, -distance);
+    void ZoomCamera()
+    {
+        float distance = Vector3.Distance(player1.position, player2.position);
+        float newZoom = Mathf.Clamp(minZoom + distance / zoomLimiter, minZoom, maxZoom);
+        Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, newZoom, Time.deltaTime);
     }
 }

@@ -2,29 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class U_Skill : MonoBehaviour
+public class Sakura_Uskill : U_Skill
 {
-    private Animator anim;
-    [SerializeField] private GameObject SkillPrefab;   
+    [SerializeField] private GameObject SkillPrefab;
     [SerializeField] private Transform skillPos;
     [SerializeField] private Transform newPos;
     [SerializeField] private float backSpeed;
 
     private Vector3 newPosition;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Uskill();
-    }
-
-    private void Uskill()
+    protected override void Uskill()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -39,7 +26,7 @@ public class U_Skill : MonoBehaviour
         while (Vector2.Distance(transform.position, newPosition) > 0.01f)
         {
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
-            yield return null; 
+            yield return null;
         }
 
         transform.position = newPosition;

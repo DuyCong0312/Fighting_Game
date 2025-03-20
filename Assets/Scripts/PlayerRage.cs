@@ -13,14 +13,6 @@ public class PlayerRage : MonoBehaviour
         currentRage = 0;
         rageBar.UpdateRageBar(currentRage, maxRage);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-
-        }
-    }
     public void GetRage(float rage)
     {
         if (currentRage >= maxRage)
