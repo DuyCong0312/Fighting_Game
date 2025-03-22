@@ -9,7 +9,6 @@ public class ComboController : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
-    [SerializeField] private AudioManager audioManager;
     [SerializeField] private int attackNumber;
     [SerializeField] private bool isAttack = false;
     [SerializeField] private bool isDefend = false;
@@ -46,7 +45,7 @@ public class ComboController : MonoBehaviour
         {
             anim.SetTrigger(attackNumber + "Attack");
             isAttack = true;
-            audioManager.PlaySFX(audioManager.attack);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
         }
     }
 

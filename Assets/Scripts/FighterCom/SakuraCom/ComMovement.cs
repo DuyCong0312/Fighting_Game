@@ -8,7 +8,6 @@ public class ComMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] private AudioManager audioManager;
     [SerializeField] private Transform player;
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 11f;
@@ -133,10 +132,10 @@ public class ComMovement : MonoBehaviour
 
     private void Footstep()
     {
-        audioManager.PlaySFX(audioManager.step1);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step1);
     }
     private void Footstep3()
     {
-        audioManager.PlaySFX(audioManager.step3);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step3);
     }
 }

@@ -17,14 +17,36 @@ public class GameManager : MonoBehaviour
     private int player2RoundsWon = 0;
 
     [Header("Game UI Settings")]
+    [SerializeField] private HealthBar[] healthBars;
     [SerializeField] private GameObject panelGameSet;
     [SerializeField] private TextMeshProUGUI gameSet;
-    [SerializeField] private int totalRounds = 3;
 
     private bool gameEnded = false;
 
     private void Start()
     {
+        PlayerHealth[] players = FindObjectsOfType<PlayerHealth>();
+
+        if (players.Length == 2)
+        {
+            if (players[0].transform.position.x < players[1].transform.position.x)
+            {
+                player01Health = players[0];
+                player02Health = players[1];
+            }
+            else
+            {
+                player01Health = players[1];
+                player02Health = players[0];
+            }
+
+            player01Health.SetHealthBar(healthBars[0]);
+            player02Health.SetHealthBar(healthBars[1]);
+        }
+        else
+        {
+            Debug.LogError("Not found enough player!");
+        }
         panelGameSet.SetActive(false);
     }
 
@@ -33,9 +55,6 @@ public class GameManager : MonoBehaviour
         if (!gameEnded && (player01Health.currentHealth <= 0 || player02Health.currentHealth <= 0))
         {
             GameSet(); 
-        }
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            AwardWinToPlayer(1);
         }
     }
     public void GameSetTime()

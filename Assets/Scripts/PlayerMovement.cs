@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
-    [SerializeField] private AudioManager audioManager;
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
@@ -19,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
 
     [Header("Effect")]
-    [SerializeField] private EffectManager effectManager;
     [SerializeField] private Transform jumpPos;
     [SerializeField] private Transform dashPos;
 
@@ -102,8 +100,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         currentState = State.Jumping;
-        effectManager.SpawnEffect(effectManager.jump, jumpPos, transform.rotation);
-        audioManager.PlaySFX(audioManager.jump);
+        EffectManager.Instance.SpawnEffect(EffectManager.Instance.jump, jumpPos, transform.rotation);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.jump);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -120,16 +118,15 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
             anim.SetBool("isDashing", true);
-            audioManager.PlaySFX(audioManager.dash);
-
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.dash);
             if (isGround)
             {
 
-                effectManager.SpawnEffect(effectManager.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+                EffectManager.Instance.SpawnEffect(EffectManager.Instance.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
             }
             else
             {
-                effectManager.SpawnEffect(effectManager.airDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+                EffectManager.Instance.SpawnEffect(EffectManager.Instance.airDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
             }
         }
     }
@@ -168,9 +165,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isGround)
             {
-                currentState = State.Idle; 
-                effectManager.SpawnEffect(effectManager.touchGround, jumpPos, transform.rotation);
-                audioManager.PlaySFX(audioManager.touchGround);
+                currentState = State.Idle;
+                EffectManager.Instance.SpawnEffect(EffectManager.Instance.touchGround, jumpPos, transform.rotation);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.touchGround);
             }
         }
         else if (Mathf.Abs(rb.velocity.x) > 1f)
@@ -185,10 +182,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Footstep()
     {
-        audioManager.PlaySFX(audioManager.step1);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step1);
     }
     private void Footstep3()
     {
-        audioManager.PlaySFX(audioManager.step3);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step3);
     }
 }

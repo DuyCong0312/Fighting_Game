@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource sfxAudioSource;
 
@@ -15,6 +17,20 @@ public class AudioManager : MonoBehaviour
     public AudioClip touchGround;
     public AudioClip step1;
     public AudioClip step3;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        } 
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {

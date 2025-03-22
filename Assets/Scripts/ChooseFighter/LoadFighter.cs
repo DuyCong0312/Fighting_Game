@@ -11,7 +11,7 @@ public class LoadFighter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fighterName;
     [SerializeField] private Image fighterAvatar;
     [SerializeField] private Image fighterFace;
-    [SerializeField] private Animator fighterAnimator;
+    [SerializeField] private GameObject fighterPrefab;
     private int selectedFighterIndex;
 
     private void Start()
@@ -20,6 +20,6 @@ public class LoadFighter : MonoBehaviour
         fighterAvatar.sprite = fighterList[selectedFighterIndex].FighterAvatar;
         fighterName.text = fighterList[selectedFighterIndex].FighterName;
         fighterFace.sprite = fighterList[selectedFighterIndex].FighterFace;
-        fighterAnimator.runtimeAnimatorController = fighterList[selectedFighterIndex].FighterAnimator;
+        fighterPrefab = Instantiate(fighterList[selectedFighterIndex].FighterPrefab, fighterPrefab.transform.position, Quaternion.identity);
     }
 }

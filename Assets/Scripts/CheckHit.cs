@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class CheckHit : MonoBehaviour
 {
-    private Animator anim;
-    private Rigidbody2D rb;
-
     public Transform meleeAttack01Pos;
     public Transform meleeAttack02Pos;
     public Transform meleeAttack03Pos;
     public Vector2 attackBoxSize = new Vector2(2f, 1f);
     public float attackRange = 1f;
     public LayerMask whatIsEnemies;
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-    }
 
     public void StraightAttack(Transform AttackPos, Vector2 AttackSize, float angle, float attackDamage)
     {

@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
@@ -51,5 +51,10 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void SetHealthBar(HealthBar bar)
+    {
+        healthBar = bar;
     }
 }

@@ -7,7 +7,6 @@ public class ComAttack : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] private AudioManager audioManager;
     [SerializeField] private Transform player;
     [SerializeField] private float speed = 4f;
     [SerializeField] private bool isFacingRight = false;
