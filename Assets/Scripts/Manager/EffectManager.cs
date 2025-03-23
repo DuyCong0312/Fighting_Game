@@ -10,6 +10,7 @@ public class EffectManager : MonoBehaviour
     public GameObject groundDash;
     public GameObject airDash;
     public GameObject touchGround;
+    public GameObject hit;
 
     void Awake()
     {

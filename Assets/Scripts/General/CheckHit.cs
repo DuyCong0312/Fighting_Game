@@ -17,7 +17,7 @@ public class CheckHit : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("hit");
-            enemy.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
 
@@ -27,7 +27,7 @@ public class CheckHit : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("hit");
-            enemy.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
 

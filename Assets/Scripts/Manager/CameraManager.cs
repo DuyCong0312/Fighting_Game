@@ -1,36 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-//Not Yet Completed
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform player1;
-    [SerializeField] private Transform player2;
+    private Transform[] playerTransforms;
 
-    public float minZoom = 1f;
-    public float maxZoom = 5f;
-    public float zoomLimiter = 2f;
-    public float maxHeightOffset = 3f;
-    public float minHeightOffset = 1f;
+    [SerializeField] private float minZoom = 1f;
+    [SerializeField] private float maxZoom = 5f;
+    [SerializeField] private float zoomLimiter = 2f;
+    [SerializeField] private float maxHeightOffset = 3f;
+    [SerializeField] private float minHeightOffset = 1f;
     private Camera cam;
 
     private void Start()
     {
         cam = Camera.main;
+        StartCoroutine(WaitForPlayers());
     }
 
+    private IEnumerator WaitForPlayers()
+    {
+        while (GameObject.FindGameObjectsWithTag("Player").Length < 1 || GameObject.FindGameObjectsWithTag("Com").Length < 1)
+        {
+            yield return null;
+        }
+
+        FindPlayers();
+    }
+
+    private void FindPlayers()
+    {
+        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] comFighter = GameObject.FindGameObjectsWithTag("Com");
+
+        playerTransforms = new Transform[2];
+        if ( allPlayers.Length >= 2)
+        {
+            playerTransforms[0] = allPlayers[0].transform;
+            playerTransforms[1] = allPlayers[1].transform;
+        }
+        else
+        {
+            playerTransforms[0] = allPlayers[0].transform;
+            playerTransforms[1] = comFighter[0].transform;
+        }
+        
+    }
     private void LateUpdate()
     {
-        if (player1 == null || player2 == null) return;
-
         UpdateCamera();
     }
 
     private void UpdateCamera()
     {
-        Vector3 midpoint = (player1.position + player2.position) / 2f;
-        float distance = Vector3.Distance(player1.position, player2.position);
+        Vector3 midpoint = (playerTransforms[0].position + playerTransforms[1].position) / 2f;
+        float distance = Vector3.Distance(playerTransforms[0].position, playerTransforms[1].position);
 
         float newZoom = Mathf.Clamp(minZoom + distance / zoomLimiter, minZoom, maxZoom);
         cam.orthographicSize = newZoom;

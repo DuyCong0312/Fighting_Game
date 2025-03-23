@@ -33,9 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        coll = GetComponentInChildren<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()

@@ -8,9 +8,6 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private HealthBar healthBar;
 
-    [SerializeField] private GameObject hit;
-    [SerializeField] private Transform hitPos;
-
     private Animator anim;
 
     void Start()
@@ -34,7 +31,6 @@ public class PlayerHealth : MonoBehaviour
         //doan duoi la day lui khi bi tan cong
         //this.transform.position = new Vector2(this.transform.position.x - 0.2f, this.transform.position.y);
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
-        Instantiate(hit, hitPos.position, transform.rotation);
         if (currentHealth <= 0)
         {
             Debug.Log("0 health");
@@ -53,8 +49,4 @@ public class PlayerHealth : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void SetHealthBar(HealthBar bar)
-    {
-        healthBar = bar;
-    }
 }

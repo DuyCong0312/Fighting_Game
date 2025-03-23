@@ -6,8 +6,8 @@ public class ComAttack : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private Transform player;
 
-    [SerializeField] private Transform player;
     [SerializeField] private float speed = 4f;
     [SerializeField] private bool isFacingRight = false;
 
@@ -15,11 +15,13 @@ public class ComAttack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void Update()
     {
         Attack();
     }
+
     private void Attack()
     {
         if (Vector2.Distance(player.position, transform.position) <= 1f)

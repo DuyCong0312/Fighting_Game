@@ -20,6 +20,6 @@ public class LoadFighter : MonoBehaviour
         fighterAvatar.sprite = fighterList[selectedFighterIndex].FighterAvatar;
         fighterName.text = fighterList[selectedFighterIndex].FighterName;
         fighterFace.sprite = fighterList[selectedFighterIndex].FighterFace;
-        fighterPrefab = Instantiate(fighterList[selectedFighterIndex].FighterPrefab, fighterPrefab.transform.position, Quaternion.identity);
+        fighterPrefab = Instantiate(fighterList[selectedFighterIndex].FighterPrefab, fighterPrefab.transform.position, fighterPrefab.transform.rotation, fighterPrefab.transform);
     }
 }

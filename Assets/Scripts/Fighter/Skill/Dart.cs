@@ -7,6 +7,7 @@ public class Dart: MonoBehaviour
     protected Animator anim;
     protected Rigidbody2D rb;
     [SerializeField] protected float attackDamage = 5f;
+    [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected float speed = 10f;
     [SerializeField] protected GameObject effect;
 
@@ -17,11 +18,17 @@ public class Dart: MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    protected virtual void Update()
+    {
+        timeExist -= Time.deltaTime;
+        DestroyByTime();
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Com"))
         {
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = collision.GetComponentInParent<PlayerHealth>();
             playerHealth.TakeDamage(attackDamage);
             Destroy(this.gameObject);
             WhenHit();
@@ -33,5 +40,13 @@ public class Dart: MonoBehaviour
     protected virtual void WhenHit()
     {
         Instantiate(effect, this.transform.position, transform.rotation * Quaternion.Euler(0, 0, 45));
+    }
+
+    protected virtual void DestroyByTime()
+    {
+        if(timeExist <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

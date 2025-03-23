@@ -7,8 +7,8 @@ public class ComMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private Transform player;
 
-    [SerializeField] private Transform player;
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 11f;
     [SerializeField] private bool isFacingRight = false;
@@ -29,6 +29,7 @@ public class ComMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -36,7 +37,6 @@ public class ComMovement : MonoBehaviour
         MoveToPlayer();
         Flipped();
         UpdateAnimation();
-        HandleJump();
         GroundCheck();
     }
 

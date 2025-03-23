@@ -206,8 +206,7 @@ GameObject:
   - component: {fileID: 210408992827306233}
   - component: {fileID: 554194665430495987}
   - component: {fileID: 8646083832986118737}
-  - component: {fileID: 7744548847469722770}
-  - component: {fileID: 7533980564408245258}
+  - component: {fileID: 3520576140043920084}
   m_Layer: 7
   m_Name: Sakura
   m_TagString: Player
@@ -459,7 +458,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &7744548847469722770
+--- !u!114 &3520576140043920084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,29 +467,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6181489956766094652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f359555feaca50a40a02b96444085fa1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e46177193706d44cabad097032b7bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 0}
-  hit: {fileID: 7481789453885571310, guid: 81d7dbee50a86ca40b80130ede981751, type: 3}
   hitPos: {fileID: 2062136309038556246}
---- !u!114 &7533980564408245258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6181489956766094652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143c763153b40ab4ebf7246b5ad95b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxRage: 100
-  currentRage: 0
-  rageBar: {fileID: 0}
 --- !u!1 &6643317084576140184
 GameObject:
   m_ObjectHideFlags: 0
