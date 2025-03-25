@@ -2342,6 +2342,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 128
+  hit: 0
 --- !u!114 &636173619
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class Sakura_Uskill : U_Skill
     [SerializeField] private float backSpeed;
 
     private Vector3 newPosition;
+    private bool isMoving = false;
+    private bool canMove = true;
 
     protected override void Uskill()
     {
@@ -23,13 +25,13 @@ public class Sakura_Uskill : U_Skill
 
     private IEnumerator StepBack()
     {
-        while (Vector2.Distance(transform.position, newPosition) > 0.01f)
+        while (Vector2.Distance(transform.position, newPosition) > 0.01f && canMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
             yield return null;
         }
-
-        transform.position = newPosition;
+        isMoving = false;
+        canMove = true;
     }
 
     private void ActiveSkill(int extraInstances, float offset)
@@ -52,4 +54,15 @@ public class Sakura_Uskill : U_Skill
     {
         ActiveSkill(1, 0.5f);
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("MainCamera"))
+        {
+            isMoving = false;
+            canMove = false;
+        }
+    }
+
 }

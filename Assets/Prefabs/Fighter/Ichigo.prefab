@@ -77,8 +77,8 @@ GameObject:
   - component: {fileID: 6885380700764057954}
   - component: {fileID: 5199207901161783175}
   - component: {fileID: 3445485636908294743}
-  - component: {fileID: 8652655224863291991}
   - component: {fileID: 8649608556145386475}
+  - component: {fileID: -6782175465761027758}
   - component: {fileID: 2357133413282601946}
   - component: {fileID: -3773639330718817434}
   m_Layer: 7
@@ -284,18 +284,6 @@ MonoBehaviour:
   attackNumber: 0
   isAttack: 0
   isDefend: 0
---- !u!114 &8652655224863291991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818890458921424710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b22a699fafc1a4aba675b3c944e045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8649608556145386475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +296,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dc4d31a5671694785c90669b21cae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillPrefab: {fileID: 9169245940227784146, guid: 76a70fd1eb6286145aa571b2b834b9b1, type: 3}
+  skillPrefab: {fileID: 0}
+  skillPos: {fileID: 7021824351745278384}
+--- !u!114 &-6782175465761027758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeb1dac36ffb12498028ee18aa06f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPrefab: {fileID: 9169245940227784146, guid: 76a70fd1eb6286145aa571b2b834b9b1, type: 3}
+  skillPrefab2: {fileID: 1550473910411337948, guid: d21a5d8c7a84e014a8edb00753c38ec7, type: 3}
   skillPos: {fileID: 7021824351745278384}
 --- !u!114 &2357133413282601946
 MonoBehaviour:

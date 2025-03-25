@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Ichigo_Uskill : U_Skill
 {
-    [SerializeField] private GameObject SkillPrefab;
+    [SerializeField] private GameObject skillPrefab;
     [SerializeField] private Transform skillPos;
-
-    protected override void Uskill()
-    {
-        base.Uskill();
-    }
 
     private void ActiveSkill()
     {
-        Instantiate(SkillPrefab, skillPos.position, transform.rotation);
+        Instantiate(skillPrefab, skillPos.position, transform.rotation);
     }
 }
