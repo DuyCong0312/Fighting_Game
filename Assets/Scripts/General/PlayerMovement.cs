@@ -8,12 +8,11 @@ public class PlayerMovement : MonoBehaviour
     private State currentState;
 
     private Rigidbody2D rb;
-    private Collider2D coll;
     private Animator anim;
+    private CheckGround groundCheck;
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
-    [SerializeField] private bool isGround = true;
     [SerializeField] private bool isDoubleJump;
     public bool isFacingRight = true;
 
@@ -28,14 +27,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isDashing;
     [SerializeField] private bool canDash = true;
 
-
-    public bool IsGrounded => isGround;
-
     void Start()
     {
-        rb = GetComponentInChildren<Rigidbody2D>();
-        coll = GetComponentInChildren<Collider2D>();
-        anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        groundCheck = GetComponent<CheckGround>();
     }
 
     void Update()
@@ -83,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.K) && isGround == true)
+        if (Input.GetKeyDown(KeyCode.K) && groundCheck.isGround == true)
         {
             Jump();
-            isGround = false;
+            groundCheck.isGround = false;
             isDoubleJump = true;
         }
         else if (Input.GetKeyDown(KeyCode.K) && isDoubleJump && currentState == State.Falling)
@@ -104,14 +100,6 @@ public class PlayerMovement : MonoBehaviour
         AudioManager.Instance.PlaySFX(AudioManager.Instance.jump);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround = true;
-        }
-    }
-
     private void HandleDash()
     {
         if(Input.GetKeyDown(KeyCode.N) && canDash)
@@ -119,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
             anim.SetBool("isDashing", true);
             AudioManager.Instance.PlaySFX(AudioManager.Instance.dash);
-            if (isGround)
+            if (groundCheck.isGround)
             {
 
                 EffectManager.Instance.SpawnEffect(EffectManager.Instance.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
@@ -163,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (currentState == State.Falling)
         {
-            if (isGround)
+            if (groundCheck.isGround)
             {
                 currentState = State.Idle;
                 EffectManager.Instance.SpawnEffect(EffectManager.Instance.touchGround, jumpPos, transform.rotation);

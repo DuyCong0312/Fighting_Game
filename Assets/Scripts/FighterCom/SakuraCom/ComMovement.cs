@@ -8,15 +8,11 @@ public class ComMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Transform player;
+    private CheckGround groundCheck;
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 11f;
     [SerializeField] private bool isFacingRight = false;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float circleRadius;
-    public bool isGround;
-    public bool isJumping = false;
 
     [Header("Dash Setting")]
     [SerializeField] private float dashPower = 10f;
@@ -29,6 +25,7 @@ public class ComMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        groundCheck = GetComponent<CheckGround>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -37,7 +34,6 @@ public class ComMovement : MonoBehaviour
         MoveToPlayer();
         Flipped();
         UpdateAnimation();
-        GroundCheck();
     }
 
     private void MoveToPlayer()
@@ -89,10 +85,10 @@ public class ComMovement : MonoBehaviour
     private void HandleJump()
     {
         float distanceFromPlayer = Mathf.Abs(player.position.y - this.transform.position.y);
-        if(distanceFromPlayer > 0.5f && isGround == true)
+        if(distanceFromPlayer > 0.5f && groundCheck.isGround == true)
         {
             Jump();
-            isJumping = true;
+            groundCheck.isJumping = true;
         }
     }
     private void Jump()
@@ -111,23 +107,10 @@ public class ComMovement : MonoBehaviour
                 anim.SetBool("Jumping", false);
             }
         }
-        if (isGround && anim.GetBool("Falling"))
+        if (groundCheck.isGround && anim.GetBool("Falling"))
         {
             anim.SetBool("Falling", false);
         }
-    }
-
-    private void GroundCheck()
-    {
-        isGround = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer);
-
-        isJumping = isGround ? false : true;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(groundCheck.position, circleRadius);
     }
 
     private void Footstep()

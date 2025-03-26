@@ -11,7 +11,7 @@ public class PlayerStateManager : MonoBehaviour
     private State currentState;
 
     private Rigidbody2D rb;
-    private PlayerMovement movement;
+    private CheckGround groundCheck;
 
     public int CurrentState => (int)currentState;
 
@@ -26,7 +26,7 @@ public class PlayerStateManager : MonoBehaviour
             Instance = this;
         }
         rb = GetComponent<Rigidbody2D>();
-        movement = GetComponent<PlayerMovement>();
+        groundCheck = GetComponent<CheckGround>();
     }
     private void Update()
     {
@@ -44,7 +44,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         else if (currentState == State.Falling)
         {
-            if (movement.IsGrounded)
+            if (groundCheck.isGround)
             {
                 currentState = State.Idle;
             }

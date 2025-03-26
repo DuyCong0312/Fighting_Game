@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Ichigo_Uskill : U_Skill
 {
-    [SerializeField] private GameObject skillPrefab;
-    [SerializeField] private Transform skillPos;
+    [Header("U Skill")]
+    [SerializeField] private GameObject uSkillPrefab;
+    [SerializeField] private Transform uSkillPos;
 
-    private void ActiveSkill()
+    [Header("U+K Skill")]
+    [SerializeField] private GameObject uKSkillPrefab;
+    [SerializeField] private Transform uKSkillPos;
+
+    private void ActiveUSkill()
     {
-        Instantiate(skillPrefab, skillPos.position, transform.rotation);
+        Instantiate(uSkillPrefab, uSkillPos.position, uSkillPos.transform.rotation);
+    }
+    private void ActiveUKSkill()
+    {
+        Instantiate(uKSkillPrefab, uKSkillPos.position, uKSkillPos.transform.rotation);
     }
 }

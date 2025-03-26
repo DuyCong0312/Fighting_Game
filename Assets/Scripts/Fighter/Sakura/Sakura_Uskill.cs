@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sakura_Uskill : U_Skill
 {
+    [Header("U Skill")]
     [SerializeField] private GameObject SkillPrefab;
     [SerializeField] private Transform skillPos;
     [SerializeField] private Transform newPos;
@@ -12,14 +13,31 @@ public class Sakura_Uskill : U_Skill
     private Vector3 newPosition;
     private bool isMoving = false;
     private bool canMove = true;
+    private Rigidbody2D rb;
+
+    [Header("U+K Skill")]
+    [SerializeField] private float force;
+
+    protected override void Start()
+    {
+        base.Start();
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     protected override void Uskill()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            newPosition = newPos.position;
-            anim.SetTrigger("Uskill");
-            StartCoroutine(StepBack());
+            if (groundCheck.isGround)
+            {
+                newPosition = newPos.position;
+                anim.SetTrigger("Uskill");
+                StartCoroutine(StepBack());
+            }
+            else
+            {
+                anim.Play("K+U");
+            }
         }
     }
 
@@ -55,7 +73,6 @@ public class Sakura_Uskill : U_Skill
         ActiveSkill(1, 0.5f);
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("MainCamera"))
@@ -63,6 +80,12 @@ public class Sakura_Uskill : U_Skill
             isMoving = false;
             canMove = false;
         }
+    }
+
+    private void ActiveUKSkill()
+    {
+        this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 45);
+        rb.velocity = new Vector2(rb.velocity.x, -force);
     }
 
 }

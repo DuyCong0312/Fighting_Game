@@ -8,6 +8,7 @@ public class ComboController : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
+    private CheckGround groundCheck;
 
     [SerializeField] private int attackNumber;
     [SerializeField] private bool isAttack = false;
@@ -17,6 +18,7 @@ public class ComboController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        groundCheck = GetComponent<CheckGround>();
     }
     void Update()
     {
@@ -43,15 +45,22 @@ public class ComboController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J) && !isAttack)
         {
-            anim.SetTrigger(attackNumber + "Attack");
             isAttack = true;
+            if (groundCheck.isGround)
+            {
+                anim.SetTrigger(attackNumber + "Attack");
+            }
+            else
+            {
+                anim.Play("K+J");
+            }
             AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
         }
     }
 
     private void Defend()
     {
-        if (Input.GetKey(KeyCode.S) && !isDefend)
+        if (Input.GetKey(KeyCode.S) && !isDefend && groundCheck.isGround)
         {
             isDefend = true;
         }

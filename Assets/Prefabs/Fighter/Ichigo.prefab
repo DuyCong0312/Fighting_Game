@@ -62,6 +62,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8207347863171276973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1472522880258741064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588388418654130650}
+  m_Layer: 7
+  m_Name: UKskillPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1588388418654130650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472522880258741064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 0.871, y: -0.871, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8078243417279963412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!1 &1818890458921424710
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,6 +112,7 @@ GameObject:
   - component: {fileID: -6782175465761027758}
   - component: {fileID: 2357133413282601946}
   - component: {fileID: -3773639330718817434}
+  - component: {fileID: 3908598434720779312}
   m_Layer: 7
   m_Name: Ichigo
   m_TagString: Player
@@ -105,6 +137,7 @@ Transform:
   - {fileID: 4512127336319825669}
   - {fileID: 7836834438314004964}
   - {fileID: 7767866360770651104}
+  - {fileID: 7815760517787553239}
   - {fileID: 3142144497071930037}
   - {fileID: 2675351959799065197}
   - {fileID: 6763763761788131866}
@@ -259,7 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   jumpForce: 11
-  isGround: 1
   isDoubleJump: 0
   isFacingRight: 1
   jumpPos: {fileID: 4512127336319825669}
@@ -296,8 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dc4d31a5671694785c90669b21cae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillPrefab: {fileID: 0}
-  skillPos: {fileID: 7021824351745278384}
+  uSkillPrefab: {fileID: 9169245940227784146, guid: 76a70fd1eb6286145aa571b2b834b9b1, type: 3}
+  uSkillPos: {fileID: 7021824351745278384}
+  uKSkillPrefab: {fileID: 7676906502940948151, guid: 5ca49d551a5a4e54a9f6557ee871bad7, type: 3}
+  uKSkillPos: {fileID: 1588388418654130650}
 --- !u!114 &-6782175465761027758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +367,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 256
+  hit: 0
 --- !u!114 &-3773639330718817434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +381,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPos: {fileID: 7767866360770651104}
+--- !u!114 &3908598434720779312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d30c55ddc17c349810b403258700b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 7815760517787553239}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  circleRadius: 0.19
+  isGround: 0
+  isJumping: 0
 --- !u!1 &2779537796108366315
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +554,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7021824351745278384}
+  - {fileID: 1588388418654130650}
+  m_Father: {fileID: 8207347863171276973}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7013825353083630463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7815760517787553239}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7815760517787553239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013825353083630463}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 8207347863171276973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8730726914888532211
