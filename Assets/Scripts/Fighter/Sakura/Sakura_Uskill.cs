@@ -13,36 +13,18 @@ public class Sakura_Uskill : U_Skill
     private Vector3 newPosition;
     private bool isMoving = false;
     private bool canMove = true;
-    private Rigidbody2D rb;
+    private Vector2 movement;
 
     [Header("U+K Skill")]
     [SerializeField] private float force;
 
-    protected override void Start()
+    private void ActiveStepBack()
     {
-        base.Start();
-        rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(StepBack());
     }
-
-    protected override void Uskill()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (groundCheck.isGround)
-            {
-                newPosition = newPos.position;
-                anim.SetTrigger("Uskill");
-                StartCoroutine(StepBack());
-            }
-            else
-            {
-                anim.Play("K+U");
-            }
-        }
-    }
-
     private IEnumerator StepBack()
     {
+        newPosition = newPos.position;
         while (Vector2.Distance(transform.position, newPosition) > 0.01f && canMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
@@ -52,7 +34,7 @@ public class Sakura_Uskill : U_Skill
         canMove = true;
     }
 
-    private void ActiveSkill(int extraInstances, float offset)
+    private void ActiveSakuraUSkill(int extraInstances, float offset)
     {
         Instantiate(SkillPrefab, skillPos.position, transform.rotation);
 
@@ -63,14 +45,14 @@ public class Sakura_Uskill : U_Skill
         }
     }
 
-    private void ActiveSkillP1()
+    private void ActiveSakuraUSkillP1()
     {
-        ActiveSkill(0, 0f);
+        ActiveSakuraUSkill(0, 0f);
     }
 
-    private void ActiveSkillP2()
+    private void ActiveSakuraUSkillP2()
     {
-        ActiveSkill(1, 0.5f);
+        ActiveSakuraUSkill(1, 0.5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -82,10 +64,16 @@ public class Sakura_Uskill : U_Skill
         }
     }
 
-    private void ActiveUKSkill()
+    private void ActiveSakuraUKSkill()
     {
         this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 45);
-        rb.velocity = new Vector2(rb.velocity.x, -force);
+        Vector2 direction = -this.transform.up;
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        movement.x = force * Mathf.Cos(angle);
+        movement.y = force * Mathf.Sin(angle);
+        Debug.Log(movement);
+
+        rb.velocity = movement.normalized * force;
     }
 
 }

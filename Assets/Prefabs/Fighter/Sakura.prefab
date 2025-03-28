@@ -303,13 +303,14 @@ GameObject:
   - component: {fileID: 8646083832986118737}
   - component: {fileID: 3520576140043920084}
   - component: {fileID: -4928981701172381779}
+  - component: {fileID: 5618413058746828547}
   m_Layer: 7
   m_Name: Sakura
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6063904594275682210
 Transform:
   m_ObjectHideFlags: 0
@@ -505,8 +506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackNumber: 0
-  isAttack: 0
-  isDefend: 0
 --- !u!114 &554194665430495987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +540,7 @@ MonoBehaviour:
   attackPos: {fileID: 2622217693882486166}
   attackRange: 0.5
   moveSpeed: 12
+  force: 0
 --- !u!114 &8646083832986118737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +594,22 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+--- !u!114 &5618413058746828547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181489956766094652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d281e7fd9d8dd43a0f28867fe26a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  isDefending: 0
+  isUsingSkill: 0
+  isDead: 0
 --- !u!1 &6643317084576140184
 GameObject:
   m_ObjectHideFlags: 0

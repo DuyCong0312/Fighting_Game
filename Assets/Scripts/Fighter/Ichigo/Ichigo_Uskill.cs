@@ -12,11 +12,11 @@ public class Ichigo_Uskill : U_Skill
     [SerializeField] private GameObject uKSkillPrefab;
     [SerializeField] private Transform uKSkillPos;
 
-    private void ActiveUSkill()
+    private void ActiveIchigoUSkill()
     {
         Instantiate(uSkillPrefab, uSkillPos.position, uSkillPos.transform.rotation);
     }
-    private void ActiveUKSkill()
+    private void ActiveIchigoUKSkill()
     {
         Instantiate(uKSkillPrefab, uKSkillPos.position, uKSkillPos.transform.rotation);
     }

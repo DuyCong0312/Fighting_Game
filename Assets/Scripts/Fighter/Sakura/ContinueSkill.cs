@@ -7,12 +7,15 @@ public class ContinueSkill : StateMachineBehaviour
     private Rigidbody2D rb;
     private Transform playerTransform;
     private CheckGround groundCheck;
+    private PlayerState playerState;
+    [SerializeField] private string nameAnimatorClip;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         playerTransform = animator.transform;
         groundCheck = animator.GetComponent<CheckGround>();
+        playerState = animator.GetComponent<PlayerState>();
         rb = playerTransform.GetComponent<Rigidbody2D>();
     }
 
@@ -21,7 +24,7 @@ public class ContinueSkill : StateMachineBehaviour
     {
         if (groundCheck.isGround)
         {
-            animator.Play("K+U2");
+            PlayAnimation(animator);
             rb.velocity = Vector2.zero; 
             Vector3 currentRotation = playerTransform.rotation.eulerAngles;
             playerTransform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, 0);
@@ -29,10 +32,10 @@ public class ContinueSkill : StateMachineBehaviour
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        playerState.isUsingSkill = false;   
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -45,4 +48,9 @@ public class ContinueSkill : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+
+    private void PlayAnimation(Animator animator)
+    {
+        animator.Play(nameAnimatorClip); 
+    }
 }

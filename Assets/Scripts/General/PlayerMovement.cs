@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private CheckGround groundCheck;
+    private PlayerState playerState;
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
@@ -32,15 +33,22 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
+        playerState = GetComponent<PlayerState>();
     }
 
     void Update()
     {
+        UpdateAnimation();
+        if ( playerState.isAttacking || 
+            playerState.isUsingSkill || 
+            playerState.isDefending)
+        {
+            return;
+        }
         Movement();
         HandleJump();
         HandleDash();
         UpdateState();
-        UpdateAnimation();
     }
 
     private void Movement()

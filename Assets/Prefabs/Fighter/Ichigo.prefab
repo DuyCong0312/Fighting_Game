@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 2357133413282601946}
   - component: {fileID: -3773639330718817434}
   - component: {fileID: 3908598434720779312}
+  - component: {fileID: 8086383848958687823}
   m_Layer: 7
   m_Name: Ichigo
   m_TagString: Player
@@ -314,8 +315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackNumber: 0
-  isAttack: 0
-  isDefend: 0
 --- !u!114 &8649608556145386475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +399,22 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+--- !u!114 &8086383848958687823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d281e7fd9d8dd43a0f28867fe26a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  isDefending: 0
+  isUsingSkill: 0
+  isDead: 0
 --- !u!1 &2779537796108366315
 GameObject:
   m_ObjectHideFlags: 0

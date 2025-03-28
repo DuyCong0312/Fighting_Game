@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class Ichigo_Iskill : I_Skill
 {
+    [Header("I Skill")]
     [SerializeField] private GameObject skillPrefab;
     [SerializeField] private GameObject skillPrefab2;
     [SerializeField] private Transform skillPos;
 
-    private void ActivateSkill(GameObject skill, Quaternion rotation)
+    private void ActivateIchigoISkill(GameObject skill, Quaternion rotation)
     {
         Instantiate(skill, skillPos.position, rotation);
     }
 
-    private void ActiveSkill01()
+    private void ActiveIchigoISkill01()
     {
-        ActivateSkill(skillPrefab, transform.rotation);
+        ActivateIchigoISkill(skillPrefab, transform.rotation);
     }
 
-    private void ActiveSkill02()
+    private void ActiveIchigoISkill02()
     {
-        ActivateSkill(skillPrefab, Quaternion.Euler(180, 0, 0) * transform.rotation);
+        ActivateIchigoISkill(skillPrefab, Quaternion.Euler(180, 0, 0) * transform.rotation);
     }
 
-    private void ActiveSkill03()
+    private void ActiveIchigoISkill03()
     {
-        ActivateSkill(skillPrefab2, transform.rotation);
+        ActivateIchigoISkill(skillPrefab2, transform.rotation);
     }
 
 }

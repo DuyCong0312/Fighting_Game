@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Sakura_Iskill : I_Skill
 {
+    [Header("I Skill")]
     [SerializeField] private CheckHit check;
     [SerializeField] private Transform newPos;
     [SerializeField] private Transform attackPos;
     [SerializeField] private float attackRange;
     [SerializeField] private float moveSpeed;
+
+
+    [Header("I+K Skill")]
+    [SerializeField] private float force;
 
     private Vector3 newPosition;
     private bool isMoving = false;
@@ -59,4 +64,11 @@ public class Sakura_Iskill : I_Skill
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
+
+    private void ActiveSakuraIKSkill()
+    {
+        this.transform.rotation = this.transform.rotation; 
+        rb.velocity = new Vector2 (rb.velocity.x, - force);
+    }
+
 }

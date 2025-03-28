@@ -2,33 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class U_Skill : MonoBehaviour
+public class U_Skill : BaseSkill
 {
-    protected Animator anim;
-    protected CheckGround groundCheck;
-    protected virtual void Start()
-    {
-        anim = GetComponent<Animator>();
-        groundCheck = GetComponent<CheckGround>();
-    }
+    protected override KeyCode SkillKey => KeyCode.U;
 
-    protected virtual void Update()
-    {
-        Uskill();
-    }
+    protected override string GroundAnimationTrigger => "USkill";
 
-    protected virtual void Uskill()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (groundCheck.isGround)
-            {
-                anim.SetTrigger("Uskill");
-            }
-            else
-            {
-                anim.Play("K+U");
-            }
-        }
-    }
+    protected override string AirAnimationName => "K+U";
 }

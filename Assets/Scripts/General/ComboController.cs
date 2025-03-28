@@ -9,16 +9,16 @@ public class ComboController : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private CheckGround groundCheck;
+    private PlayerState playerState;
 
     [SerializeField] private int attackNumber;
-    [SerializeField] private bool isAttack = false;
-    [SerializeField] private bool isDefend = false;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GetComponent<CheckGround>();
+        playerState = GetComponent<PlayerState>();
     }
     void Update()
     {
@@ -28,7 +28,7 @@ public class ComboController : MonoBehaviour
 
     private void StartCombo()
     {
-        isAttack = false;
+        playerState.isAttacking = false;
         if(attackNumber < 3)
         {
             attackNumber++;
@@ -37,15 +37,15 @@ public class ComboController : MonoBehaviour
 
     private void StopCombo()
     {
-        isAttack = false;
+        playerState.isAttacking = false;
         attackNumber = 0;
     }
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.J) && !isAttack)
+        if (Input.GetKeyDown(KeyCode.J) && !playerState.isAttacking)
         {
-            isAttack = true;
+            playerState.isAttacking = true;
             if (groundCheck.isGround)
             {
                 anim.SetTrigger(attackNumber + "Attack");
@@ -60,14 +60,14 @@ public class ComboController : MonoBehaviour
 
     private void Defend()
     {
-        if (Input.GetKey(KeyCode.S) && !isDefend && groundCheck.isGround)
+        if (Input.GetKey(KeyCode.S) && !playerState.isDefending && groundCheck.isGround)
         {
-            isDefend = true;
+            playerState.isDefending = true;
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
-            isDefend= false;
+            playerState.isDefending = false;
         }
-        anim.SetBool("isDefend", isDefend);
+        anim.SetBool("isDefend", playerState.isDefending);
     }
 }

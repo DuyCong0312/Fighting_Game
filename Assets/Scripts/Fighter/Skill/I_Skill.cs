@@ -2,24 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I_Skill : MonoBehaviour
+public class I_Skill : BaseSkill
 {
-    private Animator anim;
+    protected override KeyCode SkillKey => KeyCode.I;
 
-    void Start()
-    {
-        anim =GetComponent<Animator>();
-    }
-    
-    void Update()
-    {
-        Iskill();   
-    }
-    private void Iskill()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        { 
-            anim.SetTrigger("Iskill");
-        }
-    }
+    protected override string GroundAnimationTrigger => "ISkill";
+
+    protected override string AirAnimationName => "K+I";
 }
