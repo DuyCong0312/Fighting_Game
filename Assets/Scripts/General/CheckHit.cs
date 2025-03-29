@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class CheckHit : MonoBehaviour
 {
-    public Transform meleeAttack01Pos;
-    public Transform meleeAttack02Pos;
-    public Transform meleeAttack03Pos;
-    public Vector2 attackBoxSize = new Vector2(2f, 1f);
-    public float attackRange = 1f;
-    public LayerMask whatIsEnemies;
+    [SerializeField] private LayerMask whatIsEnemies;
     public bool hit = false;
 
     public void StraightAttack(Transform AttackPos, Vector2 AttackSize, float angle, float attackDamage)
@@ -34,28 +29,5 @@ public class CheckHit : MonoBehaviour
             hit = true;
             enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
         }
-    }
-
-    private void FirstAttack()
-    {
-        StraightAttack(meleeAttack01Pos, attackBoxSize, 0f,5f);
-    }
-
-    private void SecondAttack()
-    {
-        RoundAttack(meleeAttack02Pos, attackRange, 5f);
-    }
-
-    private void ThirdAttack()
-    {
-        StraightAttack(meleeAttack03Pos, attackBoxSize, 0f, 5f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(meleeAttack01Pos.position, attackBoxSize);
-        Gizmos.DrawWireSphere(meleeAttack02Pos.position, attackRange);
-        Gizmos.DrawWireCube(meleeAttack03Pos.position, attackBoxSize);
     }
 }

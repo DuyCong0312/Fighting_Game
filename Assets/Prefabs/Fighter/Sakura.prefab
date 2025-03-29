@@ -300,10 +300,11 @@ GameObject:
   - component: {fileID: 9194206527286779702}
   - component: {fileID: 554194665430495987}
   - component: {fileID: 8425415099491250575}
-  - component: {fileID: 8646083832986118737}
-  - component: {fileID: 3520576140043920084}
+  - component: {fileID: 556284960291988948}
   - component: {fileID: -4928981701172381779}
+  - component: {fileID: 3520576140043920084}
   - component: {fileID: 5618413058746828547}
+  - component: {fileID: 6997194588945451546}
   m_Layer: 7
   m_Name: Sakura
   m_TagString: Player
@@ -521,7 +522,7 @@ MonoBehaviour:
   SkillPrefab: {fileID: 2315352646835178593, guid: 3a86a90bfdbf54d4a9d4b0def129d76e, type: 3}
   skillPos: {fileID: 4463300805526870297}
   newPos: {fileID: 7847265885670794795}
-  backSpeed: 4
+  backSpeed: 5
   force: 10
 --- !u!114 &8425415099491250575
 MonoBehaviour:
@@ -535,13 +536,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0779818baf168b41aa2fe0105fbd71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  check: {fileID: 8646083832986118737}
+  check: {fileID: 0}
   newPos: {fileID: 6360860257771106621}
   attackPos: {fileID: 2622217693882486166}
   attackRange: 0.5
   moveSpeed: 12
-  force: 0
---- !u!114 &8646083832986118737
+  force: 10
+--- !u!114 &556284960291988948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -550,7 +551,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6181489956766094652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: edd2faf70640e28499bb177b34994c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   meleeAttack01Pos: {fileID: 8421045855311435087}
@@ -558,23 +559,6 @@ MonoBehaviour:
   meleeAttack03Pos: {fileID: 8370329791996890576}
   attackBoxSize: {x: 0.82, y: 0.15}
   attackRange: 0.5
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 256
-  hit: 0
---- !u!114 &3520576140043920084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6181489956766094652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e46177193706d44cabad097032b7bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPos: {fileID: 2062136309038556246}
 --- !u!114 &-4928981701172381779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +578,19 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+--- !u!114 &3520576140043920084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181489956766094652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e46177193706d44cabad097032b7bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPos: {fileID: 2062136309038556246}
 --- !u!114 &5618413058746828547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +607,22 @@ MonoBehaviour:
   isDefending: 0
   isUsingSkill: 0
   isDead: 0
+--- !u!114 &6997194588945451546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181489956766094652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 0
+  hit: 0
 --- !u!1 &6643317084576140184
 GameObject:
   m_ObjectHideFlags: 0

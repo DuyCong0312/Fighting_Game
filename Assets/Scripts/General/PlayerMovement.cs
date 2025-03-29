@@ -35,12 +35,12 @@ public class PlayerMovement : MonoBehaviour
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
     }
-
+     
     void Update()
     {
         UpdateAnimation();
-        if ( playerState.isAttacking || 
-            playerState.isUsingSkill || 
+        UpdateState();
+        if (playerState.isUsingSkill || 
             playerState.isDefending)
         {
             return;
@@ -48,13 +48,17 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         HandleJump();
         HandleDash();
-        UpdateState();
     }
 
     private void Movement()
     {
         if (isDashing)
         {
+            return;
+        }
+        else if (playerState.isAttacking)
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
             return;
         }
 
@@ -83,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (isDashing)
+        if (isDashing || playerState.isAttacking)
         {
             return;
         }
@@ -110,7 +114,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleDash()
     {
-        if(Input.GetKeyDown(KeyCode.N) && canDash)
+        if (playerState.isAttacking)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.N) && canDash)
         {
             StartCoroutine(Dash());
             anim.SetBool("isDashing", true);

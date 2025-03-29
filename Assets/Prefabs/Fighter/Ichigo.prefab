@@ -110,10 +110,11 @@ GameObject:
   - component: {fileID: 3445485636908294743}
   - component: {fileID: 8649608556145386475}
   - component: {fileID: -6782175465761027758}
-  - component: {fileID: 2357133413282601946}
-  - component: {fileID: -3773639330718817434}
   - component: {fileID: 3908598434720779312}
+  - component: {fileID: 7626671958649967545}
+  - component: {fileID: -3773639330718817434}
   - component: {fileID: 8086383848958687823}
+  - component: {fileID: 2357133413282601946}
   m_Layer: 7
   m_Name: Ichigo
   m_TagString: Player
@@ -346,40 +347,6 @@ MonoBehaviour:
   skillPrefab: {fileID: 9169245940227784146, guid: 76a70fd1eb6286145aa571b2b834b9b1, type: 3}
   skillPrefab2: {fileID: 1550473910411337948, guid: d21a5d8c7a84e014a8edb00753c38ec7, type: 3}
   skillPos: {fileID: 7021824351745278384}
---- !u!114 &2357133413282601946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818890458921424710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeAttack01Pos: {fileID: 3142144497071930037}
-  meleeAttack02Pos: {fileID: 2675351959799065197}
-  meleeAttack03Pos: {fileID: 6763763761788131866}
-  attackBoxSize: {x: 0.82, y: 0.15}
-  attackRange: 0.5
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 256
-  hit: 0
---- !u!114 &-3773639330718817434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818890458921424710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e46177193706d44cabad097032b7bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPos: {fileID: 7767866360770651104}
 --- !u!114 &3908598434720779312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +366,36 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+--- !u!114 &7626671958649967545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bbcc25f7375654bad176620e04e71f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttack01Pos: {fileID: 3142144497071930037}
+  meleeAttack02Pos: {fileID: 2675351959799065197}
+  meleeAttack03Pos: {fileID: 6763763761788131866}
+  attackBoxSize: {x: 0.1, y: 0.3}
+  attackRange: 4
+--- !u!114 &-3773639330718817434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e46177193706d44cabad097032b7bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPos: {fileID: 7767866360770651104}
 --- !u!114 &8086383848958687823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +412,22 @@ MonoBehaviour:
   isDefending: 0
   isUsingSkill: 0
   isDead: 0
+--- !u!114 &2357133413282601946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 256
+  hit: 0
 --- !u!1 &2779537796108366315
 GameObject:
   m_ObjectHideFlags: 0
