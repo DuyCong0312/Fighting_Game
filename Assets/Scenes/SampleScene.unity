@@ -727,7 +727,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -197011075
+  m_SortingLayerID: -1905556495
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 823b5d450fecf2e48b2453591a1f55f0, type: 3}
@@ -1798,7 +1798,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1114997167
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4fb099e02ea3db4a9de20887f0374a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2262,7 +2262,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -197011075
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 1715832091, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2328,11 +2328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttack01Pos: {fileID: 1925873119}
-  meleeAttack02Pos: {fileID: 2126734690}
-  meleeAttack03Pos: {fileID: 381094081}
-  attackBoxSize: {x: 0.82, y: 0.15}
-  attackRange: 0.5
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 128
