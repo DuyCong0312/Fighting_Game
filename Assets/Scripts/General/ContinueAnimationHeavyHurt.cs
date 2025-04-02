@@ -13,15 +13,21 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
     [SerializeField] private GameObject effectTouchGround;
     [SerializeField] private float blowUpPower;
 
+    private bool blowUpCalled = false;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerTransform = animator.transform;
-        groundCheck = animator.GetComponent<CheckGround>();
-        rb = playerTransform.GetComponent<Rigidbody2D>();
-        playerMovement = playerTransform.GetComponent<PlayerMovement>();
-        BlowUp();
-        if(touchGroundPos == null)
+        if (!blowUpCalled)
+        {
+            playerTransform = animator.transform;
+            groundCheck = animator.GetComponent<CheckGround>();
+            rb = playerTransform.GetComponent<Rigidbody2D>();
+            playerMovement = playerTransform.GetComponent<PlayerMovement>();
+            BlowUp();
+            blowUpCalled = true;
+        }
+        if (touchGroundPos == null)
         {
            touchGroundPos = playerTransform.Find("JumpPos");
         }
@@ -60,4 +66,5 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
         float direction = playerMovement.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * blowUpPower, blowUpPower / 2f);
     }
+
 }

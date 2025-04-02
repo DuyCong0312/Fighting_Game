@@ -43,8 +43,6 @@ public class PlayerHealth : MonoBehaviour
         anim.SetTrigger("getHurt");
         accumulatedDamage += damage;
         timeSinceLastDamage = 0f;
-        //doan duoi la day lui khi bi tan cong
-        //this.transform.position = new Vector2(this.transform.position.x - 0.2f, this.transform.position.y);
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
         if (currentHealth <= 0)
         {

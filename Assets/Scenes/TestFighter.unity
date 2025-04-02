@@ -174,14 +174,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sakura
       objectReference: {fileID: 0}
-    - target: {fileID: 6181489956766094652, guid: 3eb57c9ae05d1ed49949d8fe8f1dfce4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6997194588945451546, guid: 3eb57c9ae05d1ed49949d8fe8f1dfce4, type: 3}
-      propertyPath: whatIsEnemies.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -241,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8207347863171276973, guid: 833fb413268949f40a0da911ced92abb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.04
+      value: -1.56
       objectReference: {fileID: 0}
     - target: {fileID: 8207347863171276973, guid: 833fb413268949f40a0da911ced92abb, type: 3}
       propertyPath: m_LocalPosition.y

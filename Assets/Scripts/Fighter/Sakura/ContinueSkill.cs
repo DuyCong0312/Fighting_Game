@@ -15,6 +15,7 @@ public class ContinueSkill : StateMachineBehaviour
         playerTransform = animator.transform;
         groundCheck = animator.GetComponent<CheckGround>();
         rb = playerTransform.GetComponent<Rigidbody2D>();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,4 +47,5 @@ public class ContinueSkill : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+
 }

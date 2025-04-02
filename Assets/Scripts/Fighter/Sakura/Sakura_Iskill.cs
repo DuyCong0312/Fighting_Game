@@ -14,6 +14,10 @@ public class Sakura_Iskill : I_Skill
 
     [Header("I+K Skill")]
     [SerializeField] private float force;
+    [SerializeField] private GameObject effectIK1;
+    [SerializeField] private GameObject effectIK2;
+    [SerializeField] private Transform effectIKPos;
+    [SerializeField] private Transform spwanEffectPos;
 
     private Vector3 newPosition;
     private bool isMoving = false;
@@ -71,4 +75,18 @@ public class Sakura_Iskill : I_Skill
         rb.velocity = new Vector2 (rb.velocity.x, - force);
     }
 
+    private void ActiveEffectIK1() 
+    {
+        SpawnSkillEffect(effectIK1,effectIKPos);
+    }
+
+    private void ActiveEffectIK2()
+    {
+        SpawnSkillEffect(effectIK2, spwanEffectPos);
+    }
+
+    private void SpawnSkillEffect(GameObject name, Transform nameTransform)
+    {
+        Instantiate(name, nameTransform.position, nameTransform.rotation);
+    }
 }

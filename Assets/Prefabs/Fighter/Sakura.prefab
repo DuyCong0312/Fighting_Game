@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &472469861840265385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5793241452810311335}
+  m_Layer: 7
+  m_Name: IKskillPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5793241452810311335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472469861840265385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5547073591794138943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &749354672690927155
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +124,7 @@ Transform:
   m_Children:
   - {fileID: 6360860257771106621}
   - {fileID: 2622217693882486166}
+  - {fileID: 5793241452810311335}
   m_Father: {fileID: 6063904594275682210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2748181173567304011
@@ -375,7 +407,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -197011075
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 1715832091, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -524,6 +556,9 @@ MonoBehaviour:
   newPos: {fileID: 7847265885670794795}
   backSpeed: 5
   force: 10
+  effectUK1: {fileID: 4254516921239504521, guid: 79ffe9b806c23ca4e9652bdee9f66b44, type: 3}
+  effectUK2: {fileID: 785880488533058647, guid: 327fc7ab7d710a249a884899afb3a400, type: 3}
+  spwanEffectPos: {fileID: 4537927399307222695}
 --- !u!114 &8425415099491250575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +577,10 @@ MonoBehaviour:
   attackRange: 0.5
   moveSpeed: 12
   force: 10
+  effectIK1: {fileID: 7762501778609466006, guid: 9fce33346091b6d419091aefe2890ae7, type: 3}
+  effectIK2: {fileID: 7627332323283961509, guid: 68d0a24a45e4b76428017d021f3aaab1, type: 3}
+  effectIKPos: {fileID: 5793241452810311335}
+  spwanEffectPos: {fileID: 4537927399307222695}
 --- !u!114 &556284960291988948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsEnemies:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   hit: 0
 --- !u!1 &6643317084576140184
 GameObject:

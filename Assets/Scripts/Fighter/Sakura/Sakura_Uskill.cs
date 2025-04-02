@@ -17,6 +17,9 @@ public class Sakura_Uskill : U_Skill
 
     [Header("U+K Skill")]
     [SerializeField] private float force;
+    [SerializeField] private GameObject effectUK1;
+    [SerializeField] private GameObject effectUK2;
+    [SerializeField] private Transform spwanEffectPos;
 
     private void ActiveStepBack()
     {
@@ -74,6 +77,17 @@ public class Sakura_Uskill : U_Skill
         Debug.Log(movement);
 
         rb.velocity = movement.normalized * force;
+    }
+
+    private void ActiveEffectUK()
+    {
+        SpawnSkillEffect(effectUK1);
+        SpawnSkillEffect(effectUK2);
+    }
+
+    private void SpawnSkillEffect(GameObject name)
+    {
+        Instantiate(name, spwanEffectPos.position, spwanEffectPos.rotation);
     }
 
 }
