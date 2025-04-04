@@ -8,10 +8,10 @@ public class KnockBack : MonoBehaviour
     [SerializeField] private float hitDirectionForce = 5f;
 
     [Header("BlowUp")]
-    [SerializeField] private float blowUpPower;
-    [SerializeField] private float blowUpTime;
+    [SerializeField] private float blowUpPower = 5f;
 
     private PlayerMovement playerMovement;
+    private CheckGround groundCheck;
     private Rigidbody2D rb;
 
     private void Start()
@@ -24,19 +24,19 @@ public class KnockBack : MonoBehaviour
     {
         StartCoroutine(KnockBackRoutine(hitDirection));
     }
-    public void BlowUpAction(Vector2 hitDirection)
+    public void BlowUpAction(Vector2 blowDirection)
     {
-        StartCoroutine(BlowUp());
+        StartCoroutine(BlowUp(blowDirection));
     }
 
     private IEnumerator KnockBackRoutine(Vector2 hitDirection)
     {
+        float direction = playerMovement.isFacingRight ? 1 : -1;
         Vector2 hitForce = hitDirection * hitDirectionForce;
-
         float elapsedTime = 0f;
         while (elapsedTime < knockBackTime)
         {
-            rb.velocity = new Vector2(hitForce.x, hitForce.y);
+            rb.velocity = new Vector2(direction * hitForce.x, hitForce.y * 5f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -44,18 +44,12 @@ public class KnockBack : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-    private IEnumerator BlowUp()
+    private IEnumerator BlowUp(Vector2 blowDirection)
     {
         float direction = playerMovement.isFacingRight ? 1 : -1;
-
-        float elapsedTime = 0f;
-        while (elapsedTime < blowUpTime)
-        {
-            rb.velocity = new Vector2(-direction * blowUpPower, blowUpPower / 2f);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        rb.velocity = Vector2.zero;
+        Vector2 blowForce = blowDirection * blowUpPower;
+        rb.velocity = new Vector2(- direction * blowForce.x, blowForce.y);
+        
+        yield return null;
     }
 }

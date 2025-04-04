@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sakura_CheckHit : MonoBehaviour
 {
     private CheckHit checkHit;
+    private KnockBack knockBack;
 
     [SerializeField] private Transform meleeAttack01Pos;
     [SerializeField] private Transform meleeAttack02Pos;
@@ -18,17 +19,18 @@ public class Sakura_CheckHit : MonoBehaviour
     }
     private void FirstAttack()
     {
-        checkHit.StraightAttack(meleeAttack01Pos, attackBoxSize, 0f, 5f);
+        checkHit.StraightAttack(meleeAttack01Pos, attackBoxSize, 0f, 5f, transform.right);
+        
     }
 
     private void SecondAttack()
     {
-        checkHit.RoundAttack(meleeAttack02Pos, attackRange, 5f);
+        checkHit.RoundAttack(meleeAttack02Pos, attackRange, 5f, transform.right);
     }
 
     private void ThirdAttack()
     {
-        checkHit.StraightAttack(meleeAttack03Pos, attackBoxSize, 0f, 5f);
+        checkHit.StraightAttack(meleeAttack03Pos, attackBoxSize, 0f, 5f, transform.right);
     }
 
     private void OnDrawGizmosSelected()

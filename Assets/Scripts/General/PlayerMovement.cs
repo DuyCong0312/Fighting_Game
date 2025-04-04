@@ -41,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimation();
         UpdateState();
         if (playerState.isUsingSkill || 
-            playerState.isDefending)
+            playerState.isDefending  ||
+            playerState.isGettingHurt)
         {
             return;
         }

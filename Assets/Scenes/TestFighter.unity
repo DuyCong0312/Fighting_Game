@@ -191,46 +191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ichigo
       objectReference: {fileID: 0}
-    - target: {fileID: 1818890458921424710, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675351959799065197, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675351959799065197, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 3142144497071930037, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3142144497071930037, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6763763761788131866, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6763763761788131866, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626671958649967545, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: attackRange
-      value: 0.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626671958649967545, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: attackBoxSize.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626671958649967545, guid: 833fb413268949f40a0da911ced92abb, type: 3}
-      propertyPath: attackBoxSize.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8207347863171276973, guid: 833fb413268949f40a0da911ced92abb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.56

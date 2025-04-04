@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 277981597814703706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: -0.15, z: 0}
+  m_LocalPosition: {x: 1.85, y: 0.075, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1424642711499913547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.075, z: 0}
+  m_LocalPosition: {x: 1.25, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: -6782175465761027758}
   - component: {fileID: 3908598434720779312}
   - component: {fileID: 7626671958649967545}
+  - component: {fileID: 5720150010071488608}
   - component: {fileID: -3773639330718817434}
   - component: {fileID: 8086383848958687823}
   - component: {fileID: 2357133413282601946}
@@ -184,7 +185,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -197011075
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 1998391763, guid: bfa4034dbb7e4834b99261adcafec918, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -381,8 +382,23 @@ MonoBehaviour:
   meleeAttack01Pos: {fileID: 3142144497071930037}
   meleeAttack02Pos: {fileID: 2675351959799065197}
   meleeAttack03Pos: {fileID: 6763763761788131866}
-  attackBoxSize: {x: 0.1, y: 0.3}
-  attackRange: 4
+  attackBoxSize: {x: 0.8, y: 2}
+  attackRange: 0.47
+--- !u!114 &5720150010071488608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241a4164a30651540a82d85679ca39c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackTime: 0.15
+  hitDirectionForce: 1
+  blowUpPower: 7
 --- !u!114 &-3773639330718817434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +427,7 @@ MonoBehaviour:
   isAttacking: 0
   isDefending: 0
   isUsingSkill: 0
+  isGettingHurt: 0
   isDead: 0
 --- !u!114 &2357133413282601946
 MonoBehaviour:
@@ -641,7 +658,7 @@ Transform:
   m_GameObject: {fileID: 8730726914888532211}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5555555, y: 0.116, z: 0}
+  m_LocalPosition: {x: 0.9, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

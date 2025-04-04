@@ -40,7 +40,7 @@ public class Sakura_Iskill : I_Skill
             transform.position = Vector2.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
             if (Time.frameCount % 2 == 0)
             {
-                check.RoundAttack(attackPos, attackRange, 5f);
+                check.RoundAttack(attackPos, attackRange, 5f, Vector2.zero);
                 if (check.hit)
                 {
                     canMove = false;

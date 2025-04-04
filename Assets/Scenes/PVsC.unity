@@ -2133,6 +2133,8 @@ GameObject:
   - component: {fileID: 636173618}
   - component: {fileID: 636173620}
   - component: {fileID: 636173621}
+  - component: {fileID: 636173622}
+  - component: {fileID: 636173623}
   m_Layer: 8
   m_Name: SakuraCom
   m_TagString: Com
@@ -2303,7 +2305,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636173609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee602c22929a27d4a86b641f3cba02dd, type: 3}
   m_Name: 
@@ -2378,6 +2380,38 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+--- !u!114 &636173622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636173609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd2faf70640e28499bb177b34994c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttack01Pos: {fileID: 1925873119}
+  meleeAttack02Pos: {fileID: 2126734690}
+  meleeAttack03Pos: {fileID: 381094081}
+  attackBoxSize: {x: 0.82, y: 0.15}
+  attackRange: 0.5
+--- !u!114 &636173623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636173609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241a4164a30651540a82d85679ca39c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackTime: 0.15
+  hitDirectionForce: 1
+  blowUpPower: 7
 --- !u!1 &637454430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,6 +3313,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1405116251}
+  animationHeavyHurtName: 
 --- !u!1 &1072626370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,6 +3378,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1526917422}
+  animationHeavyHurtName: 
 --- !u!1 &1148779105
 GameObject:
   m_ObjectHideFlags: 0

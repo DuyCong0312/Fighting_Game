@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private string animationHeavyHurtName;
 
     private Animator anim;
+    private KnockBack knockBack;
+    private PlayerState playerState;
     private float damageThreshold = 20f;  
     private float damageTimeLimit = 2f; 
     private float accumulatedDamage = 0f;
@@ -17,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        knockBack = GetComponentInChildren<KnockBack>();
+        playerState = GetComponentInChildren<PlayerState>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
@@ -25,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T)) 
         {
-            TakeDamage(5);
+            TakeDamage(5, new Vector2(1,1));
         }
         if (timeSinceLastDamage < damageTimeLimit)
         {
@@ -37,10 +41,12 @@ public class PlayerHealth : MonoBehaviour
         }
         PlayHeavyHurt();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector2 direction)
     {
         currentHealth -= damage;
         anim.SetTrigger("getHurt");
+        playerState.isGettingHurt = true;
+        knockBack.KnockBackAction(direction);
         accumulatedDamage += damage;
         timeSinceLastDamage = 0f;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
@@ -67,6 +73,7 @@ public class PlayerHealth : MonoBehaviour
         if(accumulatedDamage >= damageThreshold && timeSinceLastDamage < damageTimeLimit)
         {
             anim.Play(animationHeavyHurtName);
+            playerState.isGettingHurt = true;
             accumulatedDamage = 0f;
         }
     }
