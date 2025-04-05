@@ -11,7 +11,6 @@ public class Sakura_Uskill : U_Skill
     [SerializeField] private float backSpeed;
 
     private Vector3 newPosition;
-    private bool isMoving = false;
     private bool canMove = true;
     private Vector2 movement;
 
@@ -33,7 +32,6 @@ public class Sakura_Uskill : U_Skill
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
             yield return null;
         }
-        isMoving = false;
         canMove = true;
     }
 
@@ -62,7 +60,6 @@ public class Sakura_Uskill : U_Skill
     {
         if (collision.collider.CompareTag("MainCamera"))
         {
-            isMoving = false;
             canMove = false;
         }
     }

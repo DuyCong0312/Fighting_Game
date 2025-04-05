@@ -9,6 +9,7 @@ public class PlayerState : MonoBehaviour
     public bool isDefending = false;
     public bool isUsingSkill = false;
     public bool isGettingHurt = false;
+    public bool isFacingRight = true;
     public bool isDead = false;
     
     private void StopSkill()

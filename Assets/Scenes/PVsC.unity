@@ -2135,6 +2135,7 @@ GameObject:
   - component: {fileID: 636173621}
   - component: {fileID: 636173622}
   - component: {fileID: 636173623}
+  - component: {fileID: 636173624}
   m_Layer: 8
   m_Name: SakuraCom
   m_TagString: Com
@@ -2264,7 +2265,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -197011075
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 1715832091, guid: 1e5f5612eebd1624d98ce56eda4e1d4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2312,7 +2313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   jumpForce: 11
-  isFacingRight: 0
   dashPower: 10
   dashTime: 0.1
   dashCooldown: 1
@@ -2341,13 +2341,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636173609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b29c566811c8cd4f9b3de35646dc208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  isFacingRight: 0
 --- !u!114 &636173620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,8 +2408,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackTime: 0.15
-  hitDirectionForce: 1
+  hitDirectionForce: 1.5
   blowUpPower: 7
+--- !u!114 &636173624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636173609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d281e7fd9d8dd43a0f28867fe26a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  isDefending: 0
+  isUsingSkill: 0
+  isGettingHurt: 0
+  isFacingRight: 1
+  isDead: 0
 --- !u!1 &637454430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,7 +2951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
+  m_AnchoredPosition: {x: -50, y: 38}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &913770863
@@ -4106,7 +4122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 50, y: 38}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1526917420

@@ -29,7 +29,7 @@ public class Dart: MonoBehaviour
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Com"))
         {
             PlayerHealth playerHealth = collision.GetComponentInParent<PlayerHealth>();
-            playerHealth.TakeDamage(attackDamage, transform.right);
+            playerHealth.TakeDamage(attackDamage, - collision.transform.right);
             Destroy(this.gameObject);
             WhenHit();
         }

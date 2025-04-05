@@ -12,6 +12,7 @@ public class ComboController : MonoBehaviour
     private PlayerState playerState;
 
     [SerializeField] private int attackNumber;
+    [SerializeField] private bool canAttack = true;
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class ComboController : MonoBehaviour
 
     private void StartCombo()
     {
-        playerState.isAttacking = false;
+        canAttack = true;
         if(attackNumber < 3)
         {
             attackNumber++;
@@ -38,17 +39,20 @@ public class ComboController : MonoBehaviour
     private void StopCombo()
     {
         playerState.isAttacking = false;
+        canAttack = true;
         attackNumber = 0;
     }
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.J) && !playerState.isAttacking)
+        if (Input.GetKeyDown(KeyCode.J) && canAttack)
         {
+            canAttack = false;
             playerState.isAttacking = true;
             if (groundCheck.isGround)
             {
                 anim.SetTrigger(attackNumber + "Attack");
+                MoveWhenAttack();
             }
             else
             {
@@ -69,5 +73,11 @@ public class ComboController : MonoBehaviour
             playerState.isDefending = false;
         }
         anim.SetBool("isDefend", playerState.isDefending);
+    }
+
+    private void MoveWhenAttack()
+    {
+        float direction = playerState.isFacingRight? 1 : -1;
+        transform.position += new Vector3(direction *  attackNumber * 0.1f, 0f, 0f);
     }
 }

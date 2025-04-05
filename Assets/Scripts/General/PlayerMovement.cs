@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private State currentState;
 
     private Rigidbody2D rb;
+    private Collider2D coll;
     private Animator anim;
     private CheckGround groundCheck;
     private PlayerState playerState;
@@ -15,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
     [SerializeField] private bool isDoubleJump;
-    public bool isFacingRight = true;
 
     [Header("Effect")]
     [SerializeField] private Transform jumpPos;
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
@@ -67,19 +68,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            if (isFacingRight) 
+            if (playerState.isFacingRight) 
             {
                 this.transform.eulerAngles = new Vector3(0, 180, 0);
-                isFacingRight = false;
+                playerState.isFacingRight = false;
             }
             movement = -1f; 
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            if (!isFacingRight)
+            if (!playerState.isFacingRight)
             {
                 this.transform.eulerAngles = new Vector3(0, 0, 0);
-                isFacingRight = true;
+                playerState.isFacingRight = true;
             }
             movement = 1f;
         }
@@ -142,10 +143,12 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        float direction = isFacingRight ? 1 : -1;
+        coll.isTrigger = true;
+        float direction = playerState.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * dashPower, 0f);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravity;
+        coll.isTrigger = false;
         isDashing = false;
         anim.SetBool("isDashing", false);
         yield return new WaitForSeconds(dashCooldown);

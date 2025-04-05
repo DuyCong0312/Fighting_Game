@@ -1,23 +1,24 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class KnockBack : MonoBehaviour
 {
     [Header("KnockBack")]
     [SerializeField] private float knockBackTime = 0.5f;
-    [SerializeField] private float hitDirectionForce = 5f;
+    [SerializeField] private float hitDirectionForce = 2f;
 
     [Header("BlowUp")]
     [SerializeField] private float blowUpPower = 5f;
 
-    private PlayerMovement playerMovement;
+    private PlayerState playerState;
     private CheckGround groundCheck;
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerState = GetComponent<PlayerState>();
     }
 
     public void KnockBackAction(Vector2 hitDirection)
@@ -31,7 +32,7 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator KnockBackRoutine(Vector2 hitDirection)
     {
-        float direction = playerMovement.isFacingRight ? 1 : -1;
+        float direction = playerState.isFacingRight ? 1 : -1;
         Vector2 hitForce = hitDirection * hitDirectionForce;
         float elapsedTime = 0f;
         while (elapsedTime < knockBackTime)
@@ -46,7 +47,7 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator BlowUp(Vector2 blowDirection)
     {
-        float direction = playerMovement.isFacingRight ? 1 : -1;
+        float direction = playerState.isFacingRight ? 1 : -1;
         Vector2 blowForce = blowDirection * blowUpPower;
         rb.velocity = new Vector2(- direction * blowForce.x, blowForce.y);
         

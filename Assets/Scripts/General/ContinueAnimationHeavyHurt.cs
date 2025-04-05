@@ -8,7 +8,6 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
     private Transform playerTransform;
     private Transform touchGroundPos;
     private CheckGround groundCheck;
-    private PlayerMovement playerMovement;
     [SerializeField] private string nameAnimatorClip;
     [SerializeField] private GameObject effectTouchGround;
     [SerializeField] private float blowUpPower;
@@ -23,8 +22,6 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
             playerTransform = animator.transform;
             groundCheck = animator.GetComponent<CheckGround>();
             rb = playerTransform.GetComponent<Rigidbody2D>();
-            playerMovement = playerTransform.GetComponent<PlayerMovement>();
-            BlowUp();
             blowUpCalled = true;
         }
         if (touchGroundPos == null)
@@ -60,11 +57,4 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
-
-    private void BlowUp()
-    {
-        float direction = playerMovement.isFacingRight ? 1 : -1;
-        rb.velocity = new Vector2(direction * blowUpPower, blowUpPower / 2f);
-    }
-
 }

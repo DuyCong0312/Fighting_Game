@@ -43,13 +43,23 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage, Vector2 direction)
     {
-        currentHealth -= damage;
-        anim.SetTrigger("getHurt");
-        playerState.isGettingHurt = true;
-        knockBack.KnockBackAction(direction);
-        accumulatedDamage += damage;
-        timeSinceLastDamage = 0f;
-        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        if (playerState.isDefending)
+        {
+            damage = 2f;
+            currentHealth -= damage;
+            knockBack.KnockBackAction(direction / 2f);
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
+        else
+        {
+            currentHealth -= damage;
+            anim.SetTrigger("getHurt");
+            playerState.isGettingHurt = true;
+            knockBack.KnockBackAction(direction);
+            accumulatedDamage += damage;
+            timeSinceLastDamage = 0f;
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
         if (currentHealth <= 0)
         {
             Debug.Log("0 health");

@@ -8,9 +8,6 @@ public class ComAttack : MonoBehaviour
     private Animator anim;
     private Transform player;
 
-    [SerializeField] private float speed = 4f;
-    [SerializeField] private bool isFacingRight = false;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();

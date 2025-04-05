@@ -23,7 +23,7 @@ public class Ichigo_CheckHit : MonoBehaviour
 
     private void SecondAttack()
     {
-        checkHit.RoundAttack(meleeAttack02Pos, attackRange, 5f, transform.right);
+        checkHit.StraightAttack(meleeAttack02Pos, attackBoxSize, 0f, 5f, transform.right);
     }
 
     private void ThirdAttack()
@@ -35,7 +35,7 @@ public class Ichigo_CheckHit : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(meleeAttack01Pos.position, attackRange);
-        Gizmos.DrawWireSphere(meleeAttack02Pos.position, attackRange);
+        Gizmos.DrawWireCube(meleeAttack02Pos.position, attackBoxSize);
         Gizmos.DrawWireCube(meleeAttack03Pos.position, attackBoxSize);
     }
 }
