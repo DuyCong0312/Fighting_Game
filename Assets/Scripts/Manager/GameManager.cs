@@ -17,18 +17,24 @@ public class GameManager : MonoBehaviour
     private int player2RoundsWon = 0;
 
     [Header("Game UI Settings")]
-    [SerializeField] private GameObject panelGameSet;
-    [SerializeField] private TextMeshProUGUI gameSet;
+    [SerializeField] private GameObject panelGameSetPerRound;
+    [SerializeField] private TextMeshProUGUI gameSetPerRound;
+    [SerializeField] private GameObject panelGameSetFinal;
+    [SerializeField] private TextMeshProUGUI gameSetFinal;
+    [SerializeField] private GameObject panelPauseGame;
 
     private bool gameEnded = false;
 
     private void Start()
     {
-        panelGameSet.SetActive(false);
+        panelGameSetPerRound.SetActive(false);
+        panelGameSetFinal.SetActive(false);
+        panelPauseGame.SetActive(false);
     }
 
     private void Update()
     {
+        PauseGame();
         if (!gameEnded && (player01Health.currentHealth <= 0 || player02Health.currentHealth <= 0))
         {
             GameSet(); 
@@ -42,19 +48,19 @@ public class GameManager : MonoBehaviour
 
         if (player01Health.currentHealth > player02Health.currentHealth)
         {
-            gameSet.text = ("You win");
+            gameSetPerRound.text = ("You win");
             AwardWinToPlayer(1);
             Debug.Log("You Win");
         }
         else if(player01Health.currentHealth < player02Health.currentHealth)
         {
-            gameSet.text = ("You lose");
+            gameSetPerRound.text = ("You lose");
             AwardWinToPlayer(2);
             Debug.Log("You Lose");
         }
         else 
         {
-            gameSet.text = ("Draw");
+            gameSetPerRound.text = ("Draw");
             Debug.Log("Draw");
         }
         SetPanel();
@@ -68,19 +74,19 @@ public class GameManager : MonoBehaviour
 
         if (player01Health.currentHealth <= 0)
         {
-            gameSet.text = ("You lose");
+            gameSetPerRound.text = ("You lose");
             AwardWinToPlayer(2);
             Debug.Log("You Lose");
         }
         else if (player02Health.currentHealth <= 0)
         {
-            gameSet.text = ("You win");
+            gameSetPerRound.text = ("You win");
             AwardWinToPlayer(1);
             Debug.Log("You Win");
         }
         else if (player01Health.currentHealth <= 0 && player02Health.currentHealth <= 0)
         {
-            gameSet.text = "Draw";
+            gameSetPerRound.text = "Draw";
             Debug.Log("Draw");
         }
         SetPanel();
@@ -88,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     private void SetPanel()
     {
-        panelGameSet.SetActive(true);
+        panelGameSetPerRound.SetActive(true);
     }
 
     private void AwardWinToPlayer(int playerNumber)
@@ -106,7 +112,8 @@ public class GameManager : MonoBehaviour
 
         if (player1RoundsWon >= 2 || player2RoundsWon >= 2)
         {
-            gameSet.text = ("Match Over Player" + playerNumber + "Win!");
+            panelGameSetFinal.SetActive(true);
+            gameSetFinal.text = ("Player" + playerNumber + "Win!");
             Debug.Log("Match Over Player" + playerNumber + "Win!");
             return;
         }
@@ -117,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ResetPlayersHealth();
-        panelGameSet.SetActive(false);
+        panelGameSetPerRound.SetActive(false);
         gameEnded = false;
     }
 
@@ -125,5 +132,14 @@ public class GameManager : MonoBehaviour
     {
         player01Health.ResetHealth();
         player02Health.ResetHealth();
+    }
+
+    private void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+            panelPauseGame.SetActive(true);
+        }
     }
 }

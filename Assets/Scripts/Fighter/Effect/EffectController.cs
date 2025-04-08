@@ -7,5 +7,6 @@ public class EffectController : MonoBehaviour
     private void DestroyEffect()
     {
         Destroy(gameObject);
-    }   
+    }
+
 }

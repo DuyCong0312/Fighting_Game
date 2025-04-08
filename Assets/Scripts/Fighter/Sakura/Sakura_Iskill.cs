@@ -87,6 +87,6 @@ public class Sakura_Iskill : I_Skill
 
     private void SpawnSkillEffect(GameObject name, Transform nameTransform)
     {
-        Instantiate(name, nameTransform.position, nameTransform.rotation);
+        Instantiate(name, nameTransform.position, nameTransform.rotation, nameTransform);
     }
 }
