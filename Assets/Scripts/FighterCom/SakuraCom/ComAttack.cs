@@ -16,6 +16,10 @@ public class ComAttack : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.Instance.gameEnded)
+        {
+            return;
+        }
         Attack();
     }
 

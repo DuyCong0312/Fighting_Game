@@ -23,6 +23,10 @@ public class ComboController : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.Instance.gameEnded)
+        {
+            return;
+        }
         Attack();
         Defend();
     }

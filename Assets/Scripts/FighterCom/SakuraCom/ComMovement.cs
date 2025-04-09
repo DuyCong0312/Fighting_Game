@@ -33,6 +33,10 @@ public class ComMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.gameEnded)
+        {
+            return;
+        }
         MoveToPlayer();
         Flipped();
         UpdateAnimation();

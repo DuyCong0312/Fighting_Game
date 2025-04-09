@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b811e06fbc4fe146ac6ecab5c65989d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelPauseGame: {fileID: 136395599}
 --- !u!114 &136395602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,11 +1440,13 @@ MonoBehaviour:
   player2Wins:
   - {fileID: 1434355493}
   - {fileID: 637454432}
+  time: {fileID: 730795345}
   panelGameSetPerRound: {fileID: 1626903145}
   gameSetPerRound: {fileID: 2125201995}
   panelGameSetFinal: {fileID: 1091948104}
   gameSetFinal: {fileID: 631903230}
-  panelPauseGame: {fileID: 0}
+  panelPauseGame: {fileID: 136395599}
+  gameEnded: 0
 --- !u!4 &296332145
 Transform:
   m_ObjectHideFlags: 0
@@ -2650,7 +2653,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 136395601}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3197,6 +3200,7 @@ Transform:
   - {fileID: 1925873119}
   - {fileID: 2126734690}
   - {fileID: 381094081}
+  - {fileID: 1266396423}
   m_Father: {fileID: 1072626371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &636173615
@@ -3293,6 +3297,7 @@ MonoBehaviour:
   meleeAttack01Pos: {fileID: 1925873119}
   meleeAttack02Pos: {fileID: 2126734690}
   meleeAttack03Pos: {fileID: 381094081}
+  jumpAttackPos: {fileID: 1266396423}
   attackBoxSize: {x: 0.82, y: 0.15}
   attackRange: 0.5
 --- !u!114 &636173623
@@ -3558,6 +3563,7 @@ GameObject:
   - component: {fileID: 730795342}
   - component: {fileID: 730795344}
   - component: {fileID: 730795343}
+  - component: {fileID: 730795345}
   m_Layer: 5
   m_Name: TimeCount
   m_TagString: Untagged
@@ -3681,6 +3687,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730795341}
   m_CullTransparentMesh: 1
+--- !u!114 &730795345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730795341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e350386942a1ed34e89787af3a06bc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLeft: 0
+  setTime: 60
+  timeCount: {fileID: 730795343}
+  gameManager: {fileID: 296332144}
 --- !u!1 &785501919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5113,6 +5135,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 584151032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1266396422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266396423}
+  m_Layer: 8
+  m_Name: JumpAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266396423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266396422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 636173614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1272326940
 GameObject:
   m_ObjectHideFlags: 0
@@ -5352,13 +5405,13 @@ AudioSource:
   m_GameObject: {fileID: 1406879352}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3553583724055280956, guid: f56cf3b8332123c459a60455b05b11b7, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -5930,13 +5983,13 @@ AudioSource:
   m_GameObject: {fileID: 1585676252}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4721444901510657063, guid: f56cf3b8332123c459a60455b05b11b7, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

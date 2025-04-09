@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     [Header("Player_1")]
     [SerializeField] private PlayerHealth player01Health;
     [SerializeField] private Toggle[] player1Wins;
@@ -17,13 +19,28 @@ public class GameManager : MonoBehaviour
     private int player2RoundsWon = 0;
 
     [Header("Game UI Settings")]
+    [SerializeField] private UiTimeCount time;
     [SerializeField] private GameObject panelGameSetPerRound;
     [SerializeField] private TextMeshProUGUI gameSetPerRound;
     [SerializeField] private GameObject panelGameSetFinal;
     [SerializeField] private TextMeshProUGUI gameSetFinal;
     [SerializeField] private GameObject panelPauseGame;
 
-    private bool gameEnded = false;
+    public bool gameEnded = false;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -61,9 +78,10 @@ public class GameManager : MonoBehaviour
         else 
         {
             gameSetPerRound.text = ("Draw");
+            SetPanel();
+            StartCoroutine(StartNewRound());
             Debug.Log("Draw");
         }
-        SetPanel();
     }
 
     private void GameSet()
@@ -87,9 +105,10 @@ public class GameManager : MonoBehaviour
         else if (player01Health.currentHealth <= 0 && player02Health.currentHealth <= 0)
         {
             gameSetPerRound.text = "Draw";
+            SetPanel();
+            StartCoroutine(StartNewRound());
             Debug.Log("Draw");
         }
-        SetPanel();
     }
 
     private void SetPanel()
@@ -112,10 +131,16 @@ public class GameManager : MonoBehaviour
 
         if (player1RoundsWon >= 2 || player2RoundsWon >= 2)
         {
+            gameEnded = true;
             panelGameSetFinal.SetActive(true);
+            panelGameSetPerRound.SetActive(false);
             gameSetFinal.text = ("Player" + playerNumber + "Win!");
             Debug.Log("Match Over Player" + playerNumber + "Win!");
             return;
+        }
+        else
+        {
+            panelGameSetPerRound.SetActive(true);
         }
 
         StartCoroutine(StartNewRound());
@@ -124,6 +149,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ResetPlayersHealth();
+        ResetTime();
         panelGameSetPerRound.SetActive(false);
         gameEnded = false;
     }
@@ -132,6 +158,11 @@ public class GameManager : MonoBehaviour
     {
         player01Health.ResetHealth();
         player02Health.ResetHealth();
+    }
+
+    private void ResetTime()
+    {
+        time.ResetTime();
     }
 
     private void PauseGame()

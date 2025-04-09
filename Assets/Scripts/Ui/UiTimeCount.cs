@@ -16,6 +16,11 @@ public class UiTimeCount : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.Instance.gameEnded)
+        {
+            return;
+        }
+
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
@@ -27,6 +32,11 @@ public class UiTimeCount : MonoBehaviour
             timeLeft = 0;
             gameManager.GameSetTime();
         }
+    }
+
+    public void ResetTime()
+    {
+        timeLeft = setTime;
     }
 
     private void TotalTime(float totalTime)

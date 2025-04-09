@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject panelPauseGame;
     public void Continue()
     {
         Time.timeScale = 1f;
+        panelPauseGame.SetActive(false);
     }
 
     public void LoadScene(string sceneName)
