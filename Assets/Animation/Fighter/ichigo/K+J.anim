@@ -22,15 +22,15 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2122503630, guid: 6545e5f17fd2f3349bf99a68e2fa30f6, type: 3}
-    - time: 0.1
+    - time: 0.083333336
       value: {fileID: 730944129, guid: 7bdc951571a27ef429d7943038fca214, type: 3}
-    - time: 0.2
+    - time: 0.16666667
       value: {fileID: -1647843887, guid: bfa0ac01f9b0c054f902c37595dc1fa9, type: 3}
-    - time: 0.3
+    - time: 0.25
       value: {fileID: -1564013312, guid: a92e5c0c325f96e47b7a112d7acebd92, type: 3}
-    - time: 0.4
+    - time: 0.33333334
       value: {fileID: -721770847, guid: bc19c8964a7cf544bbc17d45aa67490a, type: 3}
-    - time: 0.5
+    - time: 0.41666666
       value: {fileID: -170593309, guid: a1c0a4db72260fe4bbdd9e15cda822ce, type: 3}
     attribute: m_Sprite
     path: 
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.53333336
+    m_StopTime: 0.46666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,7 +85,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.53333336
+  - time: 0.016666668
+    functionName: PlaySoundFirstAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.46666667
     functionName: StopCombo
     data: 
     objectReferenceParameter: {fileID: 0}

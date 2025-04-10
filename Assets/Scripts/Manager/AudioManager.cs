@@ -12,7 +12,6 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip background;
     public AudioClip jump;
-    public AudioClip attack;
     public AudioClip dash; 
     public AudioClip touchGround;
     public AudioClip step1;

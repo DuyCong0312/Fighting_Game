@@ -66,7 +66,7 @@ public class Sakura_Uskill : U_Skill
 
     private void ActiveSakuraUKSkill()
     {
-        this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 45);
+        this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 30);
         Vector2 direction = -this.transform.up;
         float angle = Mathf.Atan2(direction.y, direction.x);
         movement.x = force * Mathf.Cos(angle);

@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: -3773639330718817434}
   - component: {fileID: 8086383848958687823}
   - component: {fileID: 2357133413282601946}
+  - component: {fileID: 6869088218187495439}
   m_Layer: 7
   m_Name: Ichigo
   m_TagString: Player
@@ -448,6 +449,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hit: 0
+--- !u!114 &6869088218187495439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581c1cf76ddad7843998d5342d88b3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstAttack: {fileID: 8300000, guid: f396ebd4629c8474985eaa7de459f78f, type: 3}
+  thirdAttack: {fileID: 8300000, guid: 56e0799142f41394091acd106e9e48ce, type: 3}
+  rangedAttack: {fileID: 8300000, guid: cec3a78c98bec904eac70a4ca623d9b1, type: 3}
+  spawnRangedAttack: {fileID: 8300000, guid: 8d62e8694b589aa4c92e2ca92670c970, type: 3}
+  specialAttack: {fileID: 8300000, guid: 81bcb016982886f4488a1d637050eed1, type: 3}
 --- !u!1 &2779537796108366315
 GameObject:
   m_ObjectHideFlags: 0

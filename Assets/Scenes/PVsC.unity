@@ -4551,7 +4551,6 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 1585676253}
   background: {fileID: 8300000, guid: ec18e153816f49240b93cb4710a36f5e, type: 3}
   jump: {fileID: 8300000, guid: 7906d5b72f5bf9e479a62cf2e5d059c9, type: 3}
-  attack: {fileID: 8300000, guid: 5bd194cf1240f3943960d4234cccd6a0, type: 3}
   dash: {fileID: 8300000, guid: bbc17e5492fe0ec4ba53116cdb034f1c, type: 3}
   touchGround: {fileID: 8300000, guid: bddaee38004198547a1d6f433f5691b0, type: 3}
   step1: {fileID: 8300000, guid: 08e40168b34bb2440bef9192f51911e9, type: 3}
@@ -7303,8 +7302,8 @@ SceneRoots:
   - {fileID: 1072626371}
   - {fileID: 1164621135}
   - {fileID: 569296780}
-  - {fileID: 959691958}
   - {fileID: 514624442}
   - {fileID: 814905884}
   - {fileID: 252155473}
   - {fileID: 296332145}
+  - {fileID: 959691958}

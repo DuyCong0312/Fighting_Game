@@ -62,7 +62,6 @@ public class ComboController : MonoBehaviour
             {
                 anim.Play("K+J");
             }
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
         }
     }
 
@@ -84,4 +83,5 @@ public class ComboController : MonoBehaviour
         float direction = playerState.isFacingRight? 1 : -1;
         transform.position += new Vector3(direction *  attackNumber * 0.1f, 0f, 0f);
     }
+
 }
