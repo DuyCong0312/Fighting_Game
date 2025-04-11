@@ -32,12 +32,11 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator KnockBackRoutine(Vector2 hitDirection)
     {
-        float direction = playerState.isFacingRight ? 1 : -1;
         Vector2 hitForce = hitDirection * hitDirectionForce;
         float elapsedTime = 0f;
         while (elapsedTime < knockBackTime)
         {
-            rb.velocity = new Vector2(direction * hitForce.x, hitForce.y * 5f);
+            rb.velocity = new Vector2(hitForce.x, hitForce.y * 5f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -47,9 +46,8 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator BlowUp(Vector2 blowDirection)
     {
-        float direction = playerState.isFacingRight ? 1 : -1;
         Vector2 blowForce = blowDirection * blowUpPower;
-        rb.velocity = new Vector2(- direction * blowForce.x, blowForce.y);
+        rb.velocity = new Vector2(blowForce.x, blowForce.y);
         
         yield return null;
     }

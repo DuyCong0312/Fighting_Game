@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float zoomLimiter = 2f;
     [SerializeField] private float maxHeightOffset = 3f;
     [SerializeField] private float minHeightOffset = 1f;
+    [SerializeField] private Transform leftBoundaryMap;
+    [SerializeField] private Transform rightBoundaryMap;
     private Camera cam;
 
     private void Start()
@@ -61,7 +63,11 @@ public class CameraManager : MonoBehaviour
 
         float heightAdjust = Mathf.Lerp(minHeightOffset, maxHeightOffset, (cam.orthographicSize - minZoom) / (maxZoom - minZoom));
         Vector3 targetPosition = new Vector3(midpoint.x, midpoint.y + heightAdjust, transform.position.z);
-        transform.position = targetPosition;
+
+        float camHalfWidth = cam.orthographicSize * cam.aspect;
+        float clampedX = Mathf.Clamp(targetPosition.x, leftBoundaryMap.position.x + camHalfWidth, rightBoundaryMap.position.x - camHalfWidth);
+
+        transform.position = new Vector3(clampedX, targetPosition.y, targetPosition.z);
     }
 
 }

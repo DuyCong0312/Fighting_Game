@@ -33,13 +33,17 @@ public class ComMovement : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.gameEnded)
+        UpdateAnimation();
+        if (GameManager.Instance.gameEnded
+            || playerState.isAttacking
+            || playerState.isUsingSkill
+            || playerState.isDefending
+            || playerState.isGettingHurt)
         {
             return;
         }
         MoveToPlayer();
         Flipped();
-        UpdateAnimation();
     }
 
     private void MoveToPlayer()

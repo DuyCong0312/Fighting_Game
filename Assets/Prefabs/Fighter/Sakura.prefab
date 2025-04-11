@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5793241452810311335}
   m_Layer: 7
-  m_Name: IKskillPos
+  m_Name: IKskillEffectPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,6 +125,7 @@ Transform:
   - {fileID: 6360860257771106621}
   - {fileID: 2622217693882486166}
   - {fileID: 5793241452810311335}
+  - {fileID: 1605710705500520278}
   m_Father: {fileID: 6063904594275682210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2748181173567304011
@@ -316,6 +317,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9000425431673933028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6107402516537493806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605710705500520278}
+  m_Layer: 7
+  m_Name: IKskillPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605710705500520278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107402516537493806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5547073591794138943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6149246094472625858
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +432,6 @@ GameObject:
   - component: {fileID: 439827996596879757}
   - component: {fileID: 3520576140043920084}
   - component: {fileID: 5618413058746828547}
-  - component: {fileID: 6997194588945451546}
   - component: {fileID: 2570029918016453842}
   m_Layer: 7
   m_Name: Sakura
@@ -637,10 +668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0779818baf168b41aa2fe0105fbd71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  check: {fileID: 6997194588945451546}
+  sakuraCheckHit: {fileID: 556284960291988948}
   newPos: {fileID: 6360860257771106621}
-  attackPos: {fileID: 2622217693882486166}
-  attackRange: 0.5
   moveSpeed: 12
   force: 10
   effectIK1: {fileID: 7762501778609466006, guid: 9fce33346091b6d419091aefe2890ae7, type: 3}
@@ -659,12 +688,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd2faf70640e28499bb177b34994c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 256
+  hit: 0
   meleeAttack01Pos: {fileID: 8421045855311435087}
   meleeAttack02Pos: {fileID: 1644091768862684216}
   meleeAttack03Pos: {fileID: 8370329791996890576}
   jumpAttackPos: {fileID: 6357504792183115658}
   attackBoxSize: {x: 0.82, y: 0.15}
   attackRange: 0.5
+  UKskillPos: {fileID: 7804539374899136849}
+  UKskillRange: {x: 2.5, y: 0.5}
+  IskillPos: {fileID: 2622217693882486166}
+  IskillRange: 0.5
+  IKskillPos: {fileID: 1605710705500520278}
+  IKskillRange: {x: 2.5, y: 0.5}
 --- !u!114 &-4928981701172381779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,22 +769,6 @@ MonoBehaviour:
   isGettingHurt: 0
   isFacingRight: 1
   isDead: 0
---- !u!114 &6997194588945451546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6181489956766094652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 256
-  hit: 0
 --- !u!114 &2570029918016453842
 MonoBehaviour:
   m_ObjectHideFlags: 0

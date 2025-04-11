@@ -5,10 +5,8 @@ using UnityEngine;
 public class Sakura_Iskill : I_Skill
 {
     [Header("I Skill")]
-    [SerializeField] private CheckHit check;
+    [SerializeField] private Sakura_CheckHit sakuraCheckHit;
     [SerializeField] private Transform newPos;
-    [SerializeField] private Transform attackPos;
-    [SerializeField] private float attackRange;
     [SerializeField] private float moveSpeed;
 
 
@@ -40,8 +38,8 @@ public class Sakura_Iskill : I_Skill
             transform.position = Vector2.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
             if (Time.frameCount % 2 == 0)
             {
-                check.RoundAttack(attackPos, attackRange, 5f, Vector2.zero);
-                if (check.hit)
+                sakuraCheckHit.IskillAttack();
+                if (sakuraCheckHit.hit)
                 {
                     canMove = false;
                     break;
@@ -61,12 +59,6 @@ public class Sakura_Iskill : I_Skill
             isMoving = false;
             canMove = false;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
     private void ActiveSakuraIKSkill()

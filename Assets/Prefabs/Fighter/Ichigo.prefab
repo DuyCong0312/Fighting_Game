@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 5720150010071488608}
   - component: {fileID: -3773639330718817434}
   - component: {fileID: 8086383848958687823}
-  - component: {fileID: 2357133413282601946}
   - component: {fileID: 6869088218187495439}
   m_Layer: 7
   m_Name: Ichigo
@@ -381,6 +380,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bbcc25f7375654bad176620e04e71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 256
+  hit: 0
   meleeAttack01Pos: {fileID: 3142144497071930037}
   meleeAttack02Pos: {fileID: 2675351959799065197}
   meleeAttack03Pos: {fileID: 6763763761788131866}
@@ -433,22 +436,6 @@ MonoBehaviour:
   isGettingHurt: 0
   isFacingRight: 1
   isDead: 0
---- !u!114 &2357133413282601946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818890458921424710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854b4b44af17e5c4f89595a4d4e6cd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 256
-  hit: 0
 --- !u!114 &6869088218187495439
 MonoBehaviour:
   m_ObjectHideFlags: 0

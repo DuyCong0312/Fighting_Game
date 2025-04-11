@@ -7,16 +7,21 @@ public class ComAttack : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Transform player;
+    private PlayerState playerState;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerState = GetComponent<PlayerState>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void Update()
     {
-        if (GameManager.Instance.gameEnded)
+        if (GameManager.Instance.gameEnded
+            || playerState.isUsingSkill
+            || playerState.isDefending
+            || playerState.isGettingHurt)
         {
             return;
         }
@@ -27,11 +32,12 @@ public class ComAttack : MonoBehaviour
     {
         if (Vector2.Distance(player.position, transform.position) <= 1f)
         {
-            anim.SetBool("isAttack", true);
+            playerState.isAttacking = true;
         }
         else
         {
-            anim.SetBool("isAttack", false);
+            playerState.isAttacking= false;
         }
+        anim.SetBool("isAttack", playerState.isAttacking);
     }
 }
