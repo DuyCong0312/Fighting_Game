@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hurt
+  m_Name: K+U
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,15 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 72639184, guid: fed62e4a6e93efd44985d4244652eb52, type: 3}
-    - time: 0.083333336
-      value: {fileID: -62480791, guid: 2dc659ca41932ce4f9c77e5feb1dca77, type: 3}
-    - time: 0.16666667
-      value: {fileID: -771743369, guid: 84dfc52b36b8d8b43ab03ecbfc92e932, type: 3}
-    - time: 0.5
-      value: {fileID: -771743369, guid: 84dfc52b36b8d8b43ab03ecbfc92e932, type: 3}
+      value: {fileID: -430260801, guid: 99c1d0acb9160da46b82054c87540747, type: 3}
+    - time: 0.06666667
+      value: {fileID: 378918759, guid: b33ef511c46cf4b41a92c8b8d3ecbc52, type: 3}
+    - time: 0.15
+      value: {fileID: -1884951319, guid: 7a8667265a2e041449293a5abe1304e1, type: 3}
+    - time: 0.21666667
+      value: {fileID: 1764037437, guid: 2316d79547c88a74b93e726df3b79257, type: 3}
+    - time: 0.28333333
+      value: {fileID: -765461912, guid: 5fadbffc1ccbcc84195904d744f9f84d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +52,17 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 72639184, guid: fed62e4a6e93efd44985d4244652eb52, type: 3}
-    - {fileID: -62480791, guid: 2dc659ca41932ce4f9c77e5feb1dca77, type: 3}
-    - {fileID: -771743369, guid: 84dfc52b36b8d8b43ab03ecbfc92e932, type: 3}
-    - {fileID: -771743369, guid: 84dfc52b36b8d8b43ab03ecbfc92e932, type: 3}
+    - {fileID: -430260801, guid: 99c1d0acb9160da46b82054c87540747, type: 3}
+    - {fileID: 378918759, guid: b33ef511c46cf4b41a92c8b8d3ecbc52, type: 3}
+    - {fileID: -1884951319, guid: 7a8667265a2e041449293a5abe1304e1, type: 3}
+    - {fileID: 1764037437, guid: 2316d79547c88a74b93e726df3b79257, type: 3}
+    - {fileID: -765461912, guid: 5fadbffc1ccbcc84195904d744f9f84d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.3
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,8 +82,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.51666665
-    functionName: CanGetHurt
+  - time: 0.16666667
+    functionName: PlaySoundThirdAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.23333333
+    functionName: ActiveSakuraUKSkill
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -6,11 +6,13 @@ public class CheckHit : MonoBehaviour
 {
     [SerializeField] protected LayerMask whatIsEnemies;
     protected SpriteRenderer spriteRenderer;
+    protected PlayerRage playerRage;
     public bool hit = false;
 
     protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();   
+        playerRage = GetComponentInParent<PlayerRage>();
     }
 
     protected void StraightAttack(Transform AttackPos, Vector2 AttackSize, float angle, float attackDamage, Vector2 direction)
@@ -22,7 +24,9 @@ public class CheckHit : MonoBehaviour
             Debug.Log("hit");
             hit = true;
             this.spriteRenderer.sortingOrder = 1;
+            this.playerRage.GetRage(5f);
             enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage, direction);
+            enemy.GetComponent<HitEffect>().SpawnEffect();
             enemy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
     }
@@ -36,7 +40,9 @@ public class CheckHit : MonoBehaviour
             Debug.Log("hit");
             hit = true;
             this.spriteRenderer.sortingOrder = 1;
+            this.playerRage.GetRage(5f);
             enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage, direction);
+            enemy.GetComponent<HitEffect>().SpawnEffect();
             enemy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
     }

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private CheckGround groundCheck;
     private PlayerState playerState;
+    private SpawnEffectAfterImage effectAfterImage;
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
+        effectAfterImage = GetComponent<SpawnEffectAfterImage>();
     }
      
     void Update()
@@ -128,7 +130,6 @@ public class PlayerMovement : MonoBehaviour
             AudioManager.Instance.PlaySFX(AudioManager.Instance.dash);
             if (groundCheck.isGround)
             {
-
                 EffectManager.Instance.SpawnEffect(EffectManager.Instance.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
             }
             else
@@ -142,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        effectAfterImage.useEffect = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         coll.isTrigger = true;
@@ -151,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = originalGravity;
         coll.isTrigger = false;
         isDashing = false;
+        effectAfterImage.useEffect = false;
         anim.SetBool("isDashing", false);
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;

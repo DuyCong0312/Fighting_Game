@@ -9,4 +9,13 @@ public class U_Skill : BaseSkill
     protected override string GroundAnimationTrigger => "Uskill";
 
     protected override string AirAnimationName => "K+U";
+
+    protected override void ActiveSkill()
+    {
+        if (Input.GetKeyDown(SkillKey))
+        {
+            playerRage.GetRage(5f); 
+            PerformSkill();
+        }
+    }
 }

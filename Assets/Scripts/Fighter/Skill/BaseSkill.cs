@@ -8,6 +8,7 @@ public abstract class BaseSkill : MonoBehaviour
     protected Animator anim;
     protected CheckGround groundCheck;
     protected PlayerState playerState;
+    protected PlayerRage playerRage;
 
     protected abstract KeyCode SkillKey { get; }
     protected abstract string GroundAnimationTrigger { get; }
@@ -19,44 +20,54 @@ public abstract class BaseSkill : MonoBehaviour
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
+        playerRage = GetComponentInParent<PlayerRage>();
     }
 
     protected virtual void Update()
     {
-        if (playerState.isAttacking)
+        if (GameManager.Instance.gameEnded
+            || playerState.isAttacking
+            || playerState.isUsingSkill
+            || playerState.isGettingHurt)
         {
             return;
         }
-        PerformSkill();
+        ActiveSkill();
+    }
+
+    protected virtual void ActiveSkill()
+    {
+        if (Input.GetKeyDown(SkillKey))
+        {
+            PerformSkill();
+        }
     }
 
     protected virtual void PerformSkill()
     {
-        if (Input.GetKeyDown(SkillKey))
+        playerState.isDefending = false;
+        playerState.isUsingSkill = true;
+        if (groundCheck.isGround)
         {
-            playerState.isUsingSkill = true;
-            if (groundCheck.isGround)
+            anim.SetTrigger(GroundAnimationTrigger);
+        }
+        else
+        {
+            bool hasAnimation = false;
+            foreach (AnimationClip clip in anim.runtimeAnimatorController.animationClips)
             {
-                anim.SetTrigger(GroundAnimationTrigger);
+                if (clip.name == AirAnimationName)
+                {
+                    hasAnimation = true;
+                    break;
+                }
             }
-            else
+            if (!hasAnimation)
             {
-                bool hasAnimation = false;
-                foreach (AnimationClip clip in anim.runtimeAnimatorController.animationClips)
-                {
-                    if (clip.name == AirAnimationName)
-                    {
-                        hasAnimation = true;
-                        break;
-                    }
-                }
-                if (!hasAnimation)
-                {
-                    playerState.isUsingSkill = false;
-                    return;
-                }
-                anim.Play(AirAnimationName);
+                playerState.isUsingSkill = false;
+                return;
             }
+            anim.Play(AirAnimationName);
         }
     }
 }

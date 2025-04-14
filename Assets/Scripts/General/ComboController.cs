@@ -23,7 +23,9 @@ public class ComboController : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.gameEnded)
+        if (GameManager.Instance.gameEnded
+            || playerState.isUsingSkill
+            || playerState.isGettingHurt)
         {
             return;
         }

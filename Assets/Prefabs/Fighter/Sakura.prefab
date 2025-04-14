@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 3520576140043920084}
   - component: {fileID: 5618413058746828547}
   - component: {fileID: 2570029918016453842}
+  - component: {fileID: 2214715306304988018}
   m_Layer: 7
   m_Name: Sakura
   m_TagString: Player
@@ -786,6 +787,21 @@ MonoBehaviour:
   rangedAttack: {fileID: 8300000, guid: 1277b3cfb9666334c89f461dfd86b8b1, type: 3}
   touchGround: {fileID: 8300000, guid: 8176d91a7aca4f145ad0730be0e9cafa, type: 3}
   ik1Skill: {fileID: 8300000, guid: 0e0154d7c9a398e47b08c78976e8103b, type: 3}
+--- !u!114 &2214715306304988018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181489956766094652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe1d044335ff4a4d9238c0dd7a6494d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDelaySeconds: 0.2
+  afterImageEffect: {fileID: 1577035489495529819, guid: 665b70366db0eca4f8bd6e789d395a5d, type: 3}
+  useEffect: 0
 --- !u!1 &6643317084576140184
 GameObject:
   m_ObjectHideFlags: 0

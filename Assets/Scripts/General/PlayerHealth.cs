@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator anim;
     private KnockBack knockBack;
     private PlayerState playerState;
+    private PlayerRage playerRage;
     private float damageThreshold = 20f;  
     private float damageTimeLimit = 2f; 
     private float accumulatedDamage = 0f;
@@ -21,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         knockBack = GetComponentInChildren<KnockBack>();
         playerState = GetComponentInChildren<PlayerState>();
+        playerRage = GetComponent<PlayerRage>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
@@ -48,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
             damage = 2f;
             currentHealth -= damage;
             knockBack.KnockBackAction(direction / 2f);
+            playerRage.GetRage(2f);
             healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
         else
@@ -56,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
             anim.SetTrigger("getHurt");
             playerState.isGettingHurt = true;
             knockBack.KnockBackAction(direction);
+            playerRage.GetRage(5f);
             accumulatedDamage += damage;
             timeSinceLastDamage = 0f;
             healthBar.UpdateHealthBar(currentHealth, maxHealth);
