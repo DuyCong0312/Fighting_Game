@@ -653,7 +653,7 @@ MonoBehaviour:
   skillPos: {fileID: 4463300805526870297}
   newPos: {fileID: 7847265885670794795}
   backSpeed: 5
-  force: 10
+  force: 15
   effectUK1: {fileID: 4254516921239504521, guid: 79ffe9b806c23ca4e9652bdee9f66b44, type: 3}
   effectUK2: {fileID: 785880488533058647, guid: 327fc7ab7d710a249a884899afb3a400, type: 3}
   spwanEffectPos: {fileID: 7804539374899136849}
@@ -720,7 +720,7 @@ MonoBehaviour:
   groundCheck: {fileID: 3156568685005754212}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
@@ -799,9 +799,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe1d044335ff4a4d9238c0dd7a6494d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelaySeconds: 0.2
+  spawnDelayTime: 0.01
   afterImageEffect: {fileID: 1577035489495529819, guid: 665b70366db0eca4f8bd6e789d395a5d, type: 3}
-  useEffect: 0
 --- !u!1 &6643317084576140184
 GameObject:
   m_ObjectHideFlags: 0

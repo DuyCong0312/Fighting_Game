@@ -45,6 +45,9 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage, Vector2 direction)
     {
+        playerState.isAttacking = false;
+        playerState.isUsingSkill = false;
+
         if (playerState.isDefending)
         {
             damage = 2f;

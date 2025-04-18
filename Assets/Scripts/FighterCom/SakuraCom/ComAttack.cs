@@ -6,38 +6,45 @@ public class ComAttack : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    private Transform player;
     private PlayerState playerState;
+    private CheckGround groundCheck;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-    private void Update()
-    {
-        if (GameManager.Instance.gameEnded
-            || playerState.isUsingSkill
-            || playerState.isDefending
-            || playerState.isGettingHurt)
-        {
-            return;
-        }
-        Attack();
+        groundCheck = GetComponent<CheckGround>();
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if (Vector2.Distance(player.position, transform.position) <= 1f)
-        {
+        if (groundCheck.isGround) 
+        { 
             playerState.isAttacking = true;
+            anim.SetBool("isAttack", true);
         }
         else
         {
-            playerState.isAttacking= false;
+            anim.Play("K+J");
         }
-        anim.SetBool("isAttack", playerState.isAttacking);
+    }
+
+    public void Defend()
+    {
+        playerState.isDefending = true;
+        anim.SetBool("isDefend", true);
+    }
+
+    public void StopAttack()
+    {
+        playerState.isAttacking = false;
+        anim.SetBool("isAttack", false);
+    }
+
+    public void StopDefend()
+    {
+        playerState.isDefending = false;
+        anim.SetBool("isDefend", false);
     }
 }

@@ -36,14 +36,10 @@ public class Sakura_Iskill : I_Skill
         while (Vector2.Distance(transform.position, newPosition) > 0.01f && canMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
-            if (Time.frameCount % 2 == 0)
+            if (sakuraCheckHit.hit)
             {
-                sakuraCheckHit.IskillAttack();
-                if (sakuraCheckHit.hit)
-                {
-                    canMove = false;
-                    break;
-                }
+                canMove = false;
+                break;
             }
 
             yield return null;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,16 +11,22 @@ public class ComMovement : MonoBehaviour
     private Transform player;
     private CheckGround groundCheck;
     private PlayerState playerState;
+    private SpawnEffectAfterImage effectAfterImage;
 
+    [Header("Jump Setting")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 11f;
+
+    [Header("Effect")]
+    [SerializeField] private Transform jumpPos;
+    [SerializeField] private Transform dashPos;
 
     [Header("Dash Setting")]
     [SerializeField] private float dashPower = 10f;
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashCooldown = 1f;
-    [SerializeField] private bool isDashing;
     [SerializeField] private bool canDash = true;
+    public bool isDashing;
 
     void Start()
     {
@@ -27,8 +34,24 @@ public class ComMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        effectAfterImage = GetComponent<SpawnEffectAfterImage>();
         playerState.isFacingRight = false;
+        StartCoroutine(WaitForPlayers());
+    }
+
+    private IEnumerator WaitForPlayers()
+    {
+        while (GameObject.FindGameObjectsWithTag("Player").Length < 1)
+        {
+            yield return null;
+        }
+
+        FindPlayers();
+    }
+
+    private void FindPlayers()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -42,11 +65,10 @@ public class ComMovement : MonoBehaviour
         {
             return;
         }
-        MoveToPlayer();
         Flipped();
     }
 
-    private void MoveToPlayer()
+    public void MoveToPlayer()
     {
         if (isDashing)
         {
@@ -59,8 +81,13 @@ public class ComMovement : MonoBehaviour
         }
         else
         {
-            anim.SetBool("Running", false);
+            StopMoveToPlayer();
         }
+    }
+
+    public void StopMoveToPlayer()
+    {
+        anim.SetBool("Running", false);
     }
     private void Flipped()
     {
@@ -75,31 +102,45 @@ public class ComMovement : MonoBehaviour
             playerState.isFacingRight = false;
         }
     }
+
+    public void HandleDash()
+    {
+        if (canDash)
+        {
+            StartCoroutine(Dash());
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.dash);
+            if (groundCheck.isGround)
+            {
+                EffectManager.Instance.SpawnEffect(EffectManager.Instance.groundDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+            }
+            else
+            {
+                EffectManager.Instance.SpawnEffect(EffectManager.Instance.airDash, dashPos, Quaternion.Euler(0, 180, 0) * transform.rotation);
+            }
+        }
+    }
     private IEnumerator Dash()
     {
-        if (!canDash)
-        {
-            canDash = false;
-            isDashing = true;
-            float originalGravity = rb.gravityScale;
-            rb.gravityScale = 0f;
-            float direction = playerState.isFacingRight ? 1 : -1;
-            rb.velocity = new Vector2(direction * dashPower, 0f);
-            anim.SetBool("isDashing", true);
-            yield return new WaitForSeconds(dashTime);
-            rb.gravityScale = originalGravity;
-            isDashing = false;
-            anim.SetBool("isDashing", false);
-            yield return new WaitForSeconds(dashCooldown);
-            canDash = true;
-        }
-        
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        float direction = playerState.isFacingRight ? 1 : -1;
+        rb.velocity = new Vector2(direction * dashPower, 0f);
+        anim.SetBool("isDashing", true);
+        effectAfterImage.StartAfterImageEffect();
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        anim.SetBool("isDashing", false);
+        effectAfterImage.StopAfterImageEffect();
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
-    private void HandleJump()
+    public void HandleJump()
     {
-        float distanceFromPlayer = Mathf.Abs(player.position.y - this.transform.position.y);
-        if(distanceFromPlayer > 0.5f && groundCheck.isGround == true)
+        if(groundCheck.isGround == true)
         {
             Jump();
             groundCheck.isJumping = true;
@@ -109,6 +150,8 @@ public class ComMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         anim.SetBool("Jumping", true);
+        EffectManager.Instance.SpawnEffect(EffectManager.Instance.jump, jumpPos, transform.rotation);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.jump);
     }
 
     private void UpdateAnimation()
@@ -124,6 +167,8 @@ public class ComMovement : MonoBehaviour
         if (groundCheck.isGround && anim.GetBool("Falling"))
         {
             anim.SetBool("Falling", false);
+            EffectManager.Instance.SpawnEffect(EffectManager.Instance.touchGround, jumpPos, transform.rotation);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.touchGround);
         }
     }
 

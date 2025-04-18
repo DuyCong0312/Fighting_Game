@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class SpawnEffectAfterImage : MonoBehaviour
 {
-    private float spawnDelayTime;
-    [SerializeField] private float spawnDelaySeconds;
+    [SerializeField] private float spawnDelayTime;
     [SerializeField] private GameObject afterImageEffect;
-    public bool useEffect = false;
+    private Coroutine effectCoroutine;
 
-    private void Start()
+    public void StartAfterImageEffect()
     {
-        spawnDelayTime = spawnDelaySeconds;
-    }
-    private void Update()
-    {
-        if (useEffect)
+        if (effectCoroutine == null)
         {
-            if(spawnDelayTime > 0)
-            {
-                spawnDelayTime -= Time.deltaTime;
-            }
-            else
-            {
-                GameObject currentAfterImage = Instantiate(afterImageEffect, this.transform.position, this.transform.rotation, this.transform);
-                Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
-                currentAfterImage.GetComponent<SpriteRenderer>().sprite = currentSprite;
-                spawnDelayTime = spawnDelaySeconds;
-            }
+            effectCoroutine = StartCoroutine(AfterImageEffectCoroutine());
+        }
+    }
+
+    public void StopAfterImageEffect()
+    {
+        if (effectCoroutine != null)
+        {
+            StopCoroutine(effectCoroutine);
+            effectCoroutine = null;
+        }
+    }
+
+    private IEnumerator AfterImageEffectCoroutine()
+    {
+        while (true)
+        {
+            GameObject currentAfterImage = Instantiate(afterImageEffect, this.transform.position, this.transform.rotation);
+            Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
+            currentAfterImage.GetComponent<SpriteRenderer>().sprite = currentSprite;
+            yield return new WaitForSeconds(spawnDelayTime);
         }
     }
 }

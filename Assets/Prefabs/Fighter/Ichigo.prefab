@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: -3773639330718817434}
   - component: {fileID: 8086383848958687823}
   - component: {fileID: 6869088218187495439}
+  - component: {fileID: 7364336050824455975}
   m_Layer: 7
   m_Name: Ichigo
   m_TagString: Player
@@ -364,7 +365,7 @@ MonoBehaviour:
   groundCheck: {fileID: 7815760517787553239}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
@@ -453,6 +454,20 @@ MonoBehaviour:
   rangedAttack: {fileID: 8300000, guid: cec3a78c98bec904eac70a4ca623d9b1, type: 3}
   spawnRangedAttack: {fileID: 8300000, guid: 8d62e8694b589aa4c92e2ca92670c970, type: 3}
   specialAttack: {fileID: 8300000, guid: 81bcb016982886f4488a1d637050eed1, type: 3}
+--- !u!114 &7364336050824455975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818890458921424710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe1d044335ff4a4d9238c0dd7a6494d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDelayTime: 0.01
+  afterImageEffect: {fileID: 1577035489495529819, guid: 665b70366db0eca4f8bd6e789d395a5d, type: 3}
 --- !u!1 &2779537796108366315
 GameObject:
   m_ObjectHideFlags: 0

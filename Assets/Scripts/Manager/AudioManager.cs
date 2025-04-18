@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
@@ -10,7 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource sfxAudioSource;
 
-    public AudioClip background;
+    [Header ("Sound Effect")]
     public AudioClip jump;
     public AudioClip dash; 
     public AudioClip touchGround;
@@ -31,12 +32,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        PlaySound(background);
-    }
-
-    public void PlaySound(AudioClip clip)
+    public void PlayMusic(AudioClip clip)
     {
         musicAudioSource.clip = clip;
         musicAudioSource.Play();

@@ -13,18 +13,18 @@ public class ComUseSkill : MonoBehaviour
         playerRage = GetComponentInParent<PlayerRage>();
     }
 
-    private void PlayUskill()
+    public void PlayUskill()
     {
         playerRage.GetRage(5f);
-        anim.Play("U");
+        anim.SetTrigger("Uskill");
     }
 
-    private void PlayISkill()
+    public void PlayISkill()
     {
         if (playerRage.currentRage >= 30f)
         {
             playerRage.CostRage(30f);
-            anim.Play("I");
+            anim.SetTrigger("Iskill");
         }
         else
         {
@@ -33,14 +33,13 @@ public class ComUseSkill : MonoBehaviour
 
     }
 
-    private void PlayUKskill()
+    public void PlayUKskill()
     {
         playerRage.GetRage(5f);
-        anim.Play("K+U" +
-            "");
+        anim.Play("K+U");
     }
 
-    private void PlayIKSkill()
+    public void PlayIKSkill()
     {
         if (playerRage.currentRage >= 30f)
         {

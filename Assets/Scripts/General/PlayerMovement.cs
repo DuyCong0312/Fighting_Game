@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerState playerState;
     private SpawnEffectAfterImage effectAfterImage;
 
+    [Header("Jump Setting")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 6f;
     [SerializeField] private bool isDoubleJump;
@@ -126,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N) && canDash)
         {
             StartCoroutine(Dash());
-            anim.SetBool("isDashing", true);
             AudioManager.Instance.PlaySFX(AudioManager.Instance.dash);
             if (groundCheck.isGround)
             {
@@ -143,18 +143,19 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        effectAfterImage.useEffect = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         coll.isTrigger = true;
         float direction = playerState.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * dashPower, 0f);
+        anim.SetBool("isDashing", true);
+        effectAfterImage.StartAfterImageEffect();
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravity;
         coll.isTrigger = false;
         isDashing = false;
-        effectAfterImage.useEffect = false;
         anim.SetBool("isDashing", false);
+        effectAfterImage.StopAfterImageEffect();
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }

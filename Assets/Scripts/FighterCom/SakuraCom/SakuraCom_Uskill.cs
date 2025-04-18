@@ -11,6 +11,7 @@ public class SakuraCom_Uskill : MonoBehaviour
     [SerializeField] private float backSpeed;
 
     private Rigidbody2D rb;
+    private SpawnEffectAfterImage effectAfterImage;
     private Vector3 newPosition;
     private bool canMove = true;
     private Vector2 movement;
@@ -24,11 +25,13 @@ public class SakuraCom_Uskill : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        effectAfterImage = GetComponent<SpawnEffectAfterImage>();
     }
 
     private void ActiveStepBack()
     {
         StartCoroutine(StepBack());
+        effectAfterImage.StartAfterImageEffect();
     }
     private IEnumerator StepBack()
     {
@@ -38,6 +41,7 @@ public class SakuraCom_Uskill : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
             yield return null;
         }
+        effectAfterImage.StopAfterImageEffect();
         canMove = true;
     }
 
@@ -72,12 +76,11 @@ public class SakuraCom_Uskill : MonoBehaviour
 
     private void ActiveSakuraUKSkill()
     {
-        this.transform.rotation = this.transform.rotation * Quaternion.Euler(0, 0, 30);
+        this.transform.rotation = this.transform.rotation * Quaternion.Euler(0, 0, 45);
         Vector2 direction = -this.transform.up;
         float angle = Mathf.Atan2(direction.y, direction.x);
         movement.x = force * Mathf.Cos(angle);
         movement.y = force * Mathf.Sin(angle);
-        Debug.Log(movement);
 
         rb.velocity = movement.normalized * force;
     }

@@ -23,6 +23,7 @@ public class Sakura_Uskill : U_Skill
     private void ActiveStepBack()
     {
         StartCoroutine(StepBack());
+        effectAfterImage.StartAfterImageEffect();
     }
     private IEnumerator StepBack()
     {
@@ -32,8 +33,10 @@ public class Sakura_Uskill : U_Skill
             transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
             yield return null;
         }
+        effectAfterImage.StopAfterImageEffect();
         canMove = true;
     }
+
 
     private void ActiveSakuraUSkill(int extraInstances, float offset)
     {
@@ -66,7 +69,7 @@ public class Sakura_Uskill : U_Skill
 
     private void ActiveSakuraUKSkill()
     {
-        this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 30);
+        this.transform.rotation =  this.transform.rotation * Quaternion.Euler(0, 0, 45);
         Vector2 direction = -this.transform.up;
         float angle = Mathf.Atan2(direction.y, direction.x);
         movement.x = force * Mathf.Cos(angle);

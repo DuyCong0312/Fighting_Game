@@ -9,6 +9,7 @@ public abstract class BaseSkill : MonoBehaviour
     protected CheckGround groundCheck;
     protected PlayerState playerState;
     protected PlayerRage playerRage;
+    protected SpawnEffectAfterImage effectAfterImage;
 
     protected abstract KeyCode SkillKey { get; }
     protected abstract string GroundAnimationTrigger { get; }
@@ -21,6 +22,7 @@ public abstract class BaseSkill : MonoBehaviour
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
         playerRage = GetComponentInParent<PlayerRage>();
+        effectAfterImage = GetComponent<SpawnEffectAfterImage>();
     }
 
     protected virtual void Update()
