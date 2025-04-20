@@ -6,45 +6,45 @@ public class ComUseSkill : MonoBehaviour
 {
     private Animator anim;
     private PlayerRage playerRage;
+    private PlayerState playerState;
+    private CheckGround groundCheck;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+        playerState = GetComponent<PlayerState>();
+        groundCheck = GetComponent<CheckGround>();
         playerRage = GetComponentInParent<PlayerRage>();
     }
 
     public void PlayUskill()
     {
+        playerState.isUsingSkill = true;
         playerRage.GetRage(5f);
-        anim.SetTrigger("Uskill");
+        if (groundCheck.isGround)
+        {
+            anim.SetTrigger("Uskill");
+        }
+        else
+        {
+            anim.Play("K+U");
+        }
     }
 
     public void PlayISkill()
     {
         if (playerRage.currentRage >= 30f)
         {
+            playerState.isUsingSkill = true;
             playerRage.CostRage(30f);
-            anim.SetTrigger("Iskill");
-        }
-        else
-        {
-            return;
-        }
-
-    }
-
-    public void PlayUKskill()
-    {
-        playerRage.GetRage(5f);
-        anim.Play("K+U");
-    }
-
-    public void PlayIKSkill()
-    {
-        if (playerRage.currentRage >= 30f)
-        {
-            playerRage.CostRage(30f);
-            anim.Play("K+I");
+            if (groundCheck.isGround)
+            {
+                anim.SetTrigger("Iskill");
+            }
+            else
+            {
+                anim.Play("K+I");
+            }
         }
         else
         {

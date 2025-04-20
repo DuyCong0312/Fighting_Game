@@ -9,7 +9,8 @@ public class KnockBack : MonoBehaviour
     [SerializeField] private float hitDirectionForce = 2f;
 
     [Header("BlowUp")]
-    [SerializeField] private float blowUpPower = 5f;
+    [SerializeField] private float blowUpPowerX = 1f;
+    [SerializeField] private float blowUpPowerY = 1.5f;
 
     private PlayerState playerState;
     private CheckGround groundCheck;
@@ -25,9 +26,9 @@ public class KnockBack : MonoBehaviour
     {
         StartCoroutine(KnockBackRoutine(hitDirection));
     }
-    public void BlowUpAction(Vector2 blowDirection)
+    public void BlowUpAction()
     {
-        StartCoroutine(BlowUp(blowDirection));
+        BlowUp();
     }
 
     private IEnumerator KnockBackRoutine(Vector2 hitDirection)
@@ -44,11 +45,10 @@ public class KnockBack : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-    private IEnumerator BlowUp(Vector2 blowDirection)
+    private void BlowUp()
     {
-        Vector2 blowForce = blowDirection * blowUpPower;
-        rb.velocity = new Vector2(blowForce.x, blowForce.y);
-        
-        yield return null;
+        Vector2 blowDirection = new Vector2(- this.transform.right.x, this.transform.up.y).normalized;
+        Vector2 blowForce = new Vector2(blowDirection.x * blowUpPowerX, blowDirection.y * blowUpPowerY);
+        rb.AddForce(blowForce, ForceMode2D.Impulse);
     }
 }

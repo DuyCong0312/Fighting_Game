@@ -7,6 +7,7 @@ using UnityEngine;
 public class ComMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Collider2D coll;
     private Animator anim;
     private Transform player;
     private CheckGround groundCheck;
@@ -16,6 +17,7 @@ public class ComMovement : MonoBehaviour
     [Header("Jump Setting")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpForce = 11f;
+    public bool isFalling = false;
 
     [Header("Effect")]
     [SerializeField] private Transform jumpPos;
@@ -26,11 +28,16 @@ public class ComMovement : MonoBehaviour
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private bool canDash = true;
+    private int defaultLayer;
+    private int dashLayer;
     public bool isDashing;
 
     void Start()
     {
+        defaultLayer = gameObject.layer;
+        dashLayer = LayerMask.NameToLayer("Dashing");
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
@@ -57,7 +64,9 @@ public class ComMovement : MonoBehaviour
     void Update()
     {
         UpdateAnimation();
-        if (GameManager.Instance.gameEnded
+
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded
             || playerState.isAttacking
             || playerState.isUsingSkill
             || playerState.isDefending
@@ -70,19 +79,8 @@ public class ComMovement : MonoBehaviour
 
     public void MoveToPlayer()
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if(Vector2.Distance(player.position, transform.position) > 1f)
-        {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
-            anim.SetBool("Running", true);
-        }
-        else
-        {
-            StopMoveToPlayer();
-        }
+        transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
+        anim.SetBool("Running", true);
     }
 
     public void StopMoveToPlayer()
@@ -125,12 +123,14 @@ public class ComMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        gameObject.layer = dashLayer;
         float direction = playerState.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * dashPower, 0f);
         anim.SetBool("isDashing", true);
         effectAfterImage.StartAfterImageEffect();
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravity;
+        gameObject.layer = defaultLayer;
         isDashing = false;
         anim.SetBool("isDashing", false);
         effectAfterImage.StopAfterImageEffect();
@@ -161,12 +161,14 @@ public class ComMovement : MonoBehaviour
             if (rb.velocity.y < 0.1f)
             {
                 anim.SetBool("Falling", true);
+                isFalling = true;
                 anim.SetBool("Jumping", false);
             }
         }
         if (groundCheck.isGround && anim.GetBool("Falling"))
         {
             anim.SetBool("Falling", false);
+            isFalling = false;
             EffectManager.Instance.SpawnEffect(EffectManager.Instance.touchGround, jumpPos, transform.rotation);
             AudioManager.Instance.PlaySFX(AudioManager.Instance.touchGround);
         }

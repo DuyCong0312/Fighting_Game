@@ -14,6 +14,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform rightBoundaryMap;
     private Camera cam;
 
+    [Header("Player Spawn Points")]
+    [SerializeField] private Transform player01SpawnPoint;
+    [SerializeField] private Transform player02SpawnPoint;
+
     private void Start()
     {
         cam = Camera.main;
@@ -64,10 +68,22 @@ public class CameraManager : MonoBehaviour
         float heightAdjust = Mathf.Lerp(minHeightOffset, maxHeightOffset, (cam.orthographicSize - minZoom) / (maxZoom - minZoom));
         Vector3 targetPosition = new Vector3(midpoint.x, midpoint.y + heightAdjust, transform.position.z);
 
+        float camHalfHeight = cam.orthographicSize;
         float camHalfWidth = cam.orthographicSize * cam.aspect;
         float clampedX = Mathf.Clamp(targetPosition.x, leftBoundaryMap.position.x + camHalfWidth, rightBoundaryMap.position.x - camHalfWidth);
 
-        transform.position = new Vector3(clampedX, targetPosition.y, targetPosition.z);
+        float lowestPlayerY = Mathf.Min(playerTransforms[0].position.y, playerTransforms[1].position.y);
+        float maxCameraY = lowestPlayerY + camHalfHeight - 0.7f;
+        float clampedY = Mathf.Min(targetPosition.y, maxCameraY);
+
+        transform.position = new Vector3(clampedX, clampedY, targetPosition.z);
+    }
+
+    public void ResetPlayerPosition()
+    {
+        playerTransforms[0].position = player01SpawnPoint.position;
+        playerTransforms[1].position = player02SpawnPoint.position;
+
     }
 
 }

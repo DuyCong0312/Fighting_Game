@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackNumber: 0
   canAttack: 1
+  attackMoveDuration: 0.2
 --- !u!114 &8649608556145386475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +370,8 @@ MonoBehaviour:
   circleRadius: 0.19
   isGround: 0
   isJumping: 0
+  groundMaterial: {fileID: 6200000, guid: 30f291fef2138f144aefb4f658bc9796, type: 2}
+  airMaterial: {fileID: 6200000, guid: 1761419d1bcd84f42810298a7aec6f17, type: 2}
 --- !u!114 &7626671958649967545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,9 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241a4164a30651540a82d85679ca39c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackTime: 0.15
-  hitDirectionForce: 1.5
-  blowUpPower: 7
+  knockBackTime: 0.2
+  hitDirectionForce: 2
+  blowUpPowerX: 8
+  blowUpPowerY: 10
 --- !u!114 &-3773639330718817434
 MonoBehaviour:
   m_ObjectHideFlags: 0

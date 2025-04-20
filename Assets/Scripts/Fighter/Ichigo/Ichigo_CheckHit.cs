@@ -23,7 +23,7 @@ public class Ichigo_CheckHit : CheckHit
 
     private void ThirdAttack()
     {
-        StraightAttack(meleeAttack03Pos, attackBoxSize, 0f, 5f, new Vector2(1,1));
+        StraightAttack(meleeAttack03Pos, attackBoxSize, 0f, 5f, new Vector2(transform.right.x,1));
     }
 
     private void JumpAttack()

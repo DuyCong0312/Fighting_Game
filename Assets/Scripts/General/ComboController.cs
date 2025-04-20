@@ -13,6 +13,8 @@ public class ComboController : MonoBehaviour
 
     [SerializeField] private int attackNumber;
     [SerializeField] private bool canAttack = true;
+    [SerializeField] private float attackMoveDuration = 0.1f;
+    private bool hasInterrupted = false;
 
     void Start()
     {
@@ -23,7 +25,10 @@ public class ComboController : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.gameEnded
+        GetHurtWhenAttacking();
+
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded
             || playerState.isUsingSkill
             || playerState.isGettingHurt)
         {
@@ -47,6 +52,9 @@ public class ComboController : MonoBehaviour
         playerState.isAttacking = false;
         canAttack = true;
         attackNumber = 0;
+        anim.ResetTrigger("0Attack");
+        anim.ResetTrigger("1Attack");
+        anim.ResetTrigger("2Attack");
     }
 
     private void Attack()
@@ -58,7 +66,7 @@ public class ComboController : MonoBehaviour
             if (groundCheck.isGround)
             {
                 anim.SetTrigger(attackNumber + "Attack");
-                MoveWhenAttack();
+                StartCoroutine(MoveWhenAttack());
             }
             else
             {
@@ -80,10 +88,31 @@ public class ComboController : MonoBehaviour
         anim.SetBool("isDefend", playerState.isDefending);
     }
 
-    private void MoveWhenAttack()
+    private IEnumerator MoveWhenAttack()
     {
-        float direction = playerState.isFacingRight? 1 : -1;
-        transform.position += new Vector3(direction *  attackNumber * 0.1f, 0f, 0f);
+        float direction = playerState.isFacingRight ? 1 : -1;
+        float timer = 0f;
+
+        while (timer < attackMoveDuration)
+        {
+            rb.velocity = new Vector2(direction * attackNumber * 2f, rb.velocity.y);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void GetHurtWhenAttacking()
+    {
+        if (playerState.isGettingHurt && !hasInterrupted)
+        {
+            hasInterrupted = true;
+            StopCombo();
+        }
+
+        if (!playerState.isGettingHurt && hasInterrupted)
+        {
+            hasInterrupted = false;
+        }
     }
 
 }

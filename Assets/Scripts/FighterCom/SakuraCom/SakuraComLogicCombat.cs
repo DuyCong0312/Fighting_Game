@@ -15,7 +15,9 @@ public class SakuraComLogicCombat : MonoBehaviour
     private PlayerRage rage;
     private CheckGround groundCheck;
     private Transform player;
-    private int comboStep = 0;
+    public int comboStep = 0;
+    private bool isActionOnCooldown = false;
+    public float actionCooldownTime = 0.2f;
 
     private void Start()
     {
@@ -46,6 +48,15 @@ public class SakuraComLogicCombat : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded)
+        {
+            return;
+        }
+        if (isActionOnCooldown)
+        {
+            return;
+        }
         UtilityCom();
         ExecuteCurrentAction();
     }
@@ -59,31 +70,59 @@ public class SakuraComLogicCombat : MonoBehaviour
         float combatScore = 0f;
         float skillScore = 0f;
 
-        comboScore = Random.Range(0f, 100f);
-        moveScore = Random.Range(0f, 100f);
-        combatScore = Random.Range(0f, 100f);
-        skillScore = Random.Range(0f, 100f);
+        comboScore = EvaluateCombo();
+        moveScore = EvaluateMovement();
+        combatScore = EvaluateCombat();
+        skillScore = EvaluateSkill();
 
-        if (comboScore >= moveScore && comboScore >= combatScore && comboScore >= skillScore)
-        {
+        float maxScore = Mathf.Max(comboScore, moveScore, combatScore, skillScore);
+
+        if (maxScore == comboScore)
             currentAction = ComAction.Combo;
-        }
-        else if (moveScore >= combatScore && moveScore >= skillScore)
-        {
+        else if (maxScore == moveScore)
             currentAction = ComAction.Movement;
-        }
-        else if (combatScore >= skillScore)
-        {
+        else if (maxScore == combatScore)
             currentAction = ComAction.Combat;
-        }
         else
-        {
             currentAction = ComAction.Skill;
-        }
+    }
+
+    private float EvaluateCombo()
+    {
+        float score = Random.Range(0f, 30f);
+        if (rage.currentRage < 35f) score += 20f;
+        if (Vector2.Distance(player.position, transform.position) > 6f) score += 20f;
+        return score;
+    }
+
+    private float EvaluateMovement()
+    {
+        float score = Random.Range(0f, 30f);
+        if (Vector2.Distance(player.position, transform.position) >= 5f) score += 40f;
+        return score;
+    }
+
+    private float EvaluateCombat()
+    {
+        float score = Random.Range(0f, 30f);
+        if (health.currentHealth < 25f) score += 20f;
+        else score += 30f;
+        return score;
+    }
+
+    private float EvaluateSkill()
+    {
+        float score = Random.Range(0f, 30f);
+        if (rage.currentRage > 35f) score += 30f;
+        else score += 15f;
+        if (!groundCheck.isGround) score += 30f;
+        return score;
     }
 
     void ExecuteCurrentAction()
     {
+
+        Debug.Log(currentAction);
         switch (currentAction)
         {
             case ComAction.Combo:
@@ -92,86 +131,77 @@ public class SakuraComLogicCombat : MonoBehaviour
 
             case ComAction.Movement:
                 HandleMovement();
-                currentAction = ComAction.None;
                 break;
 
             case ComAction.Combat:
                 HandleCombat();
-                currentAction = ComAction.None;
                 break;
 
             case ComAction.Skill:
                 HandleSkill();
-                currentAction = ComAction.None;
                 break;
         }
+        StartCoroutine(ActionCooldown(actionCooldownTime));
     }
 
     private void HandleMovement()
     {
         float DistanceToPlayerX = Mathf.Abs(player.transform.position.x - transform.position.x);
-        bool IsPlayerAbove = player.transform.position.y > transform.position.y;
+        bool IsPlayerAbove = player.position.y - transform.position.y >= 0.25f;
+
 
         if (IsPlayerAbove)
         {
             move.HandleJump();
-            if (DistanceToPlayerX >= 7f)
-            {
-                move.HandleDash();
-            }
-            else if (DistanceToPlayerX >= 5f)
-            {
-                move.MoveToPlayer();
-            }
+        }
+
+        if (DistanceToPlayerX >= 4.5f)
+        {
+            move.HandleDash();
+        }
+        else if (DistanceToPlayerX >= 1f && !move.isDashing)
+        {
+            move.MoveToPlayer();
         }
         else
         {
-            if (DistanceToPlayerX >= 7f)
-            {
-                move.HandleDash();
-            }
-            else if (DistanceToPlayerX >= 5f)
-            {
-                move.MoveToPlayer();
-            }
+            move.StopMoveToPlayer();
         }
+        currentAction = ComAction.None;
     }
 
     private void HandleCombat()
     {
-        float randomCombat = Random.Range(0f, 100f);
-        float combatScore = (health.currentHealth > 25f) ? 60f : 20f;
+        float distance = Mathf.Abs(player.position.x - transform.position.x);
+        float randomCombat = Random.Range(0f, 40f);
+        float combatScore = (health.currentHealth > 15f) ? 60f : 20f;
         combatScore += randomCombat;
 
-        if (combatScore >= 60f)
+        if (playerState.isDefending || playerState.isAttacking)
         {
-            if (Vector2.Distance(player.position, transform.position) > 0.1f)
-            {
-                attack.Attack();
-            }
-            else
-            {
-                attack.StopAttack();
-            }
-
-            attack.StopDefend();
+            return;
         }
-        else if (combatScore >= 30f)
+
+        if (combatScore >= 60f && distance <= 1f)
+        {
+            attack.Attack();
+        }
+        else 
         {
             attack.Defend();
-            attack.StopAttack();
         }
-        else
-        {
-            attack.StopAttack();
-            attack.StopDefend();
-        }
+        currentAction = ComAction.None;
     }
 
     private void HandleSkill()
     {
         float DistanceToPlayerX = Mathf.Abs(player.transform.position.x - transform.position.x);
         bool IsPlayerAbove = player.transform.position.y > transform.position.y;
+
+        if (playerState.isUsingSkill)
+        {
+            return;
+        }
 
         if (rage.currentRage > 35f)
         {
@@ -181,20 +211,19 @@ public class SakuraComLogicCombat : MonoBehaviour
             }
             else if (DistanceToPlayerX < 1f && !groundCheck.isGround)
             {
-                skill.PlayIKSkill();
+                skill.PlayISkill();
             }
         }
         else
         {
-            if (DistanceToPlayerX > 2f
-                && groundCheck.isGround)
+            if (DistanceToPlayerX > 2f)
             {
                 skill.PlayUskill();
             }
-            else if (!groundCheck.isGround)
-            {
-                skill.PlayUKskill();
-            }
+        }
+        if (!playerState.isUsingSkill)
+        {
+            currentAction = ComAction.None;
         }
     }
     private void FirstCombo()
@@ -203,36 +232,41 @@ public class SakuraComLogicCombat : MonoBehaviour
 
         switch (comboStep)
         {
-            case 0: 
-                if (comboStep == 0)
+            case 0:
+                if (comboStep == 0 && groundCheck.isGround)
                 {
                     skill.PlayUskill();
                     comboStep++;
                 }
                 break;
-            case 1: 
+            case 1:
                 if (isSkillEnd)
                 {
                     move.HandleDash();
                     comboStep++;
                 }
                 break;
-            case 2: 
+            case 2:
                 if (!move.isDashing)
                 {
                     move.HandleJump();
                     comboStep++;
                 }
                 break;
-            case 3: 
-                if (comboStep == 3 && !isSkillEnd)
+            case 3:
+                if (comboStep == 3)
                 {
-                    skill.PlayUKskill();
+                    skill.PlayUskill();
                     comboStep = 0;
                     currentAction = ComAction.None;
                 }
                 break;
         }
     }
-
+    private IEnumerator ActionCooldown(float delay)
+    {
+        isActionOnCooldown = true;
+        yield return new WaitForSeconds(delay);
+        isActionOnCooldown = false;
+    }
 }

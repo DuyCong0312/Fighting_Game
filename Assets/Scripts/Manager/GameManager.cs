@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    private int roundNumber = 1;
+    [SerializeField] private CameraManager cam;
 
     [Header("Player_1")]
     [SerializeField] private PlayerHealth player01Health;
@@ -24,9 +26,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameSetPerRound;
     [SerializeField] private GameObject panelGameSetFinal;
     [SerializeField] private TextMeshProUGUI gameSetFinal;
+    [SerializeField] private GameObject panelStartGame;
+    [SerializeField] private TextMeshProUGUI gameRound;
+    [SerializeField] private TextMeshProUGUI startGame;
     [SerializeField] private GameObject panelPauseGame;
 
     public bool gameEnded = false;
+    public bool gameStart = false;
 
     void Awake()
     {
@@ -46,6 +52,8 @@ public class GameManager : MonoBehaviour
         panelGameSetPerRound.SetActive(false);
         panelGameSetFinal.SetActive(false);
         panelPauseGame.SetActive(false);
+        panelStartGame.SetActive(false);
+        StartCoroutine(StartGame());
     }
 
     private void Update()
@@ -147,10 +155,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartNewRound()
     {
         yield return new WaitForSeconds(2);
+        roundNumber++;
         ResetPlayersHealth();
+        ResetPlayerPosition();
         ResetTime();
         panelGameSetPerRound.SetActive(false);
         gameEnded = false;
+        gameStart = false;
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(StartGame());
     }
 
     private void ResetPlayersHealth()
@@ -159,9 +172,27 @@ public class GameManager : MonoBehaviour
         player02Health.ResetHealth();
     }
 
+    private void ResetPlayerPosition()
+    {
+        cam.ResetPlayerPosition();
+    }
+
     private void ResetTime()
     {
         time.ResetTime();
+    }
+
+    private IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(1);
+        panelStartGame.SetActive(true);
+        gameRound.text = ("Round") + roundNumber;
+        startGame.text = null;
+        yield return new WaitForSeconds(1f);
+        startGame.text = "Start";
+        yield return new WaitForSeconds(0.5f);
+        panelStartGame.SetActive(false);
+        gameStart = true;
     }
 
     private void PauseGame()

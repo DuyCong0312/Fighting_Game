@@ -5,11 +5,23 @@ using UnityEngine;
 public class CheckGround : MonoBehaviour
 {
 
+    [Header("Ground Check Setting")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float circleRadius;
     public bool isGround;
     public bool isJumping = false;
+
+
+    [Header("Materials")]
+    [SerializeField] private PhysicsMaterial2D groundMaterial;
+    [SerializeField] private PhysicsMaterial2D airMaterial;
+    private Collider2D coll;
+
+    void Awake()
+    {
+        coll = GetComponent<Collider2D>();
+    }
 
     private void Update()
     {
@@ -20,6 +32,14 @@ public class CheckGround : MonoBehaviour
         isGround = Physics2D.OverlapCircle(groundCheck.position, circleRadius, groundLayer);
 
         isJumping = isGround ? false : true;
+        if (isGround)
+        {
+            coll.sharedMaterial = groundMaterial;
+        }
+        else
+        {
+            coll.sharedMaterial = airMaterial;
+        }
     }
 
     private void OnDrawGizmosSelected()

@@ -8,19 +8,44 @@ public class ComAttack : MonoBehaviour
     private Animator anim;
     private PlayerState playerState;
     private CheckGround groundCheck;
+    private Transform player;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
-        groundCheck = GetComponent<CheckGround>();
+        groundCheck = GetComponent<CheckGround>(); 
+        StartCoroutine(WaitForPlayers());
+    }
+
+    private IEnumerator WaitForPlayers()
+    {
+        while (GameObject.FindGameObjectsWithTag("Player").Length < 1)
+        {
+            yield return null;
+        }
+
+        FindPlayers();
+    }
+
+    private void FindPlayers()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void Update()
+    {
+        if (Mathf.Abs(player.position.x - transform.position.x) > 1f)
+        {
+            StopAttack();
+        }
     }
 
     public void Attack()
     {
-        if (groundCheck.isGround) 
-        { 
+        if (groundCheck.isGround)
+        {
             playerState.isAttacking = true;
             anim.SetBool("isAttack", true);
         }
@@ -32,8 +57,7 @@ public class ComAttack : MonoBehaviour
 
     public void Defend()
     {
-        playerState.isDefending = true;
-        anim.SetBool("isDefend", true);
+        StartCoroutine(DefendCoroutine());
     }
 
     public void StopAttack()
@@ -42,8 +66,11 @@ public class ComAttack : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
-    public void StopDefend()
+    private IEnumerator DefendCoroutine()
     {
+        playerState.isDefending = true;
+        anim.SetBool("isDefend", true);
+        yield return new WaitForSeconds(1f);
         playerState.isDefending = false;
         anim.SetBool("isDefend", false);
     }

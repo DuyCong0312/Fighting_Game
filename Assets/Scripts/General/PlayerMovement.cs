@@ -29,9 +29,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private bool isDashing;
     [SerializeField] private bool canDash = true;
+    private int defaultLayer;
+    private int dashLayer;
 
     void Start()
     {
+        defaultLayer = gameObject.layer;
+        dashLayer = LayerMask.NameToLayer("Dashing");
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -44,7 +48,9 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdateAnimation();
         UpdateState();
-        if (GameManager.Instance.gameEnded
+
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded
             || playerState.isUsingSkill 
             || playerState.isDefending
             || playerState.isGettingHurt)
@@ -145,14 +151,14 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        coll.isTrigger = true;
+        gameObject.layer = dashLayer;
         float direction = playerState.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * dashPower, 0f);
         anim.SetBool("isDashing", true);
         effectAfterImage.StartAfterImageEffect();
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravity;
-        coll.isTrigger = false;
+        gameObject.layer = defaultLayer;
         isDashing = false;
         anim.SetBool("isDashing", false);
         effectAfterImage.StopAfterImageEffect();

@@ -29,10 +29,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) 
-        {
-            TakeDamage(5, new Vector2(1,1));
-        }
         if (timeSinceLastDamage < damageTimeLimit)
         {
             timeSinceLastDamage += Time.deltaTime;
@@ -87,9 +83,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayHeavyHurt()
     {
-        if(accumulatedDamage >= damageThreshold && timeSinceLastDamage < damageTimeLimit)
+        if (accumulatedDamage >= damageThreshold && timeSinceLastDamage < damageTimeLimit)
         {
             anim.Play(animationHeavyHurtName);
+            knockBack.BlowUpAction();
             playerState.isGettingHurt = true;
             accumulatedDamage = 0f;
         }

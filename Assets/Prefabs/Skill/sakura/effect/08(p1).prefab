@@ -155,5 +155,4 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  circleRadius: 0.35
-  isGround: 0
+  circleRadius: 0.5

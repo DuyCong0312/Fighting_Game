@@ -47,7 +47,7 @@ public class Sakura_CheckHit : CheckHit
 
     private void UKskillAttack()
     {
-        StraightAttack(UKskillPos, UKskillRange, 0f, 5f, new Vector2 (1,1));
+        StraightAttack(UKskillPos, UKskillRange, 0f, 10f, new Vector2 (transform.right.x,1));
     }
 
     public void IskillAttack()
@@ -56,7 +56,7 @@ public class Sakura_CheckHit : CheckHit
     }
     private void IKskillAttack()
     {
-        StraightAttack(IKskillPos, IKskillRange, 0f, 5f, new Vector2(1, 1));
+        StraightAttack(IKskillPos, IKskillRange, 0f, 20f, new Vector2(transform.right.x, 1));
     }
 
     private void OnDrawGizmosSelected()

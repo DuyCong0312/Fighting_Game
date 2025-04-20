@@ -27,9 +27,11 @@ public abstract class BaseSkill : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (GameManager.Instance.gameEnded
-            || playerState.isAttacking
+
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded
             || playerState.isUsingSkill
+            || playerState.isDefending
             || playerState.isGettingHurt)
         {
             return;

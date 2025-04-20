@@ -16,7 +16,8 @@ public class UiTimeCount : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.gameEnded)
+        if (!GameManager.Instance.gameStart
+            || GameManager.Instance.gameEnded)
         {
             return;
         }
