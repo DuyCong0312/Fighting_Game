@@ -115,6 +115,7 @@ public class ComMovement : MonoBehaviour
         anim.SetBool(CONSTANT.isDashing, true);
         effectAfterImage.StartAfterImageEffect();
         yield return new WaitForSeconds(dashTime);
+        rb.velocity = Vector2.zero;
         rb.gravityScale = originalGravity;
         SetLayerRecursively(gameObject, defaultLayer);
         anim.SetBool(CONSTANT.isDashing, false);
