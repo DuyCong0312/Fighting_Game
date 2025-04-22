@@ -6,9 +6,9 @@ public class I_Skill : BaseSkill
 {
     protected override KeyCode SkillKey => KeyCode.I;
 
-    protected override string GroundAnimationTrigger => "Iskill";
+    protected override string GroundAnimationTrigger => CONSTANT.Iskill;
 
-    protected override string AirAnimationName => "K+I";
+    protected override string AirAnimationName => CONSTANT.IKskill;
 
     protected override void ActiveSkill()
     {

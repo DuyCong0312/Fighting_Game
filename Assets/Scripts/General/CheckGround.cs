@@ -17,10 +17,10 @@ public class CheckGround : MonoBehaviour
     [SerializeField] private PhysicsMaterial2D groundMaterial;
     [SerializeField] private PhysicsMaterial2D airMaterial;
     private Collider2D coll;
-
-    void Awake()
+    
+    private void Start()
     {
-        coll = GetComponent<Collider2D>();
+        coll = GetComponentInChildren<Collider2D>();
     }
 
     private void Update()

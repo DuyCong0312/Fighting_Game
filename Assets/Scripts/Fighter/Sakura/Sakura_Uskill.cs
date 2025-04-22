@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Sakura_Uskill : U_Skill
@@ -10,9 +11,11 @@ public class Sakura_Uskill : U_Skill
     [SerializeField] private Transform newPos;
     [SerializeField] private float backSpeed;
 
-    private Vector3 newPosition;
+    private Vector2 newPosition;
     private bool canMove = true;
+    private float originalGravity;
     private Vector2 movement;
+    private Coroutine stepBackCoroutine;
 
     [Header("U+K Skill")]
     [SerializeField] private float force;
@@ -22,21 +25,32 @@ public class Sakura_Uskill : U_Skill
 
     private void ActiveStepBack()
     {
-        StartCoroutine(StepBack());
-        effectAfterImage.StartAfterImageEffect();
+        if (stepBackCoroutine == null)
+        {
+            stepBackCoroutine = StartCoroutine(StepBack());
+            effectAfterImage.StartAfterImageEffect();
+        }
     }
     private IEnumerator StepBack()
     {
+        originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
         newPosition = newPos.position;
-        while (Vector2.Distance(transform.position, newPosition) > 0.01f && canMove)
+        while (Vector2.Distance(transform.parent.position, newPosition) > 0.01f && canMove)
         {
-            transform.position = Vector2.MoveTowards(transform.position, newPosition, backSpeed * Time.deltaTime);
+            transform.parent.position = Vector2.MoveTowards(transform.parent.position, newPosition, backSpeed * Time.deltaTime);
             yield return null;
         }
-        effectAfterImage.StopAfterImageEffect();
-        canMove = true;
+        StopStepBack();
     }
 
+    private void StopStepBack()
+    {
+        rb.gravityScale = originalGravity;
+        effectAfterImage.StopAfterImageEffect();
+        canMove = true;
+        stepBackCoroutine = null;
+    }
 
     private void ActiveSakuraUSkill(int extraInstances, float offset)
     {
@@ -61,9 +75,13 @@ public class Sakura_Uskill : U_Skill
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("MainCamera"))
+        if (collision.collider.CompareTag(CONSTANT.MainCamera) || collision.collider.CompareTag(CONSTANT.MapBorder))
         {
-            canMove = false;
+            if (stepBackCoroutine != null)
+            {
+                StopCoroutine(stepBackCoroutine);
+                StopStepBack();
+            }
         }
     }
 
@@ -74,9 +92,9 @@ public class Sakura_Uskill : U_Skill
         float angle = Mathf.Atan2(direction.y, direction.x);
         movement.x = force * Mathf.Cos(angle);
         movement.y = force * Mathf.Sin(angle);
-        Debug.Log(movement);
 
         rb.velocity = movement.normalized * force;
+        effectAfterImage.StartAfterImageEffect();
     }
 
     private void ActiveEffectUK()

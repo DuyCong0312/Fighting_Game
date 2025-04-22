@@ -16,7 +16,7 @@ public class LoadFighter : MonoBehaviour
 
     private void Start()
     {
-        selectedFighterIndex = PlayerPrefs.GetInt("SelectedFighterIndex",0);
+        selectedFighterIndex = PlayerPrefs.GetInt(CONSTANT.SelectedFighterIndex, 0);
         fighterAvatar.sprite = fighterList[selectedFighterIndex].FighterAvatar;
         fighterName.text = fighterList[selectedFighterIndex].FighterName;
         fighterFace.sprite = fighterList[selectedFighterIndex].FighterFace;

@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Com
   - Floor
+  - MapBorder
   layers:
   - Default
   - TransparentFX

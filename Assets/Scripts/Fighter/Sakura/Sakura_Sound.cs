@@ -34,4 +34,13 @@ public class Sakura_Sound : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(ik1Skill);
     }
+
+    private void Footstep()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step1);
+    }
+    private void Footstep3()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step3);
+    }
 }

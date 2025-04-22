@@ -5,9 +5,9 @@ using UnityEngine;
 public class ContinueAnimationHeavyHurt : StateMachineBehaviour
 {
     private Rigidbody2D rb;
-    private Transform playerTransform;
-    private Transform touchGroundPos;
+    private SpriteRenderer spriteRenderer;
     private CheckGround groundCheck;
+    private Vector2 jumpPos;
     [SerializeField] private string nameAnimatorClip;
     [SerializeField] private GameObject effectTouchGround;
     [SerializeField] private float blowUpPower;
@@ -19,14 +19,10 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
     {
         if (!blowUpCalled)
         {
-            playerTransform = animator.transform;
-            groundCheck = animator.GetComponent<CheckGround>();
-            rb = playerTransform.GetComponent<Rigidbody2D>();
+            spriteRenderer = animator.GetComponent<SpriteRenderer>();
+            groundCheck = animator.GetComponentInParent<CheckGround>();
+            rb = animator.GetComponentInParent<Rigidbody2D>();
             blowUpCalled = true;
-        }
-        if (touchGroundPos == null)
-        {
-           touchGroundPos = playerTransform.Find("JumpPos");
         }
     }
 
@@ -35,8 +31,10 @@ public class ContinueAnimationHeavyHurt : StateMachineBehaviour
     {
         if (groundCheck.isGround)
         {
+            Vector2 jumpPosValue = new Vector2(spriteRenderer.bounds.center.x, spriteRenderer.bounds.min.y);
+            jumpPos = jumpPosValue;
             animator.Play(nameAnimatorClip);
-            Instantiate(effectTouchGround, touchGroundPos.position, touchGroundPos.rotation);
+            Instantiate(effectTouchGround, jumpPos, Quaternion.identity);
             rb.velocity = Vector2.zero;
         }
     }

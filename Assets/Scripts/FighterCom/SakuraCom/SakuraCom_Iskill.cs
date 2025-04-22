@@ -6,6 +6,8 @@ public class SakuraCom_Iskill : MonoBehaviour
 {
     [Header("I Skill")]
     [SerializeField] private Sakura_CheckHit sakuraCheckHit;
+    [SerializeField] private GameObject hitEffect;
+    [SerializeField] private Transform hitIskillSpawnEffect;
     [SerializeField] private Transform newPos;
     [SerializeField] private float moveSpeed;
 
@@ -14,54 +16,68 @@ public class SakuraCom_Iskill : MonoBehaviour
     [SerializeField] private float force;
     [SerializeField] private GameObject effectIK1;
     [SerializeField] private GameObject effectIK2;
-    [SerializeField] private Transform effectIKPos;
-    [SerializeField] private Transform spwanEffectPos;
+    [SerializeField] private Transform effectIK01Pos;
+    [SerializeField] private Transform effectIK02Pos;
 
     private Rigidbody2D rb;
     private Vector3 newPosition;
-    private bool isMoving = false;
     private bool canMove = true;
+    private float originalGravity;
+    private Coroutine moveCoroutine;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
     }
 
     public void ActiveMove()
     {
-        if (!isMoving)
+        if (moveCoroutine == null)
         {
-            isMoving = true;
-            StartCoroutine(Move());
+            moveCoroutine = StartCoroutine(Move());
         }
     }
 
     private IEnumerator Move()
     {
+        originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
         newPosition = newPos.position;
-        while (Vector2.Distance(transform.position, newPosition) > 0.01f && canMove)
+        while (Vector2.Distance(transform.parent.position, newPosition) > 0.01f && canMove)
         {
-            transform.position = Vector2.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+            transform.parent.position = Vector2.MoveTowards(transform.parent.position, newPosition, moveSpeed * Time.deltaTime);
             if (sakuraCheckHit.hit)
             {
+                EffectManager.Instance.SpawnEffectUseTransform(hitEffect, hitIskillSpawnEffect, this.transform.rotation);
                 canMove = false;
                 break;
             }
 
             yield return null;
         }
-        isMoving = false;
-        canMove = true;
+        StopMove();
     }
+
+    private void StopMove()
+    {
+        rb.gravityScale = originalGravity;
+        canMove = true;
+        moveCoroutine = null;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("MainCamera"))
+        if (collision.collider.CompareTag(CONSTANT.MainCamera) || collision.collider.CompareTag(CONSTANT.MapBorder))
         {
-            isMoving = false;
-            canMove = false;
+            if (moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+                StopMove();
+            }
         }
     }
+
 
     private void ActiveSakuraIKSkill()
     {
@@ -71,12 +87,12 @@ public class SakuraCom_Iskill : MonoBehaviour
 
     private void ActiveEffectIK1()
     {
-        SpawnSkillEffect(effectIK1, effectIKPos);
+        SpawnSkillEffect(effectIK1, effectIK01Pos);
     }
 
     private void ActiveEffectIK2()
     {
-        SpawnSkillEffect(effectIK2, spwanEffectPos);
+        SpawnSkillEffect(effectIK2, effectIK02Pos);
     }
 
     private void SpawnSkillEffect(GameObject name, Transform nameTransform)

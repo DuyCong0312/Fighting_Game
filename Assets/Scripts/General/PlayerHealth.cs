@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        knockBack = GetComponentInChildren<KnockBack>();
-        playerState = GetComponentInChildren<PlayerState>();
+        knockBack = GetComponent<KnockBack>();
+        playerState = GetComponent<PlayerState>();
         playerRage = GetComponent<PlayerRage>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
@@ -37,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         {
             accumulatedDamage = 0;
         }
-        PlayHeavyHurt();
+        CheckHeavyHurt();
     }
     public void TakeDamage(float damage, Vector2 direction)
     {
@@ -50,24 +51,26 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= damage;
             knockBack.KnockBackAction(direction / 2f);
             playerRage.GetRage(2f);
-            healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
         else
         {
             currentHealth -= damage;
-            anim.SetTrigger("getHurt");
             playerState.isGettingHurt = true;
-            knockBack.KnockBackAction(direction);
+            if (currentHealth <= 0)
+            {
+                PlayHeavyHurt();
+            }
+            else
+            {
+                anim.SetTrigger(CONSTANT.getHurt);
+                knockBack.KnockBackAction(direction);
+            }
             playerRage.GetRage(5f);
             accumulatedDamage += damage;
             timeSinceLastDamage = 0f;
-            healthBar.UpdateHealthBar(currentHealth, maxHealth);
         }
-        if (currentHealth <= 0)
-        {
-            Debug.Log("0 health");
-            //Die();
-        }
+
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     public void ResetHealth()
@@ -76,19 +79,39 @@ public class PlayerHealth : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-    private void Die()
+    public void PlayWinPose()
     {
-        this.gameObject.SetActive(false);
+        StartCoroutine(WaitAndPlayPose(CONSTANT.WinPose));
     }
 
-    private void PlayHeavyHurt()
+    public void PlayLosePose()
     {
-        if (accumulatedDamage >= damageThreshold && timeSinceLastDamage < damageTimeLimit)
+        StartCoroutine(WaitAndPlayPose(CONSTANT.LosePose));
+    }
+
+    private IEnumerator WaitAndPlayPose(string poseName)
+    {
+        while (playerState.isGettingHurt)
         {
-            anim.Play(animationHeavyHurtName);
-            knockBack.BlowUpAction();
-            playerState.isGettingHurt = true;
-            accumulatedDamage = 0f;
+            yield return null;
         }
+
+        anim.Play(poseName);
+    }
+
+    private void CheckHeavyHurt()
+    {
+        if (accumulatedDamage >= damageThreshold && timeSinceLastDamage<damageTimeLimit)
+        {
+            PlayHeavyHurt();
+        }
+    }
+
+    public void PlayHeavyHurt()
+    {
+        anim.Play(animationHeavyHurtName);
+        knockBack.BlowUpAction();
+        playerState.isGettingHurt = true;
+        accumulatedDamage = 0f;
     }
 }

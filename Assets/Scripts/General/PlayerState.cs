@@ -11,14 +11,4 @@ public class PlayerState : MonoBehaviour
     public bool isGettingHurt = false;
     public bool isFacingRight = true;
     public bool isDead = false;
-    
-    private void StopSkill()
-    {
-        isUsingSkill = false;
-    }
-
-    private void CanGetHurt()
-    {
-        isGettingHurt = false;
-    }
 }

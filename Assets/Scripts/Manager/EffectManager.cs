@@ -25,7 +25,12 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void SpawnEffect(GameObject name, Transform pos, Quaternion rot)
+    public void SpawnEffect(GameObject name, Vector2 pos, Quaternion rot)
+    {
+        Instantiate(name, pos, rot);
+    }
+
+    public void SpawnEffectUseTransform(GameObject name, Transform pos, Quaternion rot)
     {
         Instantiate(name, pos.position, rot);
     }

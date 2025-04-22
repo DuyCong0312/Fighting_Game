@@ -17,12 +17,12 @@ public abstract class BaseSkill : MonoBehaviour
 
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        groundCheck = GetComponent<CheckGround>();
-        playerState = GetComponent<PlayerState>();
+        rb = GetComponentInParent<Rigidbody2D>();
+        groundCheck = GetComponentInParent<CheckGround>();
+        playerState = GetComponentInParent<PlayerState>();
         playerRage = GetComponentInParent<PlayerRage>();
-        effectAfterImage = GetComponent<SpawnEffectAfterImage>();
+        effectAfterImage = GetComponentInParent<SpawnEffectAfterImage>();
     }
 
     protected virtual void Update()
@@ -32,6 +32,7 @@ public abstract class BaseSkill : MonoBehaviour
             || GameManager.Instance.gameEnded
             || playerState.isUsingSkill
             || playerState.isDefending
+            || playerState.isAttacking
             || playerState.isGettingHurt)
         {
             return;

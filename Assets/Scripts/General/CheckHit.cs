@@ -21,13 +21,12 @@ public class CheckHit : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(AttackPos.position, AttackSize, angle, whatIsEnemies);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("hit");
             hit = true;
             this.spriteRenderer.sortingOrder = 1;
             this.playerRage.GetRage(5f);
             enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage, direction);
-            enemy.GetComponent<HitEffect>().SpawnEffect();
-            enemy.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            enemy.GetComponentInChildren<HitEffect>().SpawnEffect();
+            enemy.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
         }
     }
 
@@ -37,13 +36,12 @@ public class CheckHit : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, whatIsEnemies);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("hit");
             hit = true;
             this.spriteRenderer.sortingOrder = 1;
             this.playerRage.GetRage(5f);
             enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage, direction);
-            enemy.GetComponent<HitEffect>().SpawnEffect();
-            enemy.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            enemy.GetComponentInChildren<HitEffect>().SpawnEffect();
+            enemy.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
         }
     }
 }

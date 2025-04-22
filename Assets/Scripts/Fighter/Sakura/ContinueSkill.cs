@@ -7,14 +7,16 @@ public class ContinueSkill : StateMachineBehaviour
     private Rigidbody2D rb;
     private Transform playerTransform;
     private CheckGround groundCheck;
+    private SpawnEffectAfterImage effectAfterImage;
     [SerializeField] private string nameAnimatorClip;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         playerTransform = animator.transform;
-        groundCheck = animator.GetComponent<CheckGround>();
-        rb = playerTransform.GetComponent<Rigidbody2D>();
+        groundCheck = animator.GetComponentInParent<CheckGround>();
+        rb = playerTransform.GetComponentInParent<Rigidbody2D>();
+        effectAfterImage = animator.GetComponentInParent<SpawnEffectAfterImage>();
 
     }
 
@@ -25,6 +27,7 @@ public class ContinueSkill : StateMachineBehaviour
         {
             animator.Play(nameAnimatorClip);
             rb.velocity = Vector2.zero; 
+            effectAfterImage.StopAfterImageEffect();
             Vector3 currentRotation = playerTransform.rotation.eulerAngles;
             playerTransform.rotation = Quaternion.Euler(currentRotation.x, currentRotation.y, 0);
         }  

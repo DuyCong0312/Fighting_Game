@@ -12,46 +12,15 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float minHeightOffset = 1f;
     [SerializeField] private Transform leftBoundaryMap;
     [SerializeField] private Transform rightBoundaryMap;
+    [SerializeField] private Transform player01;
+    [SerializeField] private Transform player02;
     private Camera cam;
-
-    [Header("Player Spawn Points")]
-    [SerializeField] private Transform player01SpawnPoint;
-    [SerializeField] private Transform player02SpawnPoint;
 
     private void Start()
     {
         cam = Camera.main;
-        StartCoroutine(WaitForPlayers());
     }
 
-    private IEnumerator WaitForPlayers()
-    {
-        while (GameObject.FindGameObjectsWithTag("Player").Length < 1 || GameObject.FindGameObjectsWithTag("Com").Length < 1)
-        {
-            yield return null;
-        }
-
-        FindPlayers();
-    }
-
-    private void FindPlayers()
-    {
-        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] comFighter = GameObject.FindGameObjectsWithTag("Com");
-
-        playerTransforms = new Transform[2];
-        if ( allPlayers.Length >= 2)
-        {
-            playerTransforms[0] = allPlayers[0].transform;
-            playerTransforms[1] = allPlayers[1].transform;
-        }
-        else
-        {
-            playerTransforms[0] = allPlayers[0].transform;
-            playerTransforms[1] = comFighter[0].transform;
-        }
-        
-    }
     private void LateUpdate()
     {
         UpdateCamera();
@@ -59,8 +28,8 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateCamera()
     {
-        Vector3 midpoint = (playerTransforms[0].position + playerTransforms[1].position) / 2f;
-        float distance = Vector3.Distance(playerTransforms[0].position, playerTransforms[1].position);
+        Vector3 midpoint = (player01.position + player02.position) / 2f;
+        float distance = Vector3.Distance(player01.position, player02.position);
 
         float newZoom = Mathf.Clamp(minZoom + distance / zoomLimiter, minZoom, maxZoom);
         cam.orthographicSize = newZoom;
@@ -72,18 +41,10 @@ public class CameraManager : MonoBehaviour
         float camHalfWidth = cam.orthographicSize * cam.aspect;
         float clampedX = Mathf.Clamp(targetPosition.x, leftBoundaryMap.position.x + camHalfWidth, rightBoundaryMap.position.x - camHalfWidth);
 
-        float lowestPlayerY = Mathf.Min(playerTransforms[0].position.y, playerTransforms[1].position.y);
+        float lowestPlayerY = Mathf.Min(player01.position.y, player02.position.y);
         float maxCameraY = lowestPlayerY + camHalfHeight - 0.7f;
         float clampedY = Mathf.Min(targetPosition.y, maxCameraY);
 
         transform.position = new Vector3(clampedX, clampedY, targetPosition.z);
     }
-
-    public void ResetPlayerPosition()
-    {
-        playerTransforms[0].position = player01SpawnPoint.position;
-        playerTransforms[1].position = player02SpawnPoint.position;
-
-    }
-
 }

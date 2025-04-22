@@ -26,7 +26,7 @@ public class Dart: MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Com"))
+        if (collision.gameObject.CompareTag(CONSTANT.Player) || collision.gameObject.CompareTag(CONSTANT.Com))
         {
             PlayerHealth playerHealth = collision.GetComponentInParent<PlayerHealth>();
             playerHealth.TakeDamage(attackDamage, this.transform.right);

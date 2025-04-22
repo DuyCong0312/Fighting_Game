@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Player_1")]
     [SerializeField] private PlayerHealth player01Health;
+    [SerializeField] private Transform player01Pos;
     [SerializeField] private Toggle[] player1Wins;
     private int player1RoundsWon = 0;
 
     [Header("Player_2")]
     [SerializeField] private PlayerHealth player02Health;
+    [SerializeField] private Transform player02Pos;
     [SerializeField] private Toggle[] player2Wins;
     private int player2RoundsWon = 0;
 
@@ -31,8 +33,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI startGame;
     [SerializeField] private GameObject panelPauseGame;
 
-    public bool gameEnded = false;
+
+    private Vector2 player01SpawnPoint;
+    private Vector2 player02SpawnPoint;
+
     public bool gameStart = false;
+    public bool gameEnded = false;
 
     void Awake()
     {
@@ -49,6 +55,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        player01SpawnPoint = player01Pos.position;
+        player02SpawnPoint = player02Pos.position;
         panelGameSetPerRound.SetActive(false);
         panelGameSetFinal.SetActive(false);
         panelPauseGame.SetActive(false);
@@ -72,22 +80,20 @@ public class GameManager : MonoBehaviour
 
         if (player01Health.currentHealth > player02Health.currentHealth)
         {
+            
             gameSetPerRound.text = ("You win");
             AwardWinToPlayer(1);
-            Debug.Log("You Win");
         }
         else if(player01Health.currentHealth < player02Health.currentHealth)
         {
             gameSetPerRound.text = ("You lose");
             AwardWinToPlayer(2);
-            Debug.Log("You Lose");
         }
         else 
         {
             gameSetPerRound.text = ("Draw");
             SetPanel();
             StartCoroutine(StartNewRound());
-            Debug.Log("Draw");
         }
     }
 
@@ -101,20 +107,17 @@ public class GameManager : MonoBehaviour
         {
             gameSetPerRound.text = ("You lose");
             AwardWinToPlayer(2);
-            Debug.Log("You Lose");
         }
         else if (player02Health.currentHealth <= 0)
         {
             gameSetPerRound.text = ("You win");
             AwardWinToPlayer(1);
-            Debug.Log("You Win");
         }
         else if (player01Health.currentHealth <= 0 && player02Health.currentHealth <= 0)
         {
             gameSetPerRound.text = "Draw";
             SetPanel();
             StartCoroutine(StartNewRound());
-            Debug.Log("Draw");
         }
     }
 
@@ -136,13 +139,8 @@ public class GameManager : MonoBehaviour
             player2RoundsWon++;
         }
 
-        if (player1RoundsWon >= 2 || player2RoundsWon >= 2)
+        if (CheckFinalWin())
         {
-            gameEnded = true;
-            panelGameSetFinal.SetActive(true);
-            panelGameSetPerRound.SetActive(false);
-            gameSetFinal.text = ("Player" + playerNumber + "Win!");
-            Debug.Log("Match Over Player" + playerNumber + "Win!");
             return;
         }
         else
@@ -152,6 +150,35 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(StartNewRound());
     }
+
+    private bool CheckFinalWin()
+    {
+        if (player1RoundsWon >= 2 || player2RoundsWon >= 2)
+        {
+            gameEnded = true;
+            gameStart = false;
+            panelGameSetFinal.SetActive(true);
+            panelGameSetPerRound.SetActive(false);
+
+            if (player1RoundsWon >= 2)
+            {
+                player01Health.PlayWinPose();
+                player02Health.PlayLosePose();
+                gameSetFinal.text = "Player 1 Win!";
+            }
+            else
+            {
+                player01Health.PlayLosePose();
+                player02Health.PlayWinPose();
+                gameSetFinal.text = "Player 2 Win!";
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
     private IEnumerator StartNewRound()
     {
         yield return new WaitForSeconds(2);
@@ -174,7 +201,8 @@ public class GameManager : MonoBehaviour
 
     private void ResetPlayerPosition()
     {
-        cam.ResetPlayerPosition();
+        player01Pos.position = player01SpawnPoint;
+        player02Pos.position = player02SpawnPoint;
     }
 
     private void ResetTime()

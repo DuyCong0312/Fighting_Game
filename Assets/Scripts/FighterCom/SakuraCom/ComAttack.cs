@@ -8,35 +8,22 @@ public class ComAttack : MonoBehaviour
     private Animator anim;
     private PlayerState playerState;
     private CheckGround groundCheck;
-    private Transform player;
+    private float distanceX;
+    private float distanceY;
+    [SerializeField] private Transform player;
 
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
         groundCheck = GetComponent<CheckGround>(); 
-        StartCoroutine(WaitForPlayers());
-    }
-
-    private IEnumerator WaitForPlayers()
-    {
-        while (GameObject.FindGameObjectsWithTag("Player").Length < 1)
-        {
-            yield return null;
-        }
-
-        FindPlayers();
-    }
-
-    private void FindPlayers()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
-        if (Mathf.Abs(player.position.x - transform.position.x) > 1f)
+        DistanceToPlayer();
+        if (distanceX > 1f)
         {
             StopAttack();
         }
@@ -47,11 +34,11 @@ public class ComAttack : MonoBehaviour
         if (groundCheck.isGround)
         {
             playerState.isAttacking = true;
-            anim.SetBool("isAttack", true);
+            anim.SetBool(CONSTANT.isAttack, true);
         }
         else
         {
-            anim.Play("K+J");
+            anim.Play(CONSTANT.airAttack);
         }
     }
 
@@ -63,15 +50,31 @@ public class ComAttack : MonoBehaviour
     public void StopAttack()
     {
         playerState.isAttacking = false;
-        anim.SetBool("isAttack", false);
+        anim.SetBool(CONSTANT.isAttack, false);
     }
 
     private IEnumerator DefendCoroutine()
     {
         playerState.isDefending = true;
-        anim.SetBool("isDefend", true);
+        anim.SetBool(CONSTANT.isDefend, true);
         yield return new WaitForSeconds(1f);
         playerState.isDefending = false;
-        anim.SetBool("isDefend", false);
+        anim.SetBool(CONSTANT.isDefend, false);
+    }
+
+    private void DistanceToPlayer()
+    {
+        distanceX = Mathf.Abs(player.position.x - transform.position.x);
+        distanceY = player.position.y - transform.position.x;
+    }
+
+    public float GetDistanceX()
+    {
+        return distanceX;
+    }
+
+    public float GetDistanceY()
+    {
+        return distanceY;
     }
 }

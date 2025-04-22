@@ -6,9 +6,9 @@ public class U_Skill : BaseSkill
 {
     protected override KeyCode SkillKey => KeyCode.U;
 
-    protected override string GroundAnimationTrigger => "Uskill";
+    protected override string GroundAnimationTrigger => CONSTANT.Uskill;
 
-    protected override string AirAnimationName => "K+U";
+    protected override string AirAnimationName => CONSTANT.UKskill;
 
     protected override void ActiveSkill()
     {

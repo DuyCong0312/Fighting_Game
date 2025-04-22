@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private enum State { Idle, Running, Jumping, Falling }
     private State currentState;
 
+    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
@@ -19,14 +20,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 6f;
     [SerializeField] private bool isDoubleJump;
 
-    [Header("Effect")]
-    [SerializeField] private Transform jumpPos;
-    [SerializeField] private Transform dashPos;
+    private Vector2 jumpPos;
+    private Vector2 dashPos;
 
     [Header("Dash Setting")]
     [SerializeField] private float dashPower = 10f;
     [SerializeField] private float dashTime = 0.1f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private float dashCooldown = 1f; 
     [SerializeField] private bool isDashing;
     [SerializeField] private bool canDash = true;
     private int defaultLayer;
@@ -35,10 +35,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         defaultLayer = gameObject.layer;
-        dashLayer = LayerMask.NameToLayer("Dashing");
+        dashLayer = LayerMask.NameToLayer(CONSTANT.Dashing);
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
+        coll = GetComponentInChildren<Collider2D>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
         effectAfterImage = GetComponent<SpawnEffectAfterImage>();
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdateAnimation();
         UpdateState();
-
+        CalJumpDash();
         if (!GameManager.Instance.gameStart
             || GameManager.Instance.gameEnded
             || playerState.isUsingSkill 
@@ -151,24 +152,24 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        gameObject.layer = dashLayer;
+        SetLayerRecursively(gameObject, dashLayer);
         float direction = playerState.isFacingRight ? 1 : -1;
         rb.velocity = new Vector2(direction * dashPower, 0f);
-        anim.SetBool("isDashing", true);
+        anim.SetBool(CONSTANT.isDashing, true);
         effectAfterImage.StartAfterImageEffect();
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = originalGravity;
-        gameObject.layer = defaultLayer;
-        isDashing = false;
-        anim.SetBool("isDashing", false);
+        SetLayerRecursively(gameObject, defaultLayer);
+        anim.SetBool(CONSTANT.isDashing, false);
         effectAfterImage.StopAfterImageEffect();
+        isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
     private void UpdateAnimation()
     {
-        anim.SetInteger("CurrentState", (int)currentState);
+        anim.SetInteger(CONSTANT.CurrentState, (int)currentState);
     }
 
     private void UpdateState()
@@ -199,12 +200,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Footstep()
+    private void CalJumpDash()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.step1);
+        Vector2 jumpPosValue = new Vector2(spriteRenderer.bounds.center.x, spriteRenderer.bounds.min.y);
+        jumpPos = jumpPosValue;
+        dashPos = jumpPosValue;
     }
-    private void Footstep3()
+
+    private void SetLayerRecursively(GameObject obj, int newLayer)
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.step3);
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 }

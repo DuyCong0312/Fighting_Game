@@ -30,7 +30,7 @@ public class SpawnEffectAfterImage : MonoBehaviour
         while (true)
         {
             GameObject currentAfterImage = Instantiate(afterImageEffect, this.transform.position, this.transform.rotation);
-            Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
+            Sprite currentSprite = GetComponentInChildren<SpriteRenderer>().sprite;
             currentAfterImage.GetComponent<SpriteRenderer>().sprite = currentSprite;
             yield return new WaitForSeconds(spawnDelayTime);
         }

@@ -42,7 +42,7 @@ public class FighterSelection : MonoBehaviour
     }
     private void SaveFighter()
     {
-        PlayerPrefs.SetInt("SelectedFighterIndex",selectedFighterIndex);
+        PlayerPrefs.SetInt(CONSTANT.SelectedFighterIndex,selectedFighterIndex);
         PlayerPrefs.Save();
     }
 }

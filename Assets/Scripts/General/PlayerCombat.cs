@@ -1,24 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using UnityEngine;
 
-public class ComboController : MonoBehaviour
+public class PlayerCombat : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
     private CheckGround groundCheck;
     private PlayerState playerState;
+    private ComboAttack comboAttack;
 
-    [SerializeField] private int attackNumber;
-    [SerializeField] private bool canAttack = true;
+    public bool canAttack = true;
+    public int attackNumber;
     [SerializeField] private float attackMoveDuration = 0.1f;
     private bool hasInterrupted = false;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        comboAttack = GetComponentInChildren<ComboAttack>();
+        anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GetComponent<CheckGround>();
         playerState = GetComponent<PlayerState>();
@@ -38,25 +38,6 @@ public class ComboController : MonoBehaviour
         Defend();
     }
 
-    private void StartCombo()
-    {
-        canAttack = true;
-        if(attackNumber < 3)
-        {
-            attackNumber++;
-        }
-    }
-
-    private void StopCombo()
-    {
-        playerState.isAttacking = false;
-        canAttack = true;
-        attackNumber = 0;
-        anim.ResetTrigger("0Attack");
-        anim.ResetTrigger("1Attack");
-        anim.ResetTrigger("2Attack");
-    }
-
     private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.J) && canAttack)
@@ -65,12 +46,12 @@ public class ComboController : MonoBehaviour
             playerState.isAttacking = true;
             if (groundCheck.isGround)
             {
-                anim.SetTrigger(attackNumber + "Attack");
+                anim.SetTrigger(attackNumber + CONSTANT.Attack);
                 StartCoroutine(MoveWhenAttack());
             }
             else
             {
-                anim.Play("K+J");
+                anim.Play(CONSTANT.airAttack);
             }
         }
     }
@@ -85,7 +66,7 @@ public class ComboController : MonoBehaviour
         {
             playerState.isDefending = false;
         }
-        anim.SetBool("isDefend", playerState.isDefending);
+        anim.SetBool(CONSTANT.isDefend, playerState.isDefending);
     }
 
     private IEnumerator MoveWhenAttack()
@@ -106,7 +87,7 @@ public class ComboController : MonoBehaviour
         if (playerState.isGettingHurt && !hasInterrupted)
         {
             hasInterrupted = true;
-            StopCombo();
+            comboAttack.StopCombo();
         }
 
         if (!playerState.isGettingHurt && hasInterrupted)
@@ -116,3 +97,4 @@ public class ComboController : MonoBehaviour
     }
 
 }
+

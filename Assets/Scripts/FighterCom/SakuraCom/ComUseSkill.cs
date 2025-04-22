@@ -11,10 +11,10 @@ public class ComUseSkill : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         playerState = GetComponent<PlayerState>();
         groundCheck = GetComponent<CheckGround>();
-        playerRage = GetComponentInParent<PlayerRage>();
+        playerRage = GetComponent<PlayerRage>();
     }
 
     public void PlayUskill()
@@ -23,11 +23,11 @@ public class ComUseSkill : MonoBehaviour
         playerRage.GetRage(5f);
         if (groundCheck.isGround)
         {
-            anim.SetTrigger("Uskill");
+            anim.SetTrigger(CONSTANT.Uskill);
         }
         else
         {
-            anim.Play("K+U");
+            anim.Play(CONSTANT.UKskill);
         }
     }
 
@@ -39,11 +39,11 @@ public class ComUseSkill : MonoBehaviour
             playerRage.CostRage(30f);
             if (groundCheck.isGround)
             {
-                anim.SetTrigger("Iskill");
+                anim.SetTrigger(CONSTANT.Iskill);
             }
             else
             {
-                anim.Play("K+I");
+                anim.Play(CONSTANT.IKskill);
             }
         }
         else

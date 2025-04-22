@@ -30,4 +30,13 @@ public class Ichigo_Sound : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX(specialAttack);
     }
+
+    private void Footstep()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step1);
+    }
+    private void Footstep3()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.step3);
+    }
 }

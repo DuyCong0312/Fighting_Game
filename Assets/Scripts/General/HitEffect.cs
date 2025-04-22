@@ -8,6 +8,6 @@ public class HitEffect : MonoBehaviour
 
     public void SpawnEffect()
     {
-        EffectManager.Instance.SpawnEffect(EffectManager.Instance.hit, hitPos, transform.rotation);
+        EffectManager.Instance.SpawnEffectUseTransform(EffectManager.Instance.hit, hitPos, transform.rotation);
     }
 }
