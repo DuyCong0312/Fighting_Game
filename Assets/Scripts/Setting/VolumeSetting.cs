@@ -50,5 +50,10 @@ public class VolumeSetting : MonoBehaviour
     {
         PlayerPrefs.SetFloat(CONSTANT.AudioVolume, audioVolume);
         PlayerPrefs.SetFloat(CONSTANT.SFXVolume, sfxVolume);
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.ApplySavedVolume();
+        }
     }
 }

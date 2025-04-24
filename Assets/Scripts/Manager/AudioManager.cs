@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource sfxAudioSource;
 
+    private float audioVolume;
+    private float sfxVolume;
+
     [Header ("Sound Effect")]
     public AudioClip jump;
     public AudioClip dash; 
@@ -23,15 +26,23 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+            ApplySavedVolume();
         }
 
         else
         {
             Destroy(gameObject);
-        } 
-        DontDestroyOnLoad(gameObject);
+        }
     }
 
+    public void ApplySavedVolume()
+    {
+        audioVolume = PlayerPrefs.GetFloat(CONSTANT.AudioVolume, 1f);
+        sfxVolume = PlayerPrefs.GetFloat(CONSTANT.SFXVolume, 1f);
+        musicAudioSource.volume = audioVolume;
+        sfxAudioSource.volume = sfxVolume;
+    }
     public void PlayMusic(AudioClip clip)
     {
         musicAudioSource.clip = clip;
